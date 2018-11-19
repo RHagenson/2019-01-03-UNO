@@ -1,7 +1,7 @@
 ---
 layout: workshop      # DON'T CHANGE THIS.
 carpentry: "dc"    # what kind of Carpentry (must be either "lc" or "dc" or "swc")
-venue: "University of Nebraska Omaha"        # brief name of host site without address (e.g., "Euphoric State University")
+venue: "University of Nebraska at Omaha"        # brief name of host site without address (e.g., "Euphoric State University")
 address: "Peter Kiewit Institute - Room 158, 1110 S 67th St, Omaha, NE 68182"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1)
 language: "en"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/ISO_639-1)
@@ -237,6 +237,8 @@ eventbrite:           # optional: alphanumeric key for Eventbrite registration, 
   We will use this <a href="{{page.collaborative_notes}}">collaborative document</a> for chatting, taking notes, and sharing URLs and bits of code.
 </p>
 {% endif %}
+
+<p>Workshop Lessons: <a href="https://unlhcc.github.io/2019-01-03-UNO/lessons_index.html">https://unlhcc.github.io/2019-01-03-uno/lessons_index.html</a></p>
 
 <hr/>
 
