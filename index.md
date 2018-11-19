@@ -46,11 +46,6 @@ eventbrite:           # optional: alphanumeric key for Eventbrite registration, 
 </iframe>
 {% endif %}
 
-<h4>This is the workshop template. Delete these lines and use it to customize your own website.
-If you are running a self-organized workshop or have not put in a workshop request yet, please also fill in 
-<a href="{{site.amy_site}}/submit">this workshop request form</a> to let us know about your workshop
-and our administrator may contact you if we need any extra information.</h4>
-
 <h2 id="general">General Information</h2>
 
 {% comment %}
@@ -100,6 +95,8 @@ and our administrator may contact you if we need any extra information.</h4>
 </p>
 {% endif %}
 
+<center><form><button name="button" style="background-color: D71920; padding: 15px 32px" formaction="https://marketplace.unl.edu/hcc/hcc-software-carpentry-workshop-january-uno-2019.html">Register to Attend</button></form></center>
+
 {% comment %}
   DATE
 
@@ -131,6 +128,11 @@ and our administrator may contact you if we need any extra information.</h4>
   Library Carpentry's
   {% endif %}
   <a href="{{site.swc_site}}/conduct.html">Code of Conduct</a>.
+</p>
+
+<p id="parking">
+<strong>Parking:</strong> Parking is available in the lots adjacent to the Peter Kiewit Insitute. Attendees with UNMC passes can park either in the student lot to the northwest of the building or in the Pacific Street garage located across 67th street once they register their passes with UNO Parking Services. Please contact <a href="mailto:unoparking@unomaha.edu">Parking Services</a> to register your pass prior to attending.<br>
+			Daily visitor passes are also available to purchase at the kiosk in the Pacific Street garage. Additional information on the parking policy can be found on the <a href="https://www.unomaha.edu/business-and-finance/support-services/parking-services/permits.php#w">UNO Parking Services website</a>
 </p>
 
 {% comment %}
@@ -284,11 +286,14 @@ and our administrator may contact you if we need any extra information.</h4>
 
 <p>
 To participate in a Data Carpentry workshop, you will need working copies of the 
-described software. Please make sure to install everything (or at least to download 
-the installers) before the start of your workshop. Participants should bring and use 
-their own laptops to insure the proper setup of tools for an efficient workflow 
-once you leave the workshop.
-</p><p>
+described software. Additionally, all participants will need an active account with the <a href="http://hcc.unl.edu">Holland Computing Center</a>. If you do not currently have an account, you can request one by completing a <a href="http://hcc.unl.edu/new-user-request">new user request form</a>.</p>
+
+<p>Please note that all new accounts must be associated with an established HCC group. If your research group is not currently established with HCC, the group PI must first complete a <a href="https://hcc.unl.edu/new-group-request">new group request form</a>. Once a group has been established, a new user account can then be requested. </p>
+
+<p><strong>For those who do not have a group to request an account under and are unable to create a group, demo accounts will be provided for use during the workshop.</strong> </p>
+
+<p>Please make sure to install everything (or at least to download the installers) before the start of your workshop. Participants will need to bring a laptop with the following software installed.</p>
+<p>
 <strong>Mac users</strong>
 </p><ul>
 	<li> A spreadsheet program such as Microsoft Excel or <a href="http://www.datacarpentry.org/organization-genomics/setup/">LibreOffice</a></li>
@@ -315,10 +320,7 @@ once you leave the workshop.
 <p></p>
 
 <p>
-  We maintain a list of common issues that occur during installation as a reference for instructors
-  that may be useful on the
-  <a href="https://github.com/swcarpentry/workshop-template/wiki/Configuration-Problems-and-Solutions">Configuration Problems and Solutions wiki page</a>.
-</p>
+If you encounter any issues with the setup instructions, please plan to arrive at the workshop at 8:30 AM to receive assistance.</p>
 <hr>
 <p></p>
 
