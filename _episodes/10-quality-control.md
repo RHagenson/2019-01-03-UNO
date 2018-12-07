@@ -48,7 +48,7 @@ and assess the quality of the sequence reads.
 ## Details on the FASTQ format
 
 Although it looks complicated (and it is), it's easy to understand the
-[fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
 include...
 
 |Line|Description|
