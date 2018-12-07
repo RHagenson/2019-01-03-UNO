@@ -232,7 +232,7 @@ we'll explain as we go. This is very similar to what we did with our `read_qc.sh
 
 Our variant calling workflow will do the following steps
 
-1. Index the reference genome for use by bwa and samtools
+1. Index the reference genome for use by `bwa` and `samtools`
 2. Align reads to reference genome
 3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
 4. Calculate the read coverage of positions in the genome
