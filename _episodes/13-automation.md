@@ -35,11 +35,11 @@ long. If we wanted to do this for all six of our data files, that would be forty
 steps. If we had 50 samples (a more realistic number), it would be 400 steps! You can
 see why we want to automate this.
 
-We've also used `for` loops in previous lessons to iterate one or two commands over multiple input files. 
-In these `for` loops you used variables to enable you to run the loop on multiple files. We will be using variable 
+We've also used `for`-loops in previous lessons to iterate one or two commands over multiple input files. 
+In these `for`-loops you used variables to enable you to run the loop on multiple files. We will be using variable 
 assignments like this in our new shell scripts.
 
-Here's the `for` loop you wrote for unzipping `.zip` files: 
+Here's the for-loop you wrote for unzipping `.zip` files: 
 
 ~~~
 $ for filename in *.zip
@@ -141,7 +141,7 @@ cd /pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/
 {: .output}
 
 The next five lines should look very familiar. First we give ourselves a status message to tell us that we're unzipping our ZIP
-files. Then we run our for loop to unzip all of the `.zip` files in this directory.
+files. Then we run our for-loop to unzip all of the `.zip` files in this directory.
 
 ~~~
 echo "Unzipping..."
