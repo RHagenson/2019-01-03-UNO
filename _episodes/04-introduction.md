@@ -166,8 +166,6 @@ $ pwd
 
 Let's look at how our file system is organized.  
 
-On Hydra, we ask that users run jobs from their `/pool`, `/scratch`, or `/data` directories (e.g. `/pool/genomics/username`).
-
 We will be using files located in `/common/demo/dc-carpentry-files`
 
 You can copy the files to your space by first navigating to your /pool/genomics or /pool/biology directory (e.g. `/pool/genomics/dikowr`)
