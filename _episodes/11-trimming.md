@@ -157,12 +157,12 @@ TrimmomaticSE: Completed successfully
 > Use the output from your Trimmomatic command to answer the
 > following questions.
 >
-> 1) What percent of reads did we discard from our sample?
-> 2) What percent of reads did we keep?
+> 1. What percent of reads did we discard from our sample?
+> 2. What percent of reads did we keep?
 >
 >> ## Solution
->> 1) 21.02%
->> 2) 78.98%
+>> 1. 21.02%
+>> 2. 78.98%
 > {: .solution}
 {: .challenge}
 
