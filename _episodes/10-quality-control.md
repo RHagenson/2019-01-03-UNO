@@ -155,12 +155,13 @@ bad read.
 > read quality, different sequencing machines use different encoding systems. This means that,
 > depending on which sequencer you use to generate your data, a `#` may not be an indicator of
 > a poor quality base call.
-
+>
 > This mainly relates to older Solexa/Illumina data,
 > but it's essential that you know which sequencing platform was
 > used to generate your data, so that you can tell your quality control program which encoding
 > to use. If you choose the wrong encoding, you run the risk of throwing away good reads or
 > (even worse) not throwing away bad reads!
+>
 {: .callout}
 
 ## Assessing Quality using FastQC
