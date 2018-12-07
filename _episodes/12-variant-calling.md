@@ -22,7 +22,7 @@ We have already trimmed our reads so now the next step is alignment of our quali
 
 We perform read alignment or mapping to determine where in the genome our reads originated from. There are a number of tools to
 choose from and, while there is no gold standard, there are some tools that are better suited for particular NGS analyses. We will be
-using the [Burrows Wheeler Aligner (BWA)](http://bio-bwa.sourceforge.net/), which is a software package for mapping low-divergent
+using the [Burrows-Wheeler Aligner (BWA)](http://bio-bwa.sourceforge.net/), which is a software package for mapping low-divergent
 sequences against a large reference genome. The alignment process consists of two steps:
 
 1. Indexing the reference genome
@@ -43,7 +43,7 @@ line of code because `mkdir` can accept multiple new directory
 names as input.
 
 ~~~
-$ mkdir -p results/sai results/sam results/bam results/bcf results/vcf
+$ mkdir results/sai results/sam results/bam results/bcf results/vcf
 ~~~
 {: .bash}
 
@@ -92,8 +92,8 @@ While the index is created, you will see output something like this:
 
 The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an 
 aligner. BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence 
-reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such 
-as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it 
+reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-SW and BWA-MEM share similar features such 
+as long-read support and split alignment, however BWA-MEM (the latest algorithm) is generally recommended for high-quality queries as it 
 is faster and more accurate.
 
 Since we are working with short reads we will be using BWA-backtrack. The general usage for BWA-backtrack is: 
@@ -105,16 +105,25 @@ $ bwa aln ref_genome.fasta input_file.fastq > output_file.sai
 
 This will create a `.sai` file which is an intermediate file containing the suffix array indexes. 
     
-Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default 
-parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using 
-and make sure the options you use are appropriate for your data.*
+Have a look at the [BWA options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running BWA with the default 
+parameters here, your use case might require a change of parameters.
+
+> ## Read the Manual
+>
+> Always read the manual page for any tool before using 
+> and make sure the options you use are appropriate for your data.
+>
+{: .callout}
 
 We're going to start by aligning the reads from just one of the 
 samples in our dataset (`SRR097977.fastq`). Later, we'll be 
-iterating this whole process on all of our sample files.
+iterating this whole process on all of our sample files. **Note: below that `\` is being used to extend the command onto multiple lines for easier reading.**
 
 ~~~
-$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sai
+$ bwa aln \
+        data/ref_genome/ecoli_rel606.fasta \
+        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
+        > results/sai/SRR097977.aligned.sai
 ~~~
 {: .bash}
 
@@ -144,8 +153,7 @@ Post-alignment processing of the alignment file includes:
 
 ### Convert the format of the alignment to SAM/BAM
 
-The SAI file is not a standard alignment output file and will need to be converted into a SAM file before we can do any downstream
-processing. 
+The SAI file is not a standard alignment output file and will need to be converted into a SAM file before we can do any downstream processing.
 
 #### SAM/BAM format
 The [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#aligned-reads-sam),
@@ -155,7 +163,7 @@ have time to go in detail of the features of the SAM format, the paper by
 
 **The compressed binary version of SAM is called a BAM file.** We use this version to reduce size and to allow for *indexing*, which enables efficient random access of the data contained within the file.
 
-The file begins with a **header**, which is optional. The header is used to describe source of data, reference sequence, method of
+The file begins with an optional **header**. The header is used to describe source of data, reference sequence, method of
 alignment, etc., this will change depending on the aligner being used. Following the header is the **alignment section**. Each line
 that follows corresponds to alignment information for a single read. Each alignment line has **11 mandatory fields** for essential
 mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is 
@@ -189,8 +197,8 @@ The code in our case will look like:
 ~~~
 $ bwa samse data/ref_genome/ecoli_rel606.fasta \
         results/sai/SRR097977.aligned.sai \
-        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > \
-        results/sam/SRR097977.aligned.sam
+        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
+        > results/sam/SRR097977.aligned.sam
 ~~~
 {: .bash}
 
@@ -236,7 +244,7 @@ $ samtools sort results/bam/SRR097977.aligned.bam > results/bam/SRR097977.aligne
 > ## More Than One Way to . . . sort a SAM/BAM File
 > SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important
 > to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require 
-> differently sorted alignment files as input.*
+> differently sorted alignment files as input.
 {: .callout}
 
 ## Variant calling
@@ -255,8 +263,10 @@ Do the first pass on variant calling by counting read coverage with samtools
 [mpileup](http://samtools.sourceforge.net/mpileup.shtml):
 
 ~~~
-$ samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
-            results/bam/SRR097977.aligned.sorted.bam > results/bcf/SRR097977_raw.bcf
+$ samtools mpileup -g \
+        -f data/ref_genome/ecoli_rel606.fasta \
+        results/bam/SRR097977.aligned.sorted.bam \
+        > results/bcf/SRR097977_raw.bcf
 ~~~
 {: .bash}
 
@@ -274,18 +284,22 @@ Identify SNPs using bcftools:
 
 ~~~
 $ module load bioinformatics/bcftools
-$ bcftools call -vm -O b results/bcf/SRR097977_raw.bcf > results/bcf/SRR097977_variants.bcf
+$ bcftools call -vm \
+        -O b \
+        results/bcf/SRR097977_raw.bcf \
+        > results/bcf/SRR097977_variants.bcf
 ~~~
 {: .bash}
-
 
 ### Step 3: Filter and report the SNP variants in variant calling format (VCF)
 
 Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
-$ bcftools view results/bcf/SRR097977_variants.bcf | \
-  vcfutils.pl varFilter - > results/vcf/SRR097977_final_variants.vcf
+$ bcftools view \
+        results/bcf/SRR097977_variants.bcf \
+        | vcfutils.pl varFilter - \
+        > results/vcf/SRR097977_final_variants.vcf
 ~~~
 {: .bash}
 
@@ -370,14 +384,15 @@ The last two columns contain the genotypes and can be tricky to decode.
 | FORMAT | lists in order the metrics presented in the final column | 
 | results | lists the values associated with those metrics in order | 
 
-For our file, the metrics presented are DP:VDB:SGB:MQSB:MQOF:AC:AN:DP4:MQ:GT:PL. 
+For our file, the metrics presented are `DP:VDB:SGB:MQSB:MQOF:AC:AN:DP4:MQ:GT:PL`. 
 
 | metric | definition | 
 | ------- | ---------- |
-| GT | the genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc. |
-| PL | the likelihoods of the given genotypes |
-| GQ | the Phred-scaled confidence for the genotype | 
-| AD, DP | the depth per allele by sample and coverage |
+| GT | Genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc |
+| PL | Phred-scaled likelihoods of the given genotypes |
+| GQ | Genotype quality Phred-scaled confidence for the genotype | 
+| AD | Allele depth, i.e. the unfiltered number of reads that support each of the reported alleles |
+| DP |  (Allele) Depth, i.e. the filtered number of reads that support each of the reported alleles |
 
 The Broad Institute's [VCF guide](https://software.broadinstitute.org/gatk/documentation/article?id=11005) is an excellent place to learn more about VCF file format.
 
@@ -434,13 +449,15 @@ $ samtools index results/bam/SRR097977.aligned.sorted.bam
 ### Viewing with `tview`
 
 [Samtools](http://www.htslib.org/) implements a very simple text alignment viewer based on the GNU
-`ncurses` library, called `tview`. This alignment viewer works with short indels and shows [MAQ](http://maq.sourceforge.net/) consensus. 
+`ncurses` library, called `tview`. This alignment viewer works with short indels and shows [Maq](http://maq.sourceforge.net/) consensus. 
 It uses different colors to display mapping quality or base quality, subjected to users' choice. Samtools viewer is known to work with an 130 GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
 
 In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file: 
 
 ~~~
-$ samtools tview results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
+$ samtools tview \
+        results/bam/SRR097977.aligned.sorted.bam \
+        data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
