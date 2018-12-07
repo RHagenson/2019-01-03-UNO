@@ -50,7 +50,7 @@ feel indebted to you!
 With this in mind, let's have a look at the best practices for
 documenting your genomics project. Your future self will thank you.  
 
-In this exercise we will setup a file system for the project we will be working on during this workshop.  
+In this exercise we will set up a file system for the project we will be working on during this workshop.  
 
 We will start by creating a directory that we can use for the rest of the workshop. First navigate to your home directory. Then confirm that you are in the correct directory using the `pwd` command.
 
