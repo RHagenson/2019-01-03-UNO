@@ -63,8 +63,8 @@ lessons to work with this data. To avoid having to spend time
 downloading the data and downloading and installing all of the software,
 we're going to be working with data on Hydra.
 
-You can log-in to Hydra using the instructions
-[here](https://confluence.si.edu/display/HPC/Logging+into+Hydra).  
+You can log-in to Crane using the instructions
+[here](https://hcc-docs.unl.edu/display/HCCDOC/HCC+Documentation).  
 
 After loging on, you will see a screen showing something like this:
 
@@ -168,7 +168,7 @@ Let's look at how our file system is organized.
 
 On Hydra, we ask that users run jobs from their `/pool`, `/scratch`, or `/data` directories (e.g. `/pool/genomics/username`).
 
-We will be using files located in `/data/genomics/workshops/data_carpentry_genomics`
+We will be using files located in `/common/demo/dc-carpentry-files`
 
 You can copy the files to your space by first navigating to your /pool/genomics or /pool/biology directory (e.g. `/pool/genomics/dikowr`)
 The command to change locations in our file system is `cd` followed by a
@@ -179,7 +179,7 @@ and then using `cp -r`, which stands for copy recursively (i.e. the whole direct
 
 ~~~
 cd /pool/genomics/username
-cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sample_data .
+cp -r /common/demo/dc-carpentry-files/dc_sample_data .
 
 ~~~
 {: .output}
