@@ -232,7 +232,7 @@ Another important thing to remember is to load any modules we need. We'll do tha
 
 We will be working with a set of sample data that is located in directory (`/data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite`). First, we
 will move some of these files to the `data` directory your created at [the end of our
-last lesson](https://smithsonianworkshops.github.io/2018-06-12-nmnh/09-organization/).  
+last lesson]({% link _episodes/09-organization.md %}).  
 
 ~~~
 $ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/untrimmed_fastq /pool/genomics/username/dc_workshop/data/
