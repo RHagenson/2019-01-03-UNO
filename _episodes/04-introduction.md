@@ -64,7 +64,7 @@ we're going to be working with data on Hydra.
 You can log-in to Hydra using the instructions
 [here](https://confluence.si.edu/display/HPC/Logging+into+Hydra).  
 
-After loging on, you will see a screen showing something like this:
+After logging on, you will see a screen showing something like this:
 
 ~~~
 ---------------------------------------------------------------------------
