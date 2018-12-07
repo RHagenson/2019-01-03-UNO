@@ -117,7 +117,7 @@ NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
 ~~~
 {: .output}
 
-we can now see that the quality of each of the `N`s is 0 and the quality of the only
+we can now see that the quality of each of the Ns is 0 and the quality of the only
 nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very
 bad read.
 
@@ -141,7 +141,7 @@ bad read.
 >> {: .output}
 >>
 >> The second half of this read is poor quality. Many of the positions are unknown
->> (`N`s) and the bases that we do have guesses for are of very poor
+>> (Ns) and the bases that we do have guesses for are of very poor
 >> quality (`#`). However, the beginning of the read is fairly high
 >> quality. We will look at variations in position-based quality
 >> in just a moment.

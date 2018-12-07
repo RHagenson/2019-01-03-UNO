@@ -42,7 +42,7 @@ Suppose we want to see how many reads in our file have really bad segments conta
 
 > ## Determining quality
 >
-> In this lesson, we're going to be manually searching for strings of `N`s within our sequence
+> In this lesson, we're going to be manually searching for strings of Ns within our sequence
 > results to illustrate some principles of file searching. It can be really useful to do this
 > type of searching to get a feel for the quality of your sequencing results, however, in you
 > research you will most likely use a bioinformatics tool that has a built-in program for
