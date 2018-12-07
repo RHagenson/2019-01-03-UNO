@@ -74,10 +74,10 @@ You should see the output:
 
 > ## Exercise  
 > Use the `mkdir` command to make the following directories:   
-> dc_workshop     
-> dc_workshop/docs  
-> dc_workshop/data    
-> dc_workshop/results   
+> + `dc_workshop`
+> + `dc_workshop/docs`  
+> + `dc_workshop/data`
+> + `dc_workshop/results`
 >
 > > ## Solution
 > >
