@@ -47,8 +47,6 @@ so that others can check your work or apply your process to new data.
 own machine. These tasks are best performed using remote computers or cloud computing, which can only be accessed
 through a shell.
 
-![Automation](../img/gvng.jpg)
-
 In this lesson you will learn how to use the command line interface to move around in your file system.
 
 ## How to access the shell
@@ -165,7 +163,7 @@ $ pwd
 {: .output}
 
 Let's look at how our file system is organized.  
-
+/data/genomics/workshops/data_carpentry_genomics
 We will be using files located in `/common/demo/dc-carpentry-files`
 
 You can copy the files to your space by first navigating to your /pool/genomics or /pool/biology directory (e.g. `/pool/genomics/dikowr`)
