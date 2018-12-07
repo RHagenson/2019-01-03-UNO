@@ -48,7 +48,7 @@ and assess the quality of the sequence reads.
 ## Details on the FASTQ format
 
 Although it looks complicated (and it is), it's easy to understand the
-[fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
 include...
 
 |Line|Description|
@@ -117,7 +117,7 @@ NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
 ~~~
 {: .output}
 
-we can now see that the quality of each of the `N`s is 0 and the quality of the only
+we can now see that the quality of each of the Ns is 0 and the quality of the only
 nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very
 bad read.
 
@@ -141,7 +141,7 @@ bad read.
 >> {: .output}
 >>
 >> The second half of this read is poor quality. Many of the positions are unknown
->> (`N`s) and the bases that we do have guesses for are of very poor
+>> (Ns) and the bases that we do have guesses for are of very poor
 >> quality (`#`). However, the beginning of the read is fairly high
 >> quality. We will look at variations in position-based quality
 >> in just a moment.
@@ -155,12 +155,13 @@ bad read.
 > read quality, different sequencing machines use different encoding systems. This means that,
 > depending on which sequencer you use to generate your data, a `#` may not be an indicator of
 > a poor quality base call.
-
+>
 > This mainly relates to older Solexa/Illumina data,
 > but it's essential that you know which sequencing platform was
 > used to generate your data, so that you can tell your quality control program which encoding
 > to use. If you choose the wrong encoding, you run the risk of throwing away good reads or
 > (even worse) not throwing away bad reads!
+>
 {: .callout}
 
 ## Assessing Quality using FastQC
@@ -231,7 +232,7 @@ Another important thing to remember is to load any modules we need. We'll do tha
 
 We will be working with a set of sample data that is located in directory (`/data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite`). First, we
 will move some of these files to the `data` directory your created at [the end of our
-last lesson](https://smithsonianworkshops.github.io/2018-06-12-nmnh/09-organization/).  
+last lesson]({% link _episodes/09-organization.md %}).  
 
 ~~~
 $ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/untrimmed_fastq /pool/genomics/username/dc_workshop/data/

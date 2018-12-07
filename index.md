@@ -238,7 +238,7 @@ eventbrite:           # optional: alphanumeric key for Eventbrite registration, 
 </p>
 {% endif %}
 
-<p>Workshop Lessons: <a href="https://unlhcc.github.io/2019-01-03-UNO/lessons_index.html">https://unlhcc.github.io/2019-01-03-uno/lessons_index.html</a></p>
+<p><a href="{{ site.baseurl }} {% link lessons_index.md %}">Workshop Lessons Index</a></p>
 
 <hr/>
 

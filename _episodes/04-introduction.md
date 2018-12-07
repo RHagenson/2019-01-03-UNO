@@ -64,7 +64,7 @@ we're going to be working with data on Hydra.
 You can log-in to Crane using the instructions
 [here](https://hcc-docs.unl.edu/display/HCCDOC/HCC+Documentation).  
 
-After loging on, you will see a screen showing something like this:
+After logging on, you will see a screen showing something like this:
 
 ~~~
 Last login: Thu Feb  8 08:59:22 2018 from 66.37.232.210

@@ -212,7 +212,7 @@ This will print out all of the contents of the `SRR098026.fastq` to the screen.
 > the `/pool/genomics/username/dc_sample_data/untrimmed_fastq` directory.
 >
 > > ## Solution
-> > 1. The last line of the file is `TC:CCC::CCCCCCCC<8?6A:C28C<608'&&&,'$`.
+> > 1. The last line of the file is `C:CCC::CCCCCCCC<8?6A:C28C<608'&&&,'$`.
 > > 2. `cat /pool/genomics/username/dc_sample_data/untrimmed_fastq/*`
 > {: .solution}
 {: .challenge}

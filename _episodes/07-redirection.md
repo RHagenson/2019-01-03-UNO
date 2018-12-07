@@ -42,7 +42,7 @@ Suppose we want to see how many reads in our file have really bad segments conta
 
 > ## Determining quality
 >
-> In this lesson, we're going to be manually searching for strings of `N`s within our sequence
+> In this lesson, we're going to be manually searching for strings of Ns within our sequence
 > results to illustrate some principles of file searching. It can be really useful to do this
 > type of searching to get a feel for the quality of your sequencing results, however, in you
 > research you will most likely use a bioinformatics tool that has a built-in program for
@@ -140,7 +140,7 @@ The prompt should sit there a little bit, and then it should look like nothing
 happened. But type `ls`. You should see a new file called bad_reads.txt.
 
 We can check the number of lines in our new file using a command called `wc`.
-`wc` stands for `word count`. This command counts the number of words, lines, and characters
+`wc` stands for **w**ord **c**ount. This command counts the number of words, lines, and characters
 in a file.
 
 ~~~
