@@ -140,7 +140,7 @@ The prompt should sit there a little bit, and then it should look like nothing
 happened. But type `ls`. You should see a new file called bad_reads.txt.
 
 We can check the number of lines in our new file using a command called `wc`.
-`wc` stands for `word count`. This command counts the number of words, lines, and characters
+`wc` stands for **w**ord **c**ount. This command counts the number of words, lines, and characters
 in a file.
 
 ~~~
