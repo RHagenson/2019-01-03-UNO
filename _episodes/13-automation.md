@@ -13,7 +13,7 @@ keypoints:
 ---
 # What is a shell script?
 
-You wrote a simple shell script in a [previous lesson](http://www.datacarpentry.org/shell-genomics/05-writing-scripts/) that we used to extract bad reads from our
+You wrote a simple shell script in [a previous lesson]({% link _episodes/08-writing-scripts.md %}) that we used to extract bad reads from our
 FASTQ files and put them into a new file. 
 
 Here's the script you wrote:
