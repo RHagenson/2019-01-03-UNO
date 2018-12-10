@@ -44,7 +44,7 @@ Good documentation is key to avoiding this issue, and luckily enough,
 recording your computational experiments is even easier than recording lab data. Copy/Paste will become
 your best friend, sensible file names will make your analysis understandable by you and your collaborators, and
 writing the methods section for your next paper will be easy! Remember that in any given project of yours, it's worthwhile to consider
-a future version of yourself as an entirely separate collaborator. The better your documenation is, the more this 'collaborator' will
+a future version of yourself as an entirely separate collaborator. The better your documentation is, the more this "collaborator" will
 feel indebted to you!
 
 With this in mind, let's have a look at the best practices for
@@ -68,12 +68,12 @@ You should see the output:
 {: .output}
 
 > ## Tip  
-> If you aren't in your home directory, the easiest way to get there is to enter the command `cd`, which
-> always returns you to home.  
+> If you aren't in your work directory, the easiest way to get there is to enter the command `cd $WORK`, which
+> always returns you to work.  
 {: .callout}
 
 > ## Exercise  
-> Use the `mkdir` command to make the following directories:   
+> Use the `mkdir` command to make the following directories:
 > + `dc_workshop`
 > + `dc_workshop/docs`  
 > + `dc_workshop/data`
@@ -116,7 +116,7 @@ dc_workshop/results:
 
 # Organizing your files
 
-Before begining any analysis, it's important to save a copy of your
+Before beginning any analysis, it's important to save a copy of your
 raw data. The raw data should never be changed. Regardless of how
 sure you are that you want to carry out a particular data cleaning
 step, there's always the chance that you'll change your mind later
@@ -126,7 +126,7 @@ your data that you never modify guarantees that you will always be
 able to start over if something goes wrong with your analysis. When
 starting any analysis, you can make a copy of your raw data file and
 do your manipulations on that file, rather than the raw version. We
-learned in [a previous episode](http://www.datacarpentry.org/shell-genomics/03-working-with-files/#file-permissions) how to prevent overwriting our raw data
+learned in [a previous episode]({% link _episodes/06-working-with-files.md %}#file-permissions) how to prevent overwriting our raw data
 files by setting restrictive file permissions.
 
 You can store any results that are generated from your analysis in
@@ -160,7 +160,7 @@ $ history
 {: .bash}
 
 The history likely contains many more commands than you have used for the current project. Let's view the last
-several commands that focus on just what we need for this project.   
+several commands that focus on just what we need for this project.
 
 View the last n lines of your history (where n = approximately the last few lines you think relevant). For our example, we will use the last 7:
 
@@ -181,9 +181,9 @@ $ nano dc_workshop_log_2017_10_27.txt
 ~~~
 {: .bash}
 
-(Remember to replace the `2017_10_27` with your workshop date.)
+(Remember to replace the `2017_10_27` with your today's date.)
 
-From the `nano` screen, you can use your cursor to navigate, type, and delete any redundant lines.   
+From the `nano` screen, you can use your cursor to navigate, type, and delete any redundant lines.
 
 > ## Navigating in Nano
 >
@@ -202,18 +202,18 @@ From the `nano` screen, you can use your cursor to navigate, type, and delete an
 >
 {: .callout}
 
-Add a date line and comment to the line where you have created the directory, for example:   
+Add a date line and comment to the line where you have created the directory, for example:
 
 ~~~
-# 2017_10_27   
+# 2017_10_27
 # Created sample directories for the Data Carpentry workshop  
 ~~~
 {: .bash}
 
 `bash` treats the `#` character as a comment character. Any text on a line after a `#` is ignored by bash when evaluating the text as code.
 
-Next, remove any lines of the history that are not relevant by navigating to those lines and using your
-delete key. Save your file and close `nano`.
+Next, remove any lines of the history that are not relevant by navigating to those lines and using
+<kbd>Delete</kbd>. Save your file and close `nano`.
 
 Your file should look something like this:
 
@@ -228,7 +228,7 @@ mkdir dc_workshop/results
 ~~~
 {: .output}
 
-If you keep this file up to date, you can use it to re-do your work on your project if something happens to your results files. To demonstrate how this works, first delete
+If you keep this file up-to-date, you can use it to re-do your work on your project if something happens to your results files. To demonstrate how this works, first delete
 your `dc_workshop` directory and all of its subdirectories. Look at your directory
 contents to verify the directory is gone.
 
@@ -258,8 +258,7 @@ dc_sample_data	dc_workshop dc_workshop_log_2017_10_27.txt
 {: .output}
 
 It's important that we keep our workshop log file outside of our `dc_workshop` directory
-if we want to use it to recreate our work. It's also important for us to keep it up to
-date by regularly updating with the commands that we used to generate our results files.
+if we want to use it to recreate our work. It's also important for us to keep it up-to-date by regularly updating with the commands that we used to generate our results files.
 
 Congratulations! You've finished your introduction to using the shell for genomics
 projects. You now know how to navigate your file system, create, copy, move,
