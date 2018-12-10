@@ -294,23 +294,30 @@ reads using a wildcard within our search string for `grep`.
 > ## Exercise
 >
 > How many reads in the `SRR098026.fastq` file contain at least two regions of 5 unknown
-> nucleotides in a row, separated by any number of known nucleotides?
+> nucleotides in a row, separated by any number of nucleotides?
 >
 >> ## Solution
 >>
 >> ~~~
->> $ grep "NNNNN*NNNNN" SRR098026.fastq > bad_reads_2.txt
+>> $ grep "NNNNN.*NNNNN" SRR098026.fastq > bad_reads_2.txt
 >> $ wc -l bad_reads_2.txt
 >> ~~~
 >> {: .bash}
 >>
 >> ~~~
->> 186 bad_reads_2.txt
+>> 221 bad_reads_2.txt
 >> ~~~
 >> {: .output}
+>> Note: `.*` here means any character (`.`) any number of times (`*`) making this match read: "NNNNN, followed by any character any number of times, followed by NNNNN".
+>> Without the `.`, this pattern ignores cases such as:
+>> `ANNNNNNAATGGCTGTGCTGTNNNNNNNNAGGGAT`.
+>> but still matches:
+>> `CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN`.
+>>
+>> What you might have expected is to match two "NNNNN" groups separated by **known** nucleotides, but this is a more advanced match pattern:
+>> `grep -P "NNNNN[ATGC]+NNNNN" SRR098026.fastq`
 > {: .solution}
 {: .challenge}
-
 
 We've now created two separate files to store the results of our search for reads matching
 particular criteria. Since we might have multiple different criteria we want to search for,
