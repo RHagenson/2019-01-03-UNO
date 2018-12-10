@@ -29,8 +29,8 @@ with a keyboard instead of controlling graphical user interfaces
 
 There are many reasons to learn about the shell.
 
-* Many bioinformatics tools can only be used through a command line interface, or
-have extra capabilities in the command line version that are not available in the GUI.
+* Many bioinformatics tools can only be used through a command line interface (CLI), or
+have extra capabilities in the command line version that are not available in the graphical user interface (GUI).
 This is true, for example, of BLAST, which offers many advanced functions only accessible
 to users who know how to use a shell.  
 * The shell makes your work less boring. In bioinformatics you often need to do
