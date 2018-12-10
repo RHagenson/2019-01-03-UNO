@@ -193,7 +193,7 @@ $ ls -l bad-reads-script.sh
 {: .bash}
 
 ~~~
--rw-rw-r-- 1 username username 0 Oct 25 21:46 bad-reads-script.sh
+-rw-rw-r-- 1 username group 0 Oct 25 21:46 bad-reads-script.sh
 ~~~
 {: .output}
 
@@ -212,7 +212,7 @@ $ ls -l bad-reads-script.sh
 {: .bash}
 
 ~~~
--rwxrwxr-x 1 username username 0 Oct 25 21:46 bad-reads-script.sh
+-rwxrwxr-x 1 username group 0 Oct 25 21:46 bad-reads-script.sh
 ~~~
 {: .output}
 
