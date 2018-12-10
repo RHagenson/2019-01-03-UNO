@@ -23,11 +23,11 @@ keypoints:
 
 ### Our data set: FASTQ files
 
-Now that we know how to navigate around our directory structure, lets
+Now that we know how to navigate around our directory structure, let's
 start working with our sequencing files. We did a sequencing experiment and
 have two results files, which are stored in our `untrimmed_fastq` directory.
 
-### Wild cards
+### Wildcards
 
 Navigate to your `untrimmed_fastq` directory.
 
@@ -37,7 +37,7 @@ $ cd /work/hdzoo/rhagenson/dc_sample_data/untrimmed_fastq
 {: .bash}
 
 We are interested in looking at the FASTQ files in this directory. We can list
-all files with the .fastq extension using the command:
+all files with the `.fastq` extension using the command:
 
 ~~~
 $ ls *.fastq
@@ -66,7 +66,7 @@ SRR097977.fastq
 
 lists only the file that ends with `977.fastq`.
 
-We can use the command `echo` to see how the wildcard character is intepreted by the
+We can use the command `echo` to see how the wildcard character is interpreted by the
 shell.
 
 ~~~
@@ -89,7 +89,10 @@ $ ls /usr/bin/*.sh
 {: .bash}
 
 ~~~
-/usr/bin/amuFormat.sh  /usr/bin/gettext.sh  /usr/bin/gvmap.sh
+/usr/bin/alsa-info.sh           /usr/bin/lprsetup.sh                 /usr/bin/unix-lpr.sh
+/usr/bin/gettext.sh             /usr/bin/pm-utils-bugreport-info.sh  /usr/bin/url_handler.sh
+/usr/bin/gflags_completions.sh  /usr/bin/pv.sh
+/usr/bin/lesspipe.sh            /usr/bin/setup-nsssysinit.sh
 ~~~
 {: .output}
 
@@ -101,8 +104,8 @@ Lists every file in `/usr/bin` that ends in the characters `.sh`.
 > The root directory is the highest level directory in your file system and contains
 > files that are important for your computer to perform its daily work, but which you usually won't
 > have to interact with directly. In our case,
-> the root directory is two levels above our home directory, so `cd` or `cd ~` will take you to `/home/username`
-> and `cd /` will take you to `/`, which is equivalent to `~/../../`. Try not to worry if this is confusing,
+> the root directory is two levels above our home directory, so `cd` or `cd ~` will take you to `/home/group/username`
+> and `cd /` will take you to `/`, which is equivalent to `~/../../../`. Try not to worry if this is confusing,
 > it will all become clearer with practice.
 {: .callout}
 
@@ -110,9 +113,9 @@ Lists every file in `/usr/bin` that ends in the characters `.sh`.
 > Do each of the following tasks from your current directory using a single
 > `ls` command for each.
 >
-> 1.  List all of the files in `/usr/bin` that start with the letter 'c'.
-> 2.  List all of the files in `/usr/bin` that contain the letter 'a'.
-> 3.  List all of the files in `/usr/bin` that end with the letter 'o'.
+> 1. List all of the files in `/usr/bin` that start with the letter 'c'.
+> 2. List all of the files in `/usr/bin` that contain the letter 'a'.
+> 3. List all of the files in `/usr/bin` that end with the letter 'o'.
 >
 > Bonus: List all of the files in `/usr/bin` that contain the letter 'a' or the
 > letter 'c'.
@@ -129,7 +132,6 @@ Lists every file in `/usr/bin` that ends in the characters `.sh`.
 > >
 > {: .solution}
 {: .challenge}
-
 
 ## Command History
 
@@ -185,7 +187,6 @@ You will be glad you learned this when you need to re-run very complicated comma
 > {: .solution}
 {: .challenge}
 
-
 ## Examining Files
 
 We now know how to switch directories, run programs, and look at the
@@ -203,11 +204,10 @@ $ cat SRR098026.fastq
 
 This will print out all of the contents of the `SRR098026.fastq` to the screen.
 
-
 > ## Exercise
 >
-> 1. Print out the contents of the `/work/hdzoo/rhagenson/dc_sample_data/untrimmed_fastq/SRR097977.fastq` file. What is the last line of the file?
-> 2.  From your home directory, and without changing directories,
+> 1. Print out the contents of the `untrimmed_fastq/SRR097977.fastq` file. What is the last line of the file?
+> 2. From your home directory, and without changing directories,
 > use one short command to print the contents of all of the files in
 > the `/work/hdzoo/rhagenson/dc_sample_data/untrimmed_fastq` directory.
 >
@@ -240,26 +240,26 @@ Some navigation commands in `less`
 |  <kbd>q</kbd>    | to quit |
 
 `less` also gives you a way of searching through files. Use the
-"/" key to begin a search. Enter the word you would like
-to search for and press `enter`. The screen will jump to the next location where
+<kbd>/</kbd> key to begin a search. Enter the word you would like
+to search for and press <kbd>Enter</kbd>. The screen will jump to the next location where
 that word is found.
 
-**Shortcut:** If you hit "/" then "enter", `less` will  repeat
+**Shortcut:** If you hit <kbd>/</kbd> then <kbd>Enter</kbd>, `less` will  repeat
 the previous search. `less` searches from the current location and
 works its way forward. Note, if you are at the end of the file and search
 for the sequence "CAA", `less` will not find it. You either need to go to the
-beginning of the file (by typing `g`) and search again using `/` or you
-can use `?` to search backwards in the same way you used `/` previously.
+beginning of the file (by typing <kbd>g</kbd>) and search again using <kbd>/</kbd> or you
+can use <kbd>?</kbd> to search backwards in the same way you used <kbd>/</kbd> previously.
 
 For instance, let's search forward for the sequence `TTTTT` in our file.
 You can see that we go right to that sequence, what it looks like,
-and where it is in the file. If you continue to type `/` and hit return, you will move
-forward to the next instance of this sequence motif. If you instead type `?` and hit
+and where it is in the file. If you continue to type <kbd>/</kbd> and hit return, you will move
+forward to the next instance of this sequence motif. If you instead type <kbd>?</kbd> and hit
 return, you will search backwards and move up the file to previous examples of this motif.
 
 > ## Exercise
 >
-> What are the next three nucleotides (characters) after the first instance of the sequence quoted above?
+> What are the next three nucleotides (characters) after the first instance of the sequence quoted above (`TTTTT`)?
 >
 > > ## Solution
 > > `CAC`
@@ -268,7 +268,7 @@ return, you will search backwards and move up the file to previous examples of t
 
 Remember, the `man` program actually uses `less` internally and
 therefore uses the same commands, so you can search documentation
-using "/" as well!
+using <kbd>/</kbd> as well!
 
 There's another way that we can look at files, and in this case, just
 look at part of them. This can be particularly useful if we just want
@@ -316,7 +316,7 @@ A!@B!BBB@ABAB#########!!!!!!!######
 {: .output}
 
 The `-n` option to either of these commands can be used to print the
-first or last `n` lines of a file.
+first or last number lines of a file.
 
 ~~~
 $ head -n 1 SRR098026.fastq
@@ -367,7 +367,7 @@ SRR097977.fastq  SRR098026-copy.fastq  SRR098026.fastq
 ~~~
 {: .output}
 
-We now have two copies of the SRR098026.fastq file, one of them named SRR098026-copy.fastq. We'll move this file to a new directory
+We now have two copies of the `SRR098026.fastq` file, one of them named `SRR098026-copy.fastq`. We'll move this file to a new directory
 called `backup` where we'll store our backup data files.
 
 ### Creating Directories
@@ -380,7 +380,7 @@ $ mkdir backup
 ~~~
 {: .bash}
 
-### Moving / Renaming
+### Moving and Renaming
 
 We can now move our backup file to this directory. We can
 move files around using the command `mv`.
@@ -424,7 +424,7 @@ $ ls -l
 {: .bash}
 
 ~~~
--rw-r--r-- 1 username username 43332 Nov 15 23:02 SRR098026-backup.fastq
+-rw-r--r-- 1 username group 43332 Nov 15 23:02 SRR098026-backup.fastq
 ~~~
 {: .output}
 
@@ -448,7 +448,7 @@ $ ls -l
 {: .bash}
 
 ~~~
--r--r--r-- 1 username username 43332 Nov 15 23:02 SRR098026-backup.fastq
+-r--r--r-- 1 username group 43332 Nov 15 23:02 SRR098026-backup.fastq
 ~~~
 {: .output}
 
@@ -471,8 +471,12 @@ rm: remove write-protected regular file ‘SRR098026-backup.fastq’?
 If you enter `n` (for no), the file will not be deleted. If you enter `y`, you will delete the file. This gives us an extra
 measure of security, as there is one more step between us and deleting our data files.
 
-Important: The `rm` file permanently removes the file. Be careful with this command. It doesn't
-just nicely put the files in the Trash. They're really gone.
+> ## `rm` Deletes Completely
+>
+> The `rm` file permanently removes the file. 
+> Be careful with this command. 
+> It doesn't just nicely put the files in the Trash. They're really gone.
+{: .callout}
 
 By default, `rm`, will not delete directories. You can tell `rm` to
 delete a directory using the `-r` (recursive) option. Let's delete the backup directory
@@ -491,12 +495,12 @@ you will be asked whether you want to override your permission settings.
 
 > ## Exercise
 >
-> Starting in the `dc_sample_data/untrimmed_fastq/ directory, do the following:
+> Starting in the `dc_sample_data/untrimmed_fastq/` directory, do the following:
 > 1. Make sure that you have deleted your backup directory and all files it contains.  
 > 2. Create a copy of each of your FASTQ files. (Note: You'll need to do this individually for each of the two FASTQ files. We haven't
 > learned yet how to do this
 > with a wild-card.)  
-> 3. Use a wildcard to move all of your backup files to a new backup directory.   
+> 3. Use a wildcard to move all of your backup files to a new backup directory.
 > 4. Change the permissions on all of your backup files to be write-protected.  
 >
 > > ## Solution
@@ -508,8 +512,8 @@ you will be asked whether you want to override your permission settings.
 > > It's always a good idea to check your work with `ls -l backup`. You should see something like:
 > >
 > > ~~~
-> > -r--r--r-- 1 username username 47552 Nov 15 23:06 SRR097977-backup.fastq
-> > -r--r--r-- 1 username username 43332 Nov 15 23:06 SRR098026-backup.fastq
+> > -r--r--r-- 1 username group 47552 Nov 15 23:06 SRR097977-backup.fastq
+> > -r--r--r-- 1 username group 43332 Nov 15 23:06 SRR098026-backup.fastq
 > > ~~~
 > > {: .output}
 > {: .solution}
