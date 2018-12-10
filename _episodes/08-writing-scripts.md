@@ -62,19 +62,19 @@ The text at the bottom of the screen shows the keyboard shortcuts for performing
 
 Let's type in a few lines of text. Describe what the files in this
 directory are or what you've been doing with them.
-Once we're happy with our text, we can press `Ctrl-O` (press the Ctrl or Control key and, while
-holding it down, press the O key) to write our data to disk
+Once we're happy with our text, we can press `Ctrl-O` (press the <kbd>Ctrl</kbd> or <kbd>Control</kbd> key and, while
+holding it down, press the <kbd>O</kbd> key) to write our data to disk
 (we'll be asked what file we want to save this to:
-press Return to accept the suggested default of `README.txt`).
+press <kbd>Enter</kbd> to accept the suggested default of `README.txt`).
 
 Once our file is saved, we can use `Ctrl-X` to quit the editor and
 return to the shell.
 
 > ## Control, Ctrl, or ^ Key
 >
-> The Control key is also called the "Ctrl" key. There are various ways
-> in which using the Control key may be described. For example, you may
-> see an instruction to press the Control key and, while holding it down,
+> The <kbd>Control</kbd> is also called <kbd>Ctrl</kbd>. There are various ways
+> in which using <kbd>Control</kbd> may be described. For example, you may
+> see an instruction to press <kbd>Control</kbd> and, while holding it down,
 > press the X key, described as any of:
 >
 > * `Control-X`
