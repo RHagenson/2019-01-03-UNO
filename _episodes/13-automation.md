@@ -288,7 +288,7 @@ genome=/pool/genomics/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 > definition of your variable by typing into your script: echo $variable_name. 
 {: .callout}
 
-First we will load the modules need for all steps.
+First we will load the modules needed for all steps.
 
 ~~~
 module load bioinformatics/bwa
@@ -409,7 +409,7 @@ to be used to create our output files.
 
 Next we will create variables to store the names of our output files. This will make your script easier
 to read because you won't need to type out the full name of each of the files. We're using the `base` variable that we just
-defined, and adding different file name extensions to represent the files that will come out of each step in our workflow. 
+defined, and adding different filename extensions to represent the files that will come out of each step in our workflow. 
 Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
@@ -590,7 +590,7 @@ $ bash run_variant_calling.sh
 > As an exercise, try and change your existing script file, from using the `aln` method to the `mem` method.
 {: .callout}
 
-In the [previous lesson](http://www.datacarpentry.org/wrangling-genomics/02-variant_calling/) we mentioned that we were using small subsets of our
+In the [previous lesson]({% link _episodes/12-variant-calling.md %}) we mentioned that we were using small subsets of our
 trimmed FASTQ files to run our variant calling workflow, in the interests of time. The output files you now have in your 
 `dc_workshop/results` directory are based on the small sample FASTQ files (data from the `trimmed_fastq_small` directory). 
 We've also provided the result files from running the `run_variant_calling.sh` script on the full-sized trimmed FASTQ files. 
