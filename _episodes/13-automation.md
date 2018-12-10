@@ -13,7 +13,7 @@ keypoints:
 ---
 # What is a shell script?
 
-You wrote a simple shell script in a [previous lesson](http://www.datacarpentry.org/shell-genomics/05-writing-scripts/) that we used to extract bad reads from our
+You wrote a simple shell script in [a previous lesson]({% link _episodes/08-writing-scripts.md %}) that we used to extract bad reads from our
 FASTQ files and put them into a new file. 
 
 Here's the script you wrote:
@@ -35,11 +35,11 @@ long. If we wanted to do this for all six of our data files, that would be forty
 steps. If we had 50 samples (a more realistic number), it would be 400 steps! You can
 see why we want to automate this.
 
-We've also used `for` loops in previous lessons to iterate one or two commands over multiple input files. 
-In these `for` loops you used variables to enable you to run the loop on multiple files. We will be using variable 
+We've also used `for`-loops in previous lessons to iterate one or two commands over multiple input files. 
+In these `for`-loops you used variables to enable you to run the loop on multiple files. We will be using variable 
 assignments like this in our new shell scripts.
 
-Here's the `for` loop you wrote for unzipping `.zip` files: 
+Here's the for-loop you wrote for unzipping `.zip` files: 
 
 ~~~
 $ for filename in *.zip
@@ -141,7 +141,7 @@ cd /pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/
 {: .output}
 
 The next five lines should look very familiar. First we give ourselves a status message to tell us that we're unzipping our ZIP
-files. Then we run our for loop to unzip all of the `.zip` files in this directory.
+files. Then we run our for-loop to unzip all of the `.zip` files in this directory.
 
 ~~~
 echo "Unzipping..."
@@ -232,7 +232,7 @@ we'll explain as we go. This is very similar to what we did with our `read_qc.sh
 
 Our variant calling workflow will do the following steps
 
-1. Index the reference genome for use by bwa and samtools
+1. Index the reference genome for use by `bwa` and `samtools`
 2. Align reads to reference genome
 3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
 4. Calculate the read coverage of positions in the genome
@@ -288,7 +288,7 @@ genome=/pool/genomics/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 > definition of your variable by typing into your script: echo $variable_name. 
 {: .callout}
 
-First we will load the modules need for all steps.
+First we will load the modules needed for all steps.
 
 ~~~
 module load bioinformatics/bwa
@@ -409,7 +409,7 @@ to be used to create our output files.
 
 Next we will create variables to store the names of our output files. This will make your script easier
 to read because you won't need to type out the full name of each of the files. We're using the `base` variable that we just
-defined, and adding different file name extensions to represent the files that will come out of each step in our workflow. 
+defined, and adding different filename extensions to represent the files that will come out of each step in our workflow. 
 Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
@@ -590,7 +590,7 @@ $ bash run_variant_calling.sh
 > As an exercise, try and change your existing script file, from using the `aln` method to the `mem` method.
 {: .callout}
 
-In the [previous lesson](http://www.datacarpentry.org/wrangling-genomics/02-variant_calling/) we mentioned that we were using small subsets of our
+In the [previous lesson]({% link _episodes/12-variant-calling.md %}) we mentioned that we were using small subsets of our
 trimmed FASTQ files to run our variant calling workflow, in the interests of time. The output files you now have in your 
 `dc_workshop/results` directory are based on the small sample FASTQ files (data from the `trimmed_fastq_small` directory). 
 We've also provided the result files from running the `run_variant_calling.sh` script on the full-sized trimmed FASTQ files. 
