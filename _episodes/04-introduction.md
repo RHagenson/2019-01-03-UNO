@@ -149,8 +149,8 @@ i.e.,
 the directory that the computer assumes we want to run commands in
 unless we explicitly specify something else.
 Here,
-the computer's response is `/home/username`,
-which is your home directory:
+the computer's response is `/home/group/username`,
+which is your home (`$HOME`) directory:
 
 ~~~
 $ pwd
@@ -158,15 +158,13 @@ $ pwd
 {: .bash}
 
 ~~~
-/home/username
+/home/group/username
 ~~~
 {: .output}
 
-Let's look at how our file system is organized.  
-/data/genomics/workshops/data_carpentry_genomics
-We will be using files located in `/common/demo/dc-carpentry-files`
+Let's look at how our file system is organized. We will be using files located in `/common/demo/dc/dc_sample_data`
 
-You can copy the files to your space by first navigating to your /pool/genomics or /pool/biology directory (e.g. `/pool/genomics/dikowr`)
+You can copy the files to your space by first navigating to your `$WORK` directory (e.g. `/work/group/username`)
 The command to change locations in our file system is `cd` followed by a
 directory name to change our working directory.
 `cd` stands for "change directory".
@@ -174,9 +172,8 @@ directory name to change our working directory.
 and then using `cp -r`, which stands for copy recursively (i.e. the whole directory).
 
 ~~~
-cd /pool/genomics/username
-cp -r /common/demo/dc-carpentry-files/dc_sample_data .
-
+cd /work/hdzoo/rhagenson
+cp -r /common/demo/dc/dc_sample_data .
 ~~~
 {: .output}
 
@@ -219,7 +216,7 @@ sra_metadata/  untrimmed_fastq/
 ~~~
 {: .output}
 
-Anything with a "/" after it is a directory. Things with a "*" after them are programs. If
+Anything with a `/` after it is a directory. Things with a `*` after them are programs. If
 there are no decorations, it's a file.
 
 `ls` has lots of other options. To find out what they are, we can type:
@@ -246,8 +243,8 @@ to quit.
 > > {: .bash}
 > >
 > > ~~~
-> > drwxr-x--- 2 username username 4096 Jul 30  2015 sra_metadata
-> > drwxr-xr-x 2 username username 4096 Jul 30  2015 untrimmed_fastq
+> > dr-xr-xr-x 2 rhagenson hdzoo 4096 Dec 10 10:10 sra_metadata
+> > dr-xr-xr-x 2 rhagenson hdzoo 4096 Dec 10 10:10 untrimmed_fastq
 > > ~~~
 > > {: .output}
 > >
@@ -258,7 +255,7 @@ to quit.
 > {: .solution}
 {: .challenge}
 
-No one can possibly learn all of these arguments, that's why the manual page
+No one can possibly learn all of these arguments, that's what the manual page
 is for. You can (and should) refer to the manual page or other help files
 as needed.
 
@@ -271,7 +268,7 @@ $ ls -F
 {: .bash}
 
 ~~~
-SRR097977.fastq  SRR098026.fastq
+SRR097977.fastq*  SRR098026.fastq*
 ~~~
 {: .output}
 
@@ -287,18 +284,18 @@ as a shortcut. When you start typing out the name of a directory or file, then
 hit the <kbd>Tab</kbd> key, the shell will try to fill in the rest of the
 directory or file name.
 
-Return to your home directory:
+Return to your work (`$WORK`) directory:
 
 ~~~
-cd /pool/genomics/username
+cd /work/hdzoo/rhagenson
 ~~~
+{: .bash}
 
 then enter:
 
 ~~~
 $ cd dc_sam<tab>
 ~~~
-
 {: .bash}
 
 The shell will fill in the rest of the directory name for
@@ -320,7 +317,7 @@ If we navigate back to our `untrimmed_fastq` directory and try to access one
 of our sample files:
 
 ~~~
-$ cd /pool/genomics/username
+$ cd /work/hdzoo/rhagenson
 $ cd dc_sample_data
 $ cd untrimmed_fastq
 $ ls SR<tab>
@@ -342,7 +339,7 @@ SRR097977.fastq  SRR098026.fastq
 {: .output}
 
 Tab completion can also fill in the names of programs, which can be useful if you
-remember the begining of a program name.
+remember the beginning of a program name.
 
 ~~~
 $ pw<tab><tab>
@@ -350,7 +347,7 @@ $ pw<tab><tab>
 {: .bash}
 
 ~~~
-pwd         pwd_mkdb    pwhich      pwhich5.16  pwhich5.18  pwpolicy
+pwck       pwconv     pwd        pwdx       pwgen      pwmconfig  pwunconv
 ~~~
 {: .output}
 
