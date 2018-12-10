@@ -91,7 +91,7 @@ $ ls ../../
 ~~~
 {: .bash}
 
-prints the contents of `/pool/genomics`.
+prints the contents of `/work/hdzoo`.
 
 > ## Finding hidden directories
 >
@@ -99,7 +99,7 @@ prints the contents of `/pool/genomics`.
 > find out how to see hidden directories. List the contents of the directory and
 > identify the name of the text file in that directory.
 >
-> Hint: hidden files and folders in Unix start with `.`, for example .my_hidden_directory
+> Hint: hidden files and folders in Unix start with `.`, for example `.my_hidden_directory`
 >
 > > ## Solution
 > >
@@ -109,8 +109,8 @@ prints the contents of `/pool/genomics`.
 > > ~~~
 > > {: .bash}
 > >
-> > The `-a` option is short for `all` and says that it causes `ls` to "not ignore
-> > entries starting with ." This is the option we want.
+> > The `-a` option is short for "all" and says that it causes `ls` to not ignore
+> > entries starting with `.`. This is the option we want.
 > >
 > > ~~~
 > > $ ls -a
