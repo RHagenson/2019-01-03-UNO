@@ -314,8 +314,8 @@ reads using a wildcard within our search string for `grep`.
 >> but still matches:
 >> `CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN`.
 >>
->> What you might have expected is to match two "NNNNN" groups separated by **known** nucleotides, but this is a more advanced match pattern:
->> `grep -P "NNNNN[ATGC]+NNNNN" SRR098026.fastq`
+>> What you might have expected is to match at least two regions of 5 unknown nucleotides in a row, separated by any number of **known** nucleotides, but this is a more advanced pattern:
+>> `grep -P "NNNNN[ATGC]*NNNNN" SRR098026.fastq`
 > {: .solution}
 {: .challenge}
 
@@ -356,21 +356,25 @@ efficiently. Let's take a few minutes to practice.
 >
 > Now that we know about the pipe (`|`), write a single command to find the number of reads
 > in the `SRR098026.fastq` file that contain at least two regions of 5 unknown
-> nucleotides in a row, separated by any number of known nucleotides. Do this without creating
+> nucleotides in a row, separated by any number of **known** nucleotides. Do this without creating
 > a new file.
 >
 >> ## Solution
 >>
 >> ~~~
->> $ grep "NNNNN*NNNNN" SRR098026.fastq | wc -l
+>> $ grep -P "NNNNN[ATGC]*NNNNN" SRR098026.fastq | wc -l
 >> ~~~
 >> {: .bash}
 >>
 >> ~~~
->> 186
+>> 221
 >> ~~~
 >> {: .output}
 >>
+>> Note here that "separated by any number of **known** nucleotides" is precise wording that
+>> includes matching zero known nucleotides. If "at least one **known** nucleotide"
+>> is desired, replace `*` with `+` to indicated one or more matches.
+>> grep -P "NNNNN[ATGC]+NNNNN" SRR098026.fastq | wc -l
 > {: .solution}
 {: .challenge}
 
