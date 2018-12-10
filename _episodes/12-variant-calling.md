@@ -32,7 +32,7 @@ sequences against a large reference genome. The alignment process consists of tw
 
 First we will copy the reference genome data into our `data/` directory, as well as a set of trimmed FASTQ files to work with in this lesson, and a set of untrimmed files for the next one.  
 ~~~
-$ cd /pool/genomics/username/dc_workshop
+$ cd /work/hdzoo/rhagenson/dc_workshop
 $ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/ref_genome/ data/
 $ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/trimmed_fastq_small/ data/
 ~~~
@@ -517,10 +517,10 @@ $ cd ~/Desktop/files_for_igv
 Now we will transfer our files to that new directory. The commands to `scp` always go in the terminal window that is connected to your local computer (not to Hydra).
 
 ~~~
-$ scp username@hydra-login01.si.edu:/pool/genomics/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
-$ scp username@hydra-login01.si.edu:/pool/genomics/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
-$ scp username@hydra-login01.si.edu:/pool/genomics/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
-$ scp username@hydra-login01.si.edu:/pool/genomics/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf ~/Desktop/files_for_igv
+$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
+$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
+$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
+$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/vcf/SRR097977_final_variants.vcf ~/Desktop/files_for_igv
 ~~~
 {: .bash}
 

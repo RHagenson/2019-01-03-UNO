@@ -32,7 +32,7 @@ have two results files, which are stored in our `untrimmed_fastq` directory.
 Navigate to your `untrimmed_fastq` directory.
 
 ~~~
-$ cd /pool/genomics/username/dc_sample_data/untrimmed_fastq
+$ cd /work/hdzoo/rhagenson/dc_sample_data/untrimmed_fastq
 ~~~
 {: .bash}
 
@@ -206,14 +206,14 @@ This will print out all of the contents of the `SRR098026.fastq` to the screen.
 
 > ## Exercise
 >
-> 1. Print out the contents of the `/pool/genomics/username/dc_sample_data/untrimmed_fastq/SRR097977.fastq` file. What is the last line of the file?
+> 1. Print out the contents of the `/work/hdzoo/rhagenson/dc_sample_data/untrimmed_fastq/SRR097977.fastq` file. What is the last line of the file?
 > 2.  From your home directory, and without changing directories,
 > use one short command to print the contents of all of the files in
-> the `/pool/genomics/username/dc_sample_data/untrimmed_fastq` directory.
+> the `/work/hdzoo/rhagenson/dc_sample_data/untrimmed_fastq` directory.
 >
 > > ## Solution
 > > 1. The last line of the file is `C:CCC::CCCCCCCC<8?6A:C28C<608'&&&,'$`.
-> > 2. `cat /pool/genomics/username/dc_sample_data/untrimmed_fastq/*`
+> > 2. `cat /work/hdzoo/rhagenson/dc_sample_data/untrimmed_fastq/*`
 > {: .solution}
 {: .challenge}
 

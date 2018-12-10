@@ -128,7 +128,7 @@ In this example, we've told Trimmomatic:
 Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq` data directory:
 
 ~~~
-$ cd /pool/genomics/username/dc_workshop/data/untrimmed_fastq
+$ cd /work/hdzoo/rhagenson/dc_workshop/data/untrimmed_fastq
 ~~~
 {: .bash}
 
@@ -346,7 +346,7 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >> On Hydra window do:
 >>
 >> ~~~
->> $ fastqc /pool/genomics/username/dc_workshop/data/trimmed_fastq
+>> $ fastqc /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq
 >> ~~~
 >> {: .bash}
 >>
@@ -354,7 +354,7 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >>
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp username@hydra-login01:/pool/genomics/username/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
+>> $ scp username@hydra-login01:/work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
 >> $ open ~/Desktop/fastqc_html/trimmed/*.html
 >> ~~~
 >> {: .bash}

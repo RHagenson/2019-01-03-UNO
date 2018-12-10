@@ -235,14 +235,14 @@ will move some of these files to the `data` directory your created at [the end o
 last lesson]({% link _episodes/09-organization.md %}).  
 
 ~~~
-$ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/untrimmed_fastq /pool/genomics/username/dc_workshop/data/
+$ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/untrimmed_fastq /work/hdzoo/rhagenson/dc_workshop/data/
 ~~~
 {: .bash}
 
 Navigate to your FASTQ dataset:
 
 ~~~
-$ cd /pool/genomics/username/dc_workshop/data/untrimmed_fastq/
+$ cd /work/hdzoo/rhagenson/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .bash}
 
@@ -345,9 +345,9 @@ will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
-$ mkdir /pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads
-$ mv *.zip /pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/
-$ mv *.html /pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/
+$ mkdir /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads
+$ mv *.zip /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+$ mv *.html /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -355,7 +355,7 @@ Now we can navigate into this results directory and do some closer
 inspection of our output files.
 
 ~~~
-$ cd /pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/
+$ cd /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -410,7 +410,7 @@ $ mkdir ~/Desktop/fastqc_html
 {: .bash}
 
 ~~~
-$ scp username@hydra-login01.si.edu:/pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
 {: .bash}
 
@@ -430,7 +430,7 @@ $ mkdir %HOMEPATH%\Desktop\fastqc_html
 Now we can transfer our HTML files to our local computer using `pscp`.
 
 ~~~
-> pscp username@hydra-login01.si.edu:/pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/*.html %HOMEPATH%\Desktop\fastqc_html
+> pscp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/*.html %HOMEPATH%\Desktop\fastqc_html
 ~~~
 {: .bash}
 
@@ -508,7 +508,7 @@ in your terminal program that is connected to Hydra and make sure you're in
 our results subdirectory.   
 
 ~~~
-$ cd /pool/genomics/username/dc_workshop/results/fastqc_untrimmed_reads/
+$ cd /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
 $ ls
 ~~~
 {: .bash}
@@ -755,10 +755,10 @@ us whether this sample passed, failed, or is borderline (`WARN`).
 We can make a record of the results we obtained for all our samples
 by concatenating all of our `summary.txt` files into a single file
 using the `cat` command. We'll call this `full_report.txt` and move
-it to `/pool/genomics/username/dc_workshop/docs`.
+it to `/work/hdzoo/rhagenson/dc_workshop/docs`.
 
 ~~~
-$ cat */summary.txt > /pool/genomics/username/dc_workshop/docs/fastqc_summaries.txt
+$ cat */summary.txt > /work/hdzoo/rhagenson/dc_workshop/docs/fastqc_summaries.txt
 ~~~
 {: .bash}
 
@@ -772,7 +772,7 @@ $ cat */summary.txt > /pool/genomics/username/dc_workshop/docs/fastqc_summaries.
 >> We can get the list of all failed tests using `grep`.
 >>
 >> ~~~
->> $ cd /pool/genomics/username/dc_workshop/docs
+>> $ cd /work/hdzoo/rhagenson/dc_workshop/docs
 >> $ grep FAIL fastqc_summaries.txt
 >> ~~~
 >> {: .bash}

@@ -55,7 +55,7 @@ In this exercise we will set up a file system for the project we will be working
 We will start by creating a directory that we can use for the rest of the workshop. First navigate to your home directory. Then confirm that you are in the correct directory using the `pwd` command.
 
 ~~~
-$ cd /pool/genomics/username
+$ cd /work/hdzoo/rhagenson
 $ pwd
 ~~~
 {: .bash}
@@ -63,7 +63,7 @@ $ pwd
 You should see the output:
 
 ~~~
-/pool/genomics/username
+/work/hdzoo/rhagenson
 ~~~
 {: .output}
 

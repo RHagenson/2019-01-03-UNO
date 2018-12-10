@@ -372,7 +372,7 @@ efficiently. Let's take a few minutes to practice.
 Let's use the tools we've added to our tool kit so far, along with a few new ones, to example our SRA metadata file. First, let's navigate to the correct directory.
 
 ~~~
-$ cd /pool/genomics/username
+$ cd /work/hdzoo/rhagenson
 $ cd dc_sample_data/sra_metadata
 ~~~
 {: .bash}
