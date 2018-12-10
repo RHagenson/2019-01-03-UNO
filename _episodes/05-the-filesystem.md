@@ -152,7 +152,7 @@ By default, the `ls` commands lists the contents of the working
 directory (i.e. the directory you are in). You can always find the
 directory you are in using the `pwd` command. However, you can also
 give `ls` the names of other directories to view. Navigate to your
-`/pool/genomics` directory if you are not already there.
+`/work/hdzoo` directory if you are not already there.
 
 ~~~
 $ cd /work/hdzoo/rhagenson
@@ -189,7 +189,7 @@ the intermediate directory.
 
 > ## Navigating practice
 >
-> Navigate to your `/pool/genomics` directory. From there, list the contents of the `untrimmed_fastq`
+> Navigate to your work `/work/hdzoo/rhagenson` directory. From there, list the contents of the `untrimmed_fastq`
 > directory.
 >
 > > ## Solution
@@ -214,7 +214,7 @@ The `cd` command takes an argument which is a directory
 name. Directories can be specified using either a *relative* path or a
 full *absolute* path. The directories on the computer are arranged into a
 hierarchy. The full path tells you where a directory is in that
-hierarchy. Navigate to the home directory, then enter the `pwd`
+hierarchy. Navigate to your home directory, then enter the `pwd`
 command.
 
 ~~~
@@ -226,16 +226,17 @@ $ pwd
 You will see:
 
 ~~~
-/home/username
+/home/group/username
 ~~~
 {: .output}
 
 This is the full name of your home directory. This tells you that you
-are in a directory called `username`, which sits inside a directory called
-`home` which sits inside the very top directory in the hierarchy. The
-very top of the hierarchy is a directory called `/` which is usually
-referred to as the *root directory*. So, to summarize: `username` is a
-directory in `home` which is a directory in `/`.
+are in a directory called `username`, which sits inside a directory called 
+`group`, which is inside a directory called `home`, which sits inside 
+the very top directory in the hierarchy. The very top of the hierarchy 
+is a directory called `/` which is usually referred to as the *root directory*. 
+So, to summarize: `username` is a directory in `group`, 
+which is in`home` which is a directory in `/`.
 
 Now enter the following command:
 
@@ -245,10 +246,10 @@ $ cd /work/hdzoo/rhagenson/dc_sample_data/.hidden
 {: .bash}
 
 This jumps forward multiple levels to the `.hidden` directory.
-Now go back to the `/pool/genomics` directory.
+Now go back to the `/work/hdzoo/rhagenson` directory.
 
 ~~~
-$ cd /pool/genomics
+$ cd /work/hdzoo/rhagenson
 ~~~
 {: .bash}
 
@@ -258,7 +259,6 @@ You can also navigate to the `.hidden` directory using:
 $ cd dc_sample_data/.hidden
 ~~~
 {: .bash}
-
 
 These two commands have the same effect, they both take us to the `.hidden` directory.
 The first uses the absolute path, giving the full address from the home directory. The
@@ -272,13 +272,13 @@ get there from another country. A full path is like GPS coordinates. It tells yo
 where something is no matter where you are right now.
 
 You can usually use either a full path or a relative path
-depending on what is most convenient. If we are in the home directory,
+depending on what is most convenient. If we are in the home/work directory,
 it is more convenient to enter the relative path since it
 involves less typing.
 
 Over time, it will become easier for you to keep a mental note of the
 structure of the directories that you are using and how to quickly
-navigate amongst them.
+navigate between them.
 
 > ## Relative path resolution
 >
@@ -294,10 +294,9 @@ navigate amongst them.
 >
 > > ## Solution
 > >  1. No: there *is* a directory `backup` in `/Users`.
-> >  2. No: this is the content of `Users/thing/backup`,
-> >   but with `..` we asked for one level further up.
-> >  3. No: see previous explanation.
-> >    Also, we did not specify `-F` to display `/` at the end of the directory names.
+> >  2. No: this is the content of `/Users/thing/backup`,
+> >   however with `..` we asked for one level further up.
+> >  3. No: see previous explanation. Also, we did not specify `-F` to display `/` at the end of the directory names.
 > >  4. Yes: `../backup` refers to `/Users/backup`.
 > {: .solution}
 {: .challenge}
@@ -305,8 +304,8 @@ navigate amongst them.
 ### Navigational Shortcuts
 
 There are some shortcuts which you should know about. Dealing with the
-home directory is very common. The tilde character,
-`~`, is a shortcut for your home directory.
+home (`$HOME`) directory is very common. The tilde character,
+`~`, is a shortcut for your home (`$HOME`) directory.
 
 ~~~
 $ ls ~
@@ -314,15 +313,15 @@ $ ls ~
 {: .bash}
 
 ~~~
-bio
+bio.txt
 ~~~
 {: .output}
 
 This prints the contents of your home directory, without you needing to
 type the full path.
 
-There is a shortcut to quickly return to your home directory. typing `cd` with
-no directory name will bring you back to your home (~):
+There is a shortcut to quickly return to your home directory which we used above. typing `cd` with
+no directory name will bring you back to your home (`~`):
 
 ~~~
 $ cd
@@ -331,7 +330,7 @@ $ ls
 {: .bash}
 
 ~~~
-bio
+bio.txt
 ~~~
 {: .output}
 
