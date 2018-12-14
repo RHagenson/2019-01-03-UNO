@@ -25,14 +25,13 @@ description of each step.
 
 ![workflow](../img/variant_calling_workflow.png)
 
-
-1. Quality control - Assessing quality using FastQC
-2. Quality control - Trimming and/or filtering reads (if necessary)
+1. Quality control -- Assessing quality using FastQC
+2. Quality control -- Trimming and/or filtering reads (if necessary)
 3. Align reads to reference genome
 4. Perform post-alignment clean-up
 5. Variant calling
 
-These workflows in bioinformatics adopt a plug-and-play approach in that the output of one tool can be easily
+These workflows in bioinformatics adopt a plug-and-play approach in that the output of one tool can be
 used as input to another tool without any extensive configuration. Having standards for data formats is what
 makes this feasible. Standards ensure that data is stored in a way that is generally accepted and agreed upon
 within the community. The tools that are used to analyze data at different stages of the workflow are therefore
@@ -53,9 +52,9 @@ include...
 
 |Line|Description|
 |----|-----------|
-|1|Always begins with '@' and then information about the read|
+|1|Always begins with `@` and then information about the read|
 |2|The actual DNA sequence|
-|3|Always begins with a '+' and sometimes the same info in line 1|
+|3|Always begins with a `+` and sometimes the same info in line 1|
 |4|Has a string of characters which represent the quality scores; must have same number of characters as line 2|
 
 We can view the first complete read in one of the files our dataset by using `head` to look at
@@ -74,11 +73,11 @@ NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
 ~~~
 {: .output}
 
-All but one of the nucleotides in this read are unknown (`N`). This is a pretty bad read!
+All but one of the nucleotides in this read are unknown (N). This is a pretty bad read!
 
 Line 4 shows the quality for each nucleotide in the read. Quality is interpreted as the
 probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call
-accuracy (eg 90%). To make it possible to line up each individual nucleotide with its quality
+accuracy (e.g., 90%). To make it possible to line up each individual nucleotide with its quality
 score, the numerical score is converted into a code where each individual character
 represents the numerical quality score for an individual nucleotide. For example, in the line
 above, the quality score line is:
@@ -91,7 +90,7 @@ above, the quality score line is:
 The `#` character and each of the `!` characters represent the encoded quality for an
 individual nucleotide. The numerical value assigned to each of these characters depends on the
 sequencing platform that generated the reads. The sequencing machine used to generate our data
-uses the standard Sanger quality PHRED score encoding, using by Illumina version 1.8 onwards.
+uses the standard Sanger quality PHRED score encoding, used by Illumina version 1.8 onwards.
 Each character is assigned a quality score between 0 and 40 as shown in the chart below.
 
 ~~~
@@ -102,8 +101,8 @@ Quality score:    0........10........20........30........40
 {: .output}
 
 Each quality score represents the probability that the corresponding nucleotide call is
-incorrect. This quality score is logarithmically based, so a quality score of 10 reflects a
-base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%.
+incorrect. This quality score is logarithmic, so a quality score of 10 reflects a
+base call accuracy of 90%, while a quality score of 20 reflects a base call accuracy of 99%.
 These probability values are the results from the base calling algorithm and dependent on how
 much signal was captured for the base incorporation.
 
@@ -118,8 +117,7 @@ NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
 {: .output}
 
 we can now see that the quality of each of the Ns is 0 and the quality of the only
-nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very
-bad read.
+nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very bad read.
 
 > ## Exercise
 >
@@ -199,7 +197,7 @@ Here, we see positions within the read in which the boxes span a much wider rang
 
 ### Running analyses on Crane
 
-We are going to start doing analyses on our data. So far we've been doing all our work on the Hydra login nodes. It's find to use the nodes for simple tasks like examing files with less, editing files with nano, moving files but for analyses we need to do have the work done on the compute nodes. For this workshop we will be using the interactive queue. With one command: `qrsh` you will start an interactive job and be logged into one of the compute nodes. The rest of oour work will continue on the compute note.
+We are going to start doing analyses on our data. So far we've been doing all our work on the Crane "login" nodes. It's fine to use the nodes for simple tasks like examining files with `less`, editing files with `nano`, moving files, but for analyses we need to have the work done on the "compute" nodes. For this workshop we will be using the interactive queue. With one command: `srun --pty $SHELL` you will start an interactive job and be logged into one of the compute nodes. The rest of oour work will continue on the compute note.
 
 ~~~
 $ srun --pty $SHELL
@@ -225,15 +223,15 @@ $ pwd
 ~~~
 {: .output}
 
-We'll make sure to cd back to our data directory below.
+We'll make sure to `cd` back to our `data/` directory below.
 
 Another important thing to remember is to load any modules we need. We'll do that before we run each analysis.
 
 ### Running FastQC  
 
-We will be working with a set of sample data that is located in directory (`/data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite`). First, we
-will move some of these files to the `data` directory your created at [the end of our
-last lesson]({% link _episodes/09-organization.md %}).  
+We will be working with a set of sample data that is located in directory (`/common/demo/dc/dc_sampledata_lite`). First, we
+will move some of these files to the `data` directory your created at the end of our
+[last lesson]({% link _episodes/09-organization.md %}).  
 
 ~~~
 $ cp -r /common/demo/dc/dc_sampledata_lite/untrimmed_fastq /work/group/username/dc_workshop/data/
@@ -275,10 +273,7 @@ $ cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 > {: .solution}
 {: .challenge}
 
-
-
-To run the FastQC program, we need to load the fastqc module
-(in `bioinformatics/fastqc`).  FastQC can accept multiple file names as input, so we can use the *.fastq wildcard to run FastQC on all of the FASTQ files in this directory.
+To run the FastQC program, we need to load the fastqc module (`fastqc/0.10`).  FastQC can accept multiple file names as input, so we can use the *.fastq wildcard to run FastQC on all of the FASTQ files in this directory.
 
 ~~~
 $ module load bioinformatics/fastqc
@@ -336,10 +331,11 @@ SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
 {: .output}
 
 For each input FASTQ file, FastQC has created a `.zip` file and a
-`.html` file. The `.zip` file extension indicates that this is
-actually a compressed set of multiple output files. We'll be working
-with these output files soon. The `.html` file is a stable webpage
-displaying the summary report for each of our samples.
+directory contain an `.html` report file. The `.zip` file extension
+indicates that this is actually a compressed set of multiple output
+files. We'll be working with these output files soon.
+The `.html` file is a stable webpage displaying the summary
+report for each of our samples.
 
 We want to keep our data files and our results files separate, so we
 will move these
@@ -352,7 +348,7 @@ $ mv *fastqc ../../results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
-Now we can navigate into this results directory and do some closer
+Now we can navigate into this `results/` directory and do some closer
 inspection of our output files.
 
 ~~~
@@ -370,21 +366,21 @@ $ open SRR097977_fastqc/fastqc_report.html
 ~~~
 {: .bash}
 
-However, if you try this on our Hydra, you'll get an error:
+However, if you try this on our Crane, you'll get an error:
 
 ~~~
 Couldn't get a file descriptor referring to the console
 ~~~
 {: .output}
 
-This is because Hydra doesn't have any web
+This is because Crane doesn't have any web
 browsers installed on it, so the remote computer doesn't know how to
 open the file. We want to look at the webpage summary reports, so
 let's transfer them to our local computers (i.e. your laptop).
 
 To transfer a file from a remote server to our own machines, we will
-use a variant of the `cp` command called `scp`. The `s` stands for
-"secure" - this is a secure version of copying.
+use a variant of the `cp` command called `scp`. The "s" stands for
+"secure" -- this is a secure version of copying (`cp`).
 
 For the `cp` command, the syntax was:
 
@@ -404,7 +400,7 @@ Now we can transfer our HTML files to our local computer using `scp`.
 #### On Macs or Linux
 
 Open a new tab in your terminal program (you can use the pull down menu at the
-top of your screen or the Cmd+t keyboard shortcut) and type:
+top of your screen or the <kbd>Ctrl+t</kbd> keyboard shortcut) and type:
 
 ~~~
 $ mkdir ~/Desktop/fastqc_html
@@ -418,6 +414,7 @@ $ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_
 
 #### On Windows
 
+Open a Windows command prompt window by typing <kbd>Windows+r</kbd> (the Windows key and the 'r' key at the same time). You should see a "Run" window open.
 In the box enter: `cmd`, a new cmd.exe window should open.
 
 Create a new folder on your desktop:
@@ -427,7 +424,7 @@ $ mkdir %HOMEPATH%\Desktop\fastqc_html
 ~~~
 {: .bash}
 
-(`%HOMEPATH%` is roughly the same as `~` in Unix based systems )
+(`%HOMEPATH%` is roughly the same as `~` in Unix based systems.)
 
 Now we can transfer our HTML files to our local computer using `pscp`.
 
@@ -439,18 +436,18 @@ Now we can transfer our HTML files to our local computer using `pscp`.
 #### Back to everyone
 
 This looks really complicated, so let's break it down. The first part
-of the command `username@hydra-login01.si.edu` is
+of the command `username@crane.unl.edu` is
 the address for your remote computer. Make sure you replace `username`
 with your actual username.
 
 The second part starts with a `:` and then gives the absolute path
 of the files you want to transfer from your remote computer. Don't
-forget the `:`. We used a wildcard (`*.html`) to indicate that we want all of
-the HTML files.
+forget the `:`. We used a wildcard (`/*/`) to indicate that we want all of
+the directories recursively (`-r`).
 
 The third part of the command gives the absolute path of the location
 you want to put the files. This is on your local computer and is the
-directory we just created `~/Desktop/fastqc_html`.
+directory we just created `~/Desktop/fastqc_html/`.
 
 You should see a status output like this:
 
@@ -513,8 +510,8 @@ tabs in a single window or six separate browser windows.
 
 Now that we've looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
-in your terminal program that is connected to Hydra and make sure you're in
-our results subdirectory.   
+in your terminal program that is connected to Crane and make sure you're in
+our results subdirectory.
 
 ~~~
 $ cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
@@ -533,8 +530,8 @@ SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
 Our `.zip` files are compressed files. They each contain multiple
 different types of output files for a single input FASTQ file. To
 view the contents of a `.zip` file, we can use the program `unzip`
-to decompress these files. Let's try doing them all at once using a
-wildcard.
+to list without decompressing these files.
+Let's try doing them all at once using a wildcard.
 
 ~~~
 $ unzip -l *.zip
@@ -550,9 +547,7 @@ Archive:  SRR097977_fastqc.zip
 ~~~
 {: .output}
 
-This didn't work. We unzipped the first file and then got a warning
-message for each of the other `.zip` files. This is because `unzip`
-expects to get only one zip file as input. We could go through and
+This didn't work. What happened here is `unzip -l` expects one `.zip` argument and we gave it six. We could go through and
 unzip each file one at a time, but this is very time consuming and
 error-prone. Someday you may have 500 files to unzip!
 
@@ -673,15 +668,15 @@ Archive:  SRR097977_fastqc.zip
 ~~~
 {: .output}
 
-The `unzip` program is decompressing the `.zip` files and creating
-a new directory (with subdirectories) for each of our samples, to
+The `unzip` program is listing the content of the `.zip` files and if we ran `unzip` without the `-l` flag would decompress these file, creating a new
+directory (with subdirectories) for each of our samples, to
 store all of the different output that is produced by FastQC. There
 are a lot of files here. The one we're going to focus on is the
 `summary.txt` file.
 
 ### Understanding FastQC Output
 
-If you list the files in our directory now you will see:
+If you list the files in our directory now using `ls -F` you will see:
 
 ~~~
 SRR097977_fastqc/     SRR098026_fastqc.zip  SRR098028_fastqc/     SRR098281_fastqc.zip
@@ -689,25 +684,6 @@ SRR097977_fastqc.zip  SRR098027_fastqc/     SRR098028_fastqc.zip  SRR098283_fast
 SRR098026_fastqc/     SRR098027_fastqc.zip  SRR098281_fastqc/     SRR098283_fastqc.zip
 ~~~
 {:. output}
-
-The `.html` files and the uncompressed `.zip` files are still present,
-but now we also have a new directory for each of our samples. We can
-see for sure that it's a directory if we use the `-F` flag for `ls`.
-
-~~~
-$ ls -F
-~~~
-{: .bash}
-
-~~~
-SRR097977_fastqc/      SRR098027_fastqc/      SRR098281_fastqc/
-SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
-SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
-SRR098026_fastqc/      SRR098028_fastqc/      SRR098283_fastqc/
-SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
-SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
-~~~
-{: .output}
 
 Let's see what files are present within one of these output directories.
 
@@ -750,8 +726,8 @@ us whether this sample passed, failed, or is borderline (`WARN`).
 
 We can make a record of the results we obtained for all our samples
 by concatenating all of our `summary.txt` files into a single file
-using the `cat` command. We'll call this `full_report.txt` and move
-it to `/work/hdzoo/rhagenson/dc_workshop/docs`.
+using the `cat` command. We'll call this `fastqc_summaries.txt` and move
+it to `/work/group/username/dc_workshop/docs`.
 
 ~~~
 $ cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
