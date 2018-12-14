@@ -14,7 +14,7 @@ keypoints:
 - "`for` loops let you perform the same set of operations on multiple files with a single command."
 ---
 
-# Bioinformatics workflows
+## Bioinformatics Workflows
 
 When working with high-throughput sequencing data, the raw reads you get off of the sequencer will need to pass
 through a number of  different tools in order to generate your final desired output. The execution of this set of
@@ -38,14 +38,14 @@ makes this feasible. Standards ensure that data is stored in a way that is gener
 within the community. The tools that are used to analyze data at different stages of the workflow are therefore
 built under the assumption that the data will be provided in a specific format.  
 
-
-# Quality Control
+## Quality Control
 
 The first step in the variant calling workflow is to take the FASTQ files received from the sequencing facility
 and assess the quality of the sequence reads.
 
 ![workflow_qc](../img/var_calling_workflow_qc.png)
-## Details on the FASTQ format
+
+### Details on the FASTQ format
 
 Although it looks complicated (and it is), it's easy to understand the
 [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
@@ -164,7 +164,8 @@ bad read.
 >
 {: .callout}
 
-## Assessing Quality using FastQC
+### Assessing Quality using FastQC
+
 In real life, you won't be assessing the quality of your reads by visually inspecting your
 FASTQ files. Rather, you'll be using a software program to assess read quality and
 filter out poor quality reads. We'll first use a program called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to visualize the quality of our reads.
@@ -196,7 +197,7 @@ Now let's take a look at a quality plot on the other end of the spectrum.
 
 Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the "bad" range, particularly on the tail end of the reads. The FastQC tool produces several other diagnostic plots to assess sample quality, in addition to the one plotted above.
 
-## Running analyses on Hydra
+### Running analyses on Crane
 
 We are going to start doing analyses on our data. So far we've been doing all our work on the Hydra login nodes. It's find to use the nodes for simple tasks like examing files with less, editing files with nano, moving files but for analyses we need to do have the work done on the compute nodes. For this workshop we will be using the interactive queue. With one command: `qrsh` you will start an interactive job and be logged into one of the compute nodes. The rest of oour work will continue on the compute note.
 
@@ -228,7 +229,7 @@ We'll make sure to cd back to our data directory below.
 
 Another important thing to remember is to load any modules we need. We'll do that before we run each analysis.
 
-## Running FastQC  
+### Running FastQC  
 
 We will be working with a set of sample data that is located in directory (`/data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite`). First, we
 will move some of these files to the `data` directory your created at [the end of our
@@ -359,7 +360,7 @@ $ cd /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
-## Viewing HTML files
+### Viewing HTML files
 
 If we were working on our local computers, we'd be able to display each of these
 HTML files as a webpage:
@@ -400,7 +401,8 @@ we're transferring. Let's put it on our desktop for now.
 
 Now we can transfer our HTML files to our local computer using `scp`.
 
-### On Macs or Linux:
+#### On Macs or Linux
+
 Open a new tab in your terminal program (you can use the pull down menu at the
 top of your screen or the Cmd+t keyboard shortcut) and type:
 
@@ -414,8 +416,8 @@ $ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/fa
 ~~~
 {: .bash}
 
-### On Windows:
-Open a Windows command prompt window by typing Windows+R (the Windows key and the 'r' key at the same time). You should see a "Run" window open.
+#### On Windows
+
 In the box enter: `cmd`, a new cmd.exe window should open.
 
 Create a new folder on your desktop:
@@ -434,7 +436,8 @@ Now we can transfer our HTML files to our local computer using `pscp`.
 ~~~
 {: .bash}
 
-### Back to everyone
+#### Back to everyone
+
 This looks really complicated, so let's break it down. The first part
 of the command `username@hydra-login01.si.edu` is
 the address for your remote computer. Make sure you replace `username`
@@ -500,7 +503,7 @@ tabs in a single window or six separate browser windows.
 > {: .solution}
 {: .challenge}
 
-## Unzipping Compressed Files
+### Unzipping Compressed Files
 
 Now that we've looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
@@ -679,7 +682,7 @@ store all of the different output that is produced by FastQC. There
 are a lot of files here. The one we're going to focus on is the
 `summary.txt` file.
 
-## Understanding FastQC Output
+### Understanding FastQC Output
 
 If you list the files in our directory now you will see:
 
@@ -750,7 +753,7 @@ WARN    Kmer Content    SRR097977.fastq
 The summary file gives us a list of tests that FastQC ran, and tells
 us whether this sample passed, failed, or is borderline (`WARN`).
 
-## Documenting Our Work
+### Documenting Our Work
 
 We can make a record of the results we obtained for all our samples
 by concatenating all of our `summary.txt` files into a single file
