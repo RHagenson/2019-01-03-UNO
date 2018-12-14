@@ -32,7 +32,7 @@ sequences against a large reference genome. The alignment process consists of tw
 
 First we will copy the reference genome data into our `data/` directory, as well as a set of trimmed FASTQ files to work with in this lesson, and a set of untrimmed files for the next one.  
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_workshop
+$ cd /work/group/username/dc_workshop
 $ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/ref_genome/ data/
 $ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/trimmed_fastq_small/ data/
 ~~~
@@ -50,7 +50,7 @@ $ mkdir results/sai results/sam results/bam results/bcf results/vcf
 > ## Loading modules
 > 
 > It's worth noting here that all of the software we are using for
-> this workshop has been pre-installed on Hydra. 
+> this workshop has been pre-installed on Crane. 
 > You'll need to load the software modules first. 
 > Today we are working on the interactive node (that you called using qrsh),
 > but you could also submit jobs using qsub.
@@ -514,22 +514,22 @@ $ cd ~/Desktop/files_for_igv
 ~~~
 {: .bash}
 
-Now we will transfer our files to that new directory. The commands to `scp` always go in the terminal window that is connected to your local computer (not to Hydra).
+Now we will transfer our files to that new directory. The commands to `scp` always go in the terminal window that is connected to your local computer (not to Crane).
 
 ~~~
-$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
-$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
-$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
-$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/vcf/SRR097977_final_variants.vcf ~/Desktop/files_for_igv
+$ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
+$ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
+$ scp username@crane.unl.edu:/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
+$ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf ~/Desktop/files_for_igv
 ~~~
 {: .bash}
 
-You will need to type your Hydra password each time you call `scp`. 
+You will need to type your Crane password each time you call `scp`. 
 
 Alternatively, you can copy everything using one command, and add the password only once. Each path/file is separated by a space and all files to be copied are delimited by a a single quote ('): 
 
 ~~~
-$ scp username@hydra-login01.si.edu:'/scratch/genomics/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
+$ scp username@crane.unl.edu:'/scratch/genomics/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
 /scratch/genomics/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
 /scratch/genomics/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \ /scratch/genomics/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
 ~/Desktop/files_for_igv/

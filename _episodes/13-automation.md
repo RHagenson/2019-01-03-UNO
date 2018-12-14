@@ -73,7 +73,7 @@ directory called `scripts/`. Previously, we used
 `nano` to create and open a new file. The command `touch` allows us to create a new file without opening that file.
 
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_workshop
+$ cd /work/group/username/dc_workshop
 $ mkdir scripts
 $ cd scripts
 $ touch read_qc.sh
@@ -99,7 +99,7 @@ Enter the following pieces of code into your shell script (not into your termina
 Our first line will move us into the `untrimmed_fastq/` directory when we run our script.
 
 ~~~
-cd /work/hdzoo/rhagenson/dc_workshop/data/untrimmed_fastq/
+cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .output}
 
@@ -119,7 +119,7 @@ idea to use this option in your shell scripts to avoid running into errors if yo
 you do.'
 
 ~~~
-mkdir -p /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads
+mkdir -p /work/group/username/dc_workshop/results/fastqc_untrimmed_reads
 ~~~
 {: .output}
 
@@ -128,15 +128,15 @@ with a `.zip` or a `.html` extension to the directory we just created for storin
 
 ~~~
 echo "Saving FastQC results..."
-mv *.zip /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
-mv *.html /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.zip /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.html /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .output}
 
 The next line moves us to the results directory where we've stored our output.
 
 ~~~
-cd /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .output}
 
@@ -157,7 +157,7 @@ what we're doing.
 
 ~~~
 echo "Saving summary..."
-cat */summary.txt > /work/hdzoo/rhagenson/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
 ~~~
 {: .output}
 
@@ -171,19 +171,19 @@ cat */summary.txt > /work/hdzoo/rhagenson/dc_workshop/docs/fastqc_summaries.txt
 Your full shell script should now look like this:
 
 ~~~
-cd /work/hdzoo/rhagenson/dc_workshop/data/untrimmed_fastq/
+cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 
 module load bioinformatics/fastqc
 echo "Running FastQC ..."
 fastqc *.fastq
 
-mkdir -p /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads
+mkdir -p /work/group/username/dc_workshop/results/fastqc_untrimmed_reads
 
 echo "Saving FastQC results..."
-mv *.zip /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
-mv *.html /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.zip /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.html /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 
-cd /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 
 echo "Unzipping..."
 for filename in *.zip
@@ -192,7 +192,7 @@ for filename in *.zip
     done
 
 echo "Saving summary..."
-cat */summary.txt > /work/hdzoo/rhagenson/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
 echo "done"
 ~~~
 {: .output}
@@ -244,7 +244,7 @@ We will be creating a script together to do all of these steps.
 First, we will create a new script in our `scripts/` directory using `touch`. 
 
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_workshop/scripts
+$ cd /work/group/username/dc_workshop/scripts
 $ touch run_variant_calling.sh
 $ ls 
 ~~~
@@ -269,7 +269,7 @@ First we will change our working directory so that we can create new results sub
 in the right location. 
 
 ~~~
-cd /work/hdzoo/rhagenson/dc_workshop/results
+cd /work/group/username/dc_workshop/results
 ~~~
 {: .output}
 
@@ -277,7 +277,7 @@ Next we tell our script where to find the reference genome by assigning the `gen
 the path to our reference genome: 
 
 ~~~
-genome=/work/hdzoo/rhagenson/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+genome=/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .output}
 
@@ -319,7 +319,7 @@ The first thing we do is assign the name of the FASTQ file we're currently worki
 tell the script to `echo` the filename back to us so we can check which file we're on.
 
 ~~~
-for fq in /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/*.fastq
+for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
     echo "working with file $fq"
     done
@@ -356,14 +356,14 @@ for fq in /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/*.fastq
 >> [bwa_index] Pack forward-only FASTA... 0.04 sec
 >> [bwa_index] Construct SA from BWT and Occ... 0.66 sec
 >> [main] Version: 0.7.17-r1188
->> [main] CMD: bwa index /work/hdzoo/rhagenson/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> [main] CMD: bwa index /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 >> [main] Real time: 3.727 sec; CPU: 3.424 sec
->> working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
->> working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
->> working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
->> working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
->> working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
->> working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
+>> working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
+>> working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
+>> working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
+>> working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
+>> working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
+>> working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
 >> ~~~
 >> {: .output}
 >> 
@@ -388,17 +388,17 @@ to a new variable called `base` variable. Add `done` again at the end so we can 
 Now if you save and run your script, the final lines of your output should look like this: 
 
 ~~~
-working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
+working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
 base name is SRR097977
-working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
+working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
 base name is SRR098026
-working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
+working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
 base name is SRR098027
-working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
+working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
 base name is SRR098028
-working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
+working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
 base name is SRR098281
-working with file /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
+working with file /work/group/username/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
 base name is SRR098283
 ~~~
 {: .output}
@@ -413,8 +413,8 @@ defined, and adding different filename extensions to represent the files that wi
 Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
-    fq=/work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
-    results=/work/hdzoo/rhagenson/dc_workshop/results/
+    fq=/work/group/username/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
+    results=/work/group/username/dc_workshop/results/
     sai=${results}/sai/${base}_aligned.sai
     sam=${results}/sam/${base}_aligned.sam
     bam=${results}/bam/${base}_aligned.bam
@@ -491,9 +491,9 @@ We added a `done` line after the SNP filtering step because this is the last ste
 Your script should now look like this:
 
 ~~~
-cd /work/hdzoo/rhagenson/dc_workshop/results
+cd /work/group/username/dc_workshop/results
 
-genome=/work/hdzoo/rhagenson/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+genome=/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 
 module load bioinformatics/bwa
 module load bioinformatics/samtools
@@ -503,15 +503,15 @@ bwa index $genome
 
 mkdir -p sai sam bam bcf vcf
 
-for fq in /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/*.fastq
+for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
     echo "working with file $fq"
 
     base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
 
-    fq=/work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
-    results=/work/hdzoo/rhagenson/dc_workshop/results/
+    fq=/work/group/username/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
+    results=/work/group/username/dc_workshop/results/
     sai=${results}/sai/${base}_aligned.sai
     sam=${results}/sam/${base}_aligned.sam
     bam=${results}/bam/${base}_aligned.bam
@@ -618,7 +618,7 @@ Let's do a few comparisons.
 > > {: .output}
 > > 
 > > ~~~
-> > $ ls -lh /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq_small
+> > $ ls -lh /work/group/username/dc_workshop/data/trimmed_fastq_small
 > > ~~~
 > > {: .bash}
 > > 
@@ -637,7 +637,7 @@ Let's do a few comparisons.
 >> ## Solution
 >> 
 >> ~~~
->> $ samtools tview /work/hdzoo/rhagenson/dc_workshop/results/bam/SRR098281_aligned_sorted.bam /work/hdzoo/rhagenson/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> $ samtools tview /work/group/username/dc_workshop/results/bam/SRR098281_aligned_sorted.bam /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >> 
@@ -653,7 +653,7 @@ variants are present in position 145?
 >> ## Solution
 >> 
 >> ~~~
->> $ samtools tview /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/bam/SRR098281_aligned_sorted.bam /work/hdzoo/rhagenson/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> $ samtools tview /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/bam/SRR098281_aligned_sorted.bam /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >> 

@@ -28,7 +28,7 @@ Use the commands we've learned so far to navigate to the `dc_sample_data/untrimm
 you're not already there.
 
 ~~~
-$ cd /work/hdzoo/rhagenson
+$ cd /work/group/username
 $ cd dc_sample_data
 $ cd untrimmed_fastq
 ~~~
@@ -68,7 +68,7 @@ $ pwd
 {: .bash}
 
 ~~~
-/work/hdzoo/rhagenson/dc_sample_data
+/work/group/username/dc_sample_data
 ~~~
 {: .output}
 
@@ -91,7 +91,7 @@ $ ls ../../
 ~~~
 {: .bash}
 
-prints the contents of `/work/hdzoo`.
+prints the contents of `/work/group`.
 
 > ## Finding hidden directories
 >
@@ -152,10 +152,10 @@ By default, the `ls` commands lists the contents of the working
 directory (i.e. the directory you are in). You can always find the
 directory you are in using the `pwd` command. However, you can also
 give `ls` the names of other directories to view. Navigate to your
-`/work/hdzoo` directory if you are not already there.
+`/work/group` directory if you are not already there.
 
 ~~~
-$ cd /work/hdzoo/rhagenson
+$ cd /work/group/username
 ~~~
 {: .bash}
 
@@ -179,7 +179,7 @@ The `cd` command works in a similar way.
 Try entering:
 
 ~~~
-$ cd /work/hdzoo/rhagenson
+$ cd /work/group/username
 $ cd dc_sample_data/untrimmed_fastq
 ~~~
 {: .bash}
@@ -189,13 +189,13 @@ the intermediate directory.
 
 > ## Navigating practice
 >
-> Navigate to your work `/work/hdzoo/rhagenson` directory. From there, list the contents of the `untrimmed_fastq`
+> Navigate to your work `/work/group/username` directory. From there, list the contents of the `untrimmed_fastq`
 > directory.
 >
 > > ## Solution
 > >
 > > ~~~
-> > $ cd /work/hdzoo/rhagenson
+> > $ cd /work/group/username
 > > $ ls dc_sample_data/untrimmed_fastq/
 > > ~~~
 > > {: .bash}
@@ -241,15 +241,15 @@ which is in`home` which is a directory in `/`.
 Now enter the following command:
 
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_sample_data/.hidden
+$ cd /work/group/username/dc_sample_data/.hidden
 ~~~
 {: .bash}
 
 This jumps forward multiple levels to the `.hidden` directory.
-Now go back to the `/work/hdzoo/rhagenson` directory.
+Now go back to the `/work/group/username` directory.
 
 ~~~
-$ cd /work/hdzoo/rhagenson
+$ cd /work/group/username
 ~~~
 {: .bash}
 

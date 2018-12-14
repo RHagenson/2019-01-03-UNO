@@ -31,7 +31,7 @@ filter poor quality reads and trim poor quality bases from our samples.
 
 ## Trimmomatic Options
 
-To use Trimmomatic on Hydra, load the trimmomatic module with:
+To use Trimmomatic on Crane, load the trimmomatic module with:
 
 ~~~
 $ module load bioinformatics/trimmomatic
@@ -39,11 +39,11 @@ $ module load bioinformatics/trimmomatic
 {: .bash}
 
 
-On Hydra, we start trimmomatic with a shortcut that is available when
+On Crane, we start trimmomatic with a shortcut that is available when
 you load the bioinformatics/trimmomatic module: `runtrimmomatic`.
 This shortcut (technically an [alias](https://en.wikipedia.org/wiki/Alias_(command))) has `java -jar` followed by 
 the full path to the jar file incorporated as well as some other java options that help 
-trimmomatic run well on Hydra. You can type `alias runtrimmomatic` to see
+trimmomatic run well on Crane. You can type `alias runtrimmomatic` to see
 what the alias does and you can type `module help bioinformatics/trimmomatic` for more details.
 
 
@@ -53,7 +53,7 @@ $ runtrimmomatic
 {: .bash}
 
 
-Note: `runtrimmomatic` is a command you'll only see on Hydra. On other systems,
+Note: `runtrimmomatic` is a command you'll only see on Crane. On other systems,
 Trimmomatic is called with `java -jar trimmomatic-0.32.jar`.
 Trimmomatic is a program written in the Java programming language.
 You don't need to learn Java to use Trimmomatic (FastQC is also
@@ -108,7 +108,7 @@ $ runtrimmomatic SE -threads 1 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq IL
 ~~~
 {: .bash}
 
-*On Hydra it's essential to specify `-threads` or Trimmomatic will use more than threads
+*On Crane it's essential to specify `-threads` or Trimmomatic will use more than threads
 on the compute node than you requested.*
 
 In this example, we've told Trimmomatic:
@@ -128,7 +128,7 @@ In this example, we've told Trimmomatic:
 Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq` data directory:
 
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_workshop/data/untrimmed_fastq
+$ cd /work/group/username/dc_workshop/data/untrimmed_fastq
 ~~~
 {: .bash}
 
@@ -343,10 +343,10 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >
 >> ## Solution
 >>
->> On Hydra window do:
+>> On Crane window do:
 >>
 >> ~~~
->> $ fastqc /work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq
+>> $ fastqc /work/group/username/dc_workshop/data/trimmed_fastq
 >> ~~~
 >> {: .bash}
 >>
@@ -354,7 +354,7 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >>
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp username@hydra-login01:/work/hdzoo/rhagenson/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
+>> $ scp username@hydra-login01:/work/group/username/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
 >> $ open ~/Desktop/fastqc_html/trimmed/*.html
 >> ~~~
 >> {: .bash}
