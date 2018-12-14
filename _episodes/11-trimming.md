@@ -97,6 +97,29 @@ analysis. It is important to understand the steps you are using to
 clean your data. For more information about the Trimmomatic arguments
 and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
+> ## Software Versions
+>
+> One of the biggest causes for irreproducibility in Bioinformatics
+> is forgetting/neglecting to document the version of a program used.
+> In this case, we are using Trimmomatic v0.33. Be sure to note what version
+> of a tool you are using and do not use multiple versions of a tool in one project.
+>
+> Keen observers will see that the Trimmomatic manual linked above is for
+> Trimmomatic v0.32; this is the latest manual and should apply to all
+> version of Trimmomatic v0.32 and above.
+>
+> Versions are usually written in some form of `major.minor.development` designation.
+> In this case, we are working with
+> "major version 0, minor version 33, and no development version number".
+>
+> By convention, major version updates are not compatible, but minor and
+> development versions are safe to update.
+> For example, moving from v0.32 to v0.33 is safe, but
+> if tomorrow Trimmomatic v1.0 was released, moving from v0.33 to v1.0
+> would likely break our workflows.
+>
+{: .callout}
+
 We said above that a basic command for Trimmomatic looks like this:
 
 ~~~
