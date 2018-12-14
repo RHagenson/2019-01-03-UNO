@@ -11,10 +11,12 @@ keypoints:
 - "We can combine multiple commands into a shell script to automate a workflow."
 - "Use `echo` statements within your scripts to get an automated progress update."
 ---
-# What is a shell script?
 
-You wrote a simple shell script in [a previous lesson]({% link _episodes/08-writing-scripts.md %}) that we used to extract bad reads from our
-FASTQ files and put them into a new file. 
+## What is a shell script?
+
+You wrote a simple shell script in
+[a previous lesson]({% link _episodes/08-writing-scripts.md %})
+that we used to extract bad reads from our FASTQ files and put them into a new file.
 
 Here's the script you wrote:
 
@@ -66,7 +68,7 @@ including creating our summary file. To do this, we'll take each of the commands
 process the output files and put them into a single file with a `.sh` extension. The `.sh` is not essential, but
 serves as a reminder to ourselves and to the computer that this is a shell script.
 
-# Analyzing Quality with FastQC
+## Analyzing Quality with FastQC
 
 We will use the command `touch` to create a new file where we will write our shell script. We will create this script in a new
 directory called `scripts/`. Previously, we used
@@ -222,7 +224,7 @@ replace SRR097977_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]e
 ~~~
 {: .output}
 
-# Automating the Rest of our Variant Calling Workflow
+## Automating the Rest of our Variant Calling Workflow
 
 Now we will create a second shell script to complete the other steps of our variant calling
 workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, 
@@ -667,6 +669,3 @@ variants are present in position 145?
 > If you have time after completing the previous two exercises, use `run_variant_calling.sh` to run the variant calling pipeline 
 > on the full-sized trimmed FASTQ files. You can find a copy of the files in `/data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq`.
 {: .challenge} 
-
-
-
