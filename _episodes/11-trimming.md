@@ -13,23 +13,23 @@ keypoints:
 - "Data cleaning is an essential step in a genomics workflow."
 ---
 
-# Cleaning Reads
+## Cleaning Reads
 
 In the previous episode, we took a high-level look at the quality
-of each of our samples using FastQC. We vizualized per-base quality
+of each of our samples using FastQC. We visualized per-base quality
 graphs showing the distribution of read quality at each base across
 all reads in a sample and extracted information about which samples
 fail which quality checks. We know that all of our samples failed at
 least one of the quality metrics used by FastQC. This doesn't mean,
 though, that our samples should be thrown out! It's very common to
 have some reads within a sample,
-or some positions (near the begining or end of reads) across all
+or some positions (near the beginning or end of reads) across all
 reads that are low
 quality and should be discarded. We will use a program called
 [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) to
 filter poor quality reads and trim poor quality bases from our samples.
 
-## Trimmomatic Options
+### Trimmomatic Options
 
 To use Trimmomatic on Crane, load the trimmomatic module with:
 
@@ -123,7 +123,7 @@ In this example, we've told Trimmomatic:
 | `ILLUMINACLIP:SRR_adapters.fa`| to clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
 |`SLIDINGWINDOW:4:20` | to use a sliding window of size 4 that will remove bases if their phred score is below 20 |
 
-## Running Trimmomatic
+### Running Trimmomatic
 
 Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq` data directory:
 
