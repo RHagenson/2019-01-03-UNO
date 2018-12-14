@@ -14,7 +14,7 @@ keypoints:
 - "There are many different file formats for storing genomics data. It's important to understand these file formats and know how to convert among them."
 ---
 
-# Alignment to a reference genome
+## Alignment to a reference genome
 
 We have already trimmed our reads so now the next step is alignment of our quality reads to the reference genome.
 
@@ -28,7 +28,7 @@ sequences against a large reference genome. The alignment process consists of tw
 1. Indexing the reference genome
 2. Aligning the reads to the reference genome
 
-# Setting up
+### Setting up
 
 First we will copy the reference genome data into our `data/` directory, as well as a set of trimmed FASTQ files to work with in this lesson, and a set of untrimmed files for the next one.  
 ~~~
@@ -58,6 +58,7 @@ $ mkdir results/sai results/sam results/bam results/bcf results/vcf
 {: .callout}
 
 ### Index the reference genome
+
 Our first step is to index the reference genome for use by BWA. This 
 helps speed up our alignment.
 
@@ -156,6 +157,7 @@ Post-alignment processing of the alignment file includes:
 The SAI file is not a standard alignment output file and will need to be converted into a SAM file before we can do any downstream processing.
 
 #### SAM/BAM format
+
 The [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#aligned-reads-sam),
 is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not 
 have time to go in detail of the features of the SAM format, the paper by 
@@ -306,7 +308,7 @@ $ bcftools view \
 `bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform
 the filtering. Note that the output is in VCF format, which is a text format.
 
-## Explore the VCF format:
+## Explore the VCF format
 
 ~~~
 $ less results/vcf/SRR097977_final_variants.vcf
@@ -430,7 +432,7 @@ The Broad Institute's [VCF guide](https://software.broadinstitute.org/gatk/docum
 > {: .solution}
 {: .challenge}
 
-## Assess the alignment (visualization) - optional step
+### Assess the alignment (visualization) - optional step
 
 It is often instructive to look at your data in a genome browser. Visualisation will allow you to get a "feel" for 
 the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you 
@@ -497,7 +499,6 @@ locations. That is good! If that wasn't the case, we should probably reconsider 
 Below the horizontal line, we can see all of the reads in our sample aligned with the reference genome. Only 
 positions where the called base differs from the reference are shown. You can use the arrow keys on your keyboard
 to scroll or type `?` for a help menu. Type `Ctrl^C` to exit `tview`. 
-
 
 ### Viewing with IGV
 
