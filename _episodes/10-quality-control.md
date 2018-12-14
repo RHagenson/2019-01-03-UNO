@@ -344,7 +344,7 @@ output files into a new directory within our `results/` directory.
 ~~~
 $ mkdir /work/group/username/dc_workshop/results/fastqc_untrimmed_reads
 $ mv *.zip /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
-$ mv *fastqc ../../results/fastqc_untrimmed_reads/
+$ mv *fastqc/ ../../results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
