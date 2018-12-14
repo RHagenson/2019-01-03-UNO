@@ -202,12 +202,12 @@ Here, we see positions within the read in which the boxes span a much wider rang
 We are going to start doing analyses on our data. So far we've been doing all our work on the Hydra login nodes. It's find to use the nodes for simple tasks like examing files with less, editing files with nano, moving files but for analyses we need to do have the work done on the compute nodes. For this workshop we will be using the interactive queue. With one command: `qrsh` you will start an interactive job and be logged into one of the compute nodes. The rest of oour work will continue on the compute note.
 
 ~~~
-$ qrsh
+$ srun --pty $SHELL
 ~~~
 {: .bash}
 
 ~~~
-[username@compute-x-x]$
+[username@cNNNN]$
 ~~~
 {: .output}
 
@@ -221,7 +221,7 @@ $ pwd
 {: .bash}
 
 ~~~
-/home/username
+/work/group/username
 ~~~
 {: .output}
 
@@ -236,14 +236,14 @@ will move some of these files to the `data` directory your created at [the end o
 last lesson]({% link _episodes/09-organization.md %}).  
 
 ~~~
-$ cp -r /data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/untrimmed_fastq /work/hdzoo/rhagenson/dc_workshop/data/
+$ cp -r /common/demo/dc/dc_sampledata_lite/untrimmed_fastq /work/group/username/dc_workshop/data/
 ~~~
 {: .bash}
 
 Navigate to your FASTQ dataset:
 
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_workshop/data/untrimmed_fastq/
+$ cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .bash}
 
@@ -261,12 +261,12 @@ $ cd /work/hdzoo/rhagenson/dc_workshop/data/untrimmed_fastq/
 >> {: .bash}
 >>
 >> ~~~
->> -rw-r--r-- 1 username username 840M Jul 30  2015 SRR097977.fastq
->> -rw-r--r-- 1 username username 3.4G Jul 30  2015 SRR098026.fastq
->> -rw-r--r-- 1 username username 875M Jul 30  2015 SRR098027.fastq
->> -rw-r--r-- 1 username username 3.4G Jul 30  2015 SRR098028.fastq
->> -rw-r--r-- 1 username username 4.0G Jul 30  2015 SRR098281.fastq
->> -rw-r--r-- 1 username username 3.9G Jul 30  2015 SRR098283.fastq
+>> -rw-r--r-- 1 username group 840M Jul 30  2015 SRR097977.fastq
+>> -rw-r--r-- 1 username group 3.4G Jul 30  2015 SRR098026.fastq
+>> -rw-r--r-- 1 username group 875M Jul 30  2015 SRR098027.fastq
+>> -rw-r--r-- 1 username group 3.4G Jul 30  2015 SRR098028.fastq
+>> -rw-r--r-- 1 username group 4.0G Jul 30  2015 SRR098281.fastq
+>> -rw-r--r-- 1 username group 3.9G Jul 30  2015 SRR098283.fastq
 >> ~~~
 >> {: .output}
 >>
@@ -326,11 +326,11 @@ $ ls
 {: .bash}
 
 ~~~
-SRR097977.fastq        SRR098027.fastq	      SRR098281.fastq
-SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
+SRR097977.fastq        SRR098027.fastq        SRR098281.fastq
+SRR097977_fastqc/      SRR098027_fastqc/      SRR098281_fastqc/
 SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
-SRR098026.fastq        SRR098028.fastq	      SRR098283.fastq
-SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
+SRR098026.fastq        SRR098028.fastq        SRR098283.fastq
+SRR098026_fastqc/      SRR098028_fastqc/      SRR098283_fastqc/
 SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
 ~~~
 {: .output}
@@ -346,9 +346,9 @@ will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
-$ mkdir /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads
-$ mv *.zip /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
-$ mv *.html /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+$ mkdir /work/group/username/dc_workshop/results/fastqc_untrimmed_reads
+$ mv *.zip /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
+$ mv *fastqc ../../results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -356,7 +356,7 @@ Now we can navigate into this results directory and do some closer
 inspection of our output files.
 
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+$ cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -366,7 +366,7 @@ If we were working on our local computers, we'd be able to display each of these
 HTML files as a webpage:
 
 ~~~
-$ open SRR097977_fastqc.html
+$ open SRR097977_fastqc/fastqc_report.html
 ~~~
 {: .bash}
 
@@ -412,7 +412,7 @@ $ mkdir ~/Desktop/fastqc_html
 {: .bash}
 
 ~~~
-$ scp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+$ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*/ ~/Desktop/fastqc_html/
 ~~~
 {: .bash}
 
@@ -432,7 +432,7 @@ $ mkdir %HOMEPATH%\Desktop\fastqc_html
 Now we can transfer our HTML files to our local computer using `pscp`.
 
 ~~~
-> pscp username@hydra-login01.si.edu:/work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/*.html %HOMEPATH%\Desktop\fastqc_html
+> pscp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*/ %HOMEPATH%\Desktop\fastqc_html\
 ~~~
 {: .bash}
 
@@ -455,12 +455,18 @@ directory we just created `~/Desktop/fastqc_html`.
 You should see a status output like this:
 
 ~~~
-SRR097977_fastqc.html                                    100%  318KB 317.8KB/s   00:01    
-SRR098026_fastqc.html                                    100%  330KB 329.8KB/s   00:00    
-SRR098027_fastqc.html                                    100%  369KB 369.5KB/s   00:00    
-SRR098028_fastqc.html                                    100%  323KB 323.4KB/s   00:01    
-SRR098281_fastqc.html                                    100%  329KB 329.1KB/s   00:00    
-SRR098283_fastqc.html                                    100%  324KB 323.5KB/s   00:00
+per_base_quality.png        100%   9949     9.7KB/s   00:00
+kmer_profiles.png           100%   20KB    20.4KB/s   00:00
+per_sequence_quality.png    100%   19KB    19.4KB/s   00:00
+per_base_gc_content.png     100%   10KB    10.4KB/s   00:00
+per_base_n_content.png      100%   8426     8.2KB/s   00:00  
+.
+.
+.
+warning.png                 100%   1450     1.4KB/s   00:00
+fastqc_icon.png             100%   1197     1.2KB/s   00:00
+error.png                   100%   1561     1.5KB/s   00:00
+fastqc_data.txt             100%   9990     9.8KB/s   00:00
 ~~~
 {: .output}
 
@@ -511,7 +517,7 @@ in your terminal program that is connected to Hydra and make sure you're in
 our results subdirectory.   
 
 ~~~
-$ cd /work/hdzoo/rhagenson/dc_workshop/results/fastqc_untrimmed_reads/
+$ cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 $ ls
 ~~~
 {: .bash}
@@ -531,17 +537,16 @@ to decompress these files. Let's try doing them all at once using a
 wildcard.
 
 ~~~
-$ unzip *.zip
+$ unzip -l *.zip
 ~~~
 {: .bash}
 
 ~~~
 Archive:  SRR097977_fastqc.zip
-caution: filename not matched:  SRR098026_fastqc.zip
-caution: filename not matched:  SRR098027_fastqc.zip
-caution: filename not matched:  SRR098028_fastqc.zip
-caution: filename not matched:  SRR098281_fastqc.zip
-caution: filename not matched:  SRR098283_fastqc.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+---------                     -------
+        0                     0 files
 ~~~
 {: .output}
 
@@ -558,7 +563,7 @@ discuss what we're doing with each line of our loop.
 ~~~
 $ for filename in *.zip
 > do
-> unzip $filename
+> unzip -l $filename
 > done
 ~~~
 {: .bash}
@@ -615,7 +620,7 @@ if we wrote this loop as:
 ~~~
 $ for x in *.zip
 > do
-> unzip $x
+> unzip -l $x
 > done
 ~~~
 {: .bash}
@@ -625,7 +630,7 @@ or:
 ~~~
 $ for temperature in *.zip
 > do
-> unzip $temperature
+> unzip -l $temperature
 > done
 ~~~
 {: .bash}
@@ -640,7 +645,7 @@ increase the odds that the program won't do what its readers think it does.
 > The `for` loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
 >
 > ~~~   
-> $ for zip in *.zip; do echo File $zip; unzip $zip; done
+> $ for filename in *.zip; do unzip -l $filename; done
 > ~~~
 > {: .bash}
 >
@@ -652,27 +657,19 @@ When we run our `for` loop, you will see output that starts like this:
 
 ~~~
 Archive:  SRR097977_fastqc.zip
-creating: SRR097977_fastqc/
-creating: SRR097977_fastqc/Icons/
-creating: SRR097977_fastqc/Images/
-inflating: SRR097977_fastqc/Icons/fastqc_icon.png  
-inflating: SRR097977_fastqc/Icons/warning.png  
-inflating: SRR097977_fastqc/Icons/error.png  
-inflating: SRR097977_fastqc/Icons/tick.png  
-inflating: SRR097977_fastqc/summary.txt  
-inflating: SRR097977_fastqc/Images/per_base_quality.png  
-inflating: SRR097977_fastqc/Images/per_tile_quality.png  
-inflating: SRR097977_fastqc/Images/per_sequence_quality.png  
-inflating: SRR097977_fastqc/Images/per_base_sequence_content.png  
-inflating: SRR097977_fastqc/Images/per_sequence_gc_content.png  
-inflating: SRR097977_fastqc/Images/per_base_n_content.png  
-inflating: SRR097977_fastqc/Images/sequence_length_distribution.png  
-inflating: SRR097977_fastqc/Images/duplication_levels.png  
-inflating: SRR097977_fastqc/Images/adapter_content.png  
-inflating: SRR097977_fastqc/Images/kmer_profiles.png  
-inflating: SRR097977_fastqc/fastqc_report.html  
-inflating: SRR097977_fastqc/fastqc_data.txt  
-inflating: SRR097977_fastqc/fastqc.fo  
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  12-13-2018 13:28   SRR097977_fastqc/
+        0  12-13-2018 13:28   SRR097977_fastqc/Icons/
+        0  12-13-2018 13:28   SRR097977_fastqc/Images/
+     1561  12-13-2018 13:28   SRR097977_fastqc/Icons/error.png
+     1715  12-13-2018 13:28   SRR097977_fastqc/Icons/tick.png
+     1450  12-13-2018 13:28   SRR097977_fastqc/Icons/warning.png
+     1197  12-13-2018 13:28   SRR097977_fastqc/Icons/fastqc_icon.png
+      487  12-13-2018 13:28   SRR097977_fastqc/summary.txt
+.
+.
+.
 ~~~
 {: .output}
 
@@ -687,12 +684,9 @@ are a lot of files here. The one we're going to focus on is the
 If you list the files in our directory now you will see:
 
 ~~~
-SRR097977_fastqc       SRR098027_fastqc       SRR098281_fastqc
-SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
-SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
-SRR098026_fastqc       SRR098028_fastqc       SRR098283_fastqc
-SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
-SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
+SRR097977_fastqc/     SRR098026_fastqc.zip  SRR098028_fastqc/     SRR098281_fastqc.zip
+SRR097977_fastqc.zip  SRR098027_fastqc/     SRR098028_fastqc.zip  SRR098283_fastqc/
+SRR098026_fastqc/     SRR098027_fastqc.zip  SRR098281_fastqc/     SRR098283_fastqc.zip
 ~~~
 {:. output}
 
@@ -723,7 +717,7 @@ $ ls -F SRR097977_fastqc/
 {: .bash}
 
 ~~~
-fastqc_data.txt  fastqc.fo  fastqc_report.html	Icons/	Images/  summary.txt
+fastqc_data.txt  fastqc_report.html  Icons/  Images/  summary.txt
 ~~~
 {: .output}
 
@@ -735,18 +729,17 @@ $ less SRR097977_fastqc/summary.txt
 {: .bash}
 
 ~~~
-PASS    Basic Statistics        SRR097977.fastq
-WARN    Per base sequence quality       SRR097977.fastq
-FAIL    Per tile sequence quality       SRR097977.fastq
-PASS    Per sequence quality scores     SRR097977.fastq
-PASS    Per base sequence content       SRR097977.fastq
-PASS    Per sequence GC content SRR097977.fastq
-PASS    Per base N content      SRR097977.fastq
-PASS    Sequence Length Distribution    SRR097977.fastq
-PASS    Sequence Duplication Levels     SRR097977.fastq
-PASS    Overrepresented sequences       SRR097977.fastq
-PASS    Adapter Content SRR097977.fastq
-WARN    Kmer Content    SRR097977.fastq
+PASS  Basic Statistics              SRR097977.fastq
+WARN  Per base sequence quality     SRR097977.fastq
+PASS  Per sequence quality scores   SRR097977.fastq
+PASS  Per base sequence content     SRR097977.fastq
+PASS  Per base GC content           SRR097977.fastq
+PASS  Per sequence GC content       SRR097977.fastq
+PASS  Per base N content            SRR097977.fastq
+PASS  Sequence Length Distribution  SRR097977.fastq
+WARN  Sequence Duplication Levels   SRR097977.fastq
+WARN  Overrepresented sequences     SRR097977.fastq
+FAIL  Kmer Content                  SRR097977.fastq
 ~~~
 {: .output}
 
@@ -761,7 +754,7 @@ using the `cat` command. We'll call this `full_report.txt` and move
 it to `/work/hdzoo/rhagenson/dc_workshop/docs`.
 
 ~~~
-$ cat */summary.txt > /work/hdzoo/rhagenson/dc_workshop/docs/fastqc_summaries.txt
+$ cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
 ~~~
 {: .bash}
 
@@ -775,7 +768,7 @@ $ cat */summary.txt > /work/hdzoo/rhagenson/dc_workshop/docs/fastqc_summaries.tx
 >> We can get the list of all failed tests using `grep`.
 >>
 >> ~~~
->> $ cd /work/hdzoo/rhagenson/dc_workshop/docs
+>> $ cd /work/group/username/dc_workshop/docs
 >> $ grep FAIL fastqc_summaries.txt
 >> ~~~
 >> {: .bash}
@@ -828,10 +821,10 @@ $ cat */summary.txt > /work/hdzoo/rhagenson/dc_workshop/docs/fastqc_summaries.tx
 >> {: .bash}
 >>
 >> ~~~
->> 5 Kmer Content
+>> 6 Kmer Content
 >> 4 Overrepresented sequences
 >> 1 Per base sequence quality
->> 4 Per tile sequence quality
+>> 4 Sequence Duplication Levels
 >> ~~~
 >> {: .output}
 > {: .solution}
