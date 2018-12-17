@@ -16,12 +16,13 @@ keypoints:
 
 ## Bioinformatics Workflows
 
-When working with high-throughput sequencing data, the raw reads you get off of the sequencer will need to pass
-through a number of  different tools in order to generate your final desired output. The execution of this set of
-tools in a specified order is commonly referred to as a *workflow* or a *pipeline*.
+When working with high-throughput sequencing data, the raw reads you get off of the
+sequencer will need to pass through a number of  different tools in order to generate
+your final desired output. The execution of this set of tools in a specified order is
+commonly referred to as a *workflow* or a *pipeline*.
 
-An example of the workflow we will be using for our variant calling analysis is provided below with a brief
-description of each step.
+An example of the workflow we will be using for our variant calling analysis is
+provided below with a brief description of each step.
 
 ![workflow](../img/variant_calling_workflow.png)
 
@@ -31,24 +32,27 @@ description of each step.
 4. Perform post-alignment clean-up
 5. Variant calling
 
-These workflows in bioinformatics adopt a plug-and-play approach in that the output of one tool can be
-used as input to another tool without any extensive configuration. Having standards for data formats is what
-makes this feasible. Standards ensure that data is stored in a way that is generally accepted and agreed upon
-within the community. The tools that are used to analyze data at different stages of the workflow are therefore
-built under the assumption that the data will be provided in a specific format.  
+These workflows in bioinformatics adopt a plug-and-play approach in that the output of
+one tool can be used as input to another tool without any extensive configuration.
+Having standards for data formats is what makes this feasible. Standards ensure that
+data is stored in a way that is generally accepted and agreed upon within the
+community. The tools that are used to analyze data at different stages of the workflow
+are therefore built under the assumption that the data will be provided in a specific
+format.  
 
 ## Quality Control
 
-The first step in the variant calling workflow is to take the FASTQ files received from the sequencing facility
-and assess the quality of the sequence reads.
+The first step in the variant calling workflow is to take the FASTQ files received
+from the sequencing facility and assess the quality of the sequence reads.
 
 ![workflow_qc](../img/var_calling_workflow_qc.png)
 
 ### Details on the FASTQ format
 
 Although it looks complicated (and it is), it's easy to understand the
-[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
-include...
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format)
+format with a little decoding. Some rules about the format
+include:
 
 |Line|Description|
 |----|-----------|
@@ -57,8 +61,8 @@ include...
 |3|Always begins with a `+` and sometimes the same info in line 1|
 |4|Has a string of characters which represent the quality scores; must have same number of characters as line 2|
 
-We can view the first complete read in one of the files our dataset by using `head` to look at
-the first four lines.
+We can view the first complete read in one of the files our dataset by using `head` to
+look at the first four lines.
 
 ~~~
 $ head -n4 SRR098026.fastq
@@ -77,10 +81,10 @@ All but one of the nucleotides in this read are unknown (N). This is a pretty ba
 
 Line 4 shows the quality for each nucleotide in the read. Quality is interpreted as the
 probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call
-accuracy (e.g., 90%). To make it possible to line up each individual nucleotide with its quality
-score, the numerical score is converted into a code where each individual character
-represents the numerical quality score for an individual nucleotide. For example, in the line
-above, the quality score line is:
+accuracy (e.g., 90%). To make it possible to line up each individual nucleotide with
+its quality score, the numerical score is converted into a code where each individual
+character represents the numerical quality score for an individual nucleotide. For
+example, in the line above, the quality score line is:
 
 ~~~
 !!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
@@ -88,23 +92,24 @@ above, the quality score line is:
 {: .output}
 
 The `#` character and each of the `!` characters represent the encoded quality for an
-individual nucleotide. The numerical value assigned to each of these characters depends on the
-sequencing platform that generated the reads. The sequencing machine used to generate our data
-uses the standard Sanger quality PHRED score encoding, used by Illumina version 1.8 onwards.
-Each character is assigned a quality score between 0 and 40 as shown in the chart below.
+individual nucleotide. The numerical value assigned to each of these characters
+depends on the sequencing platform that generated the reads. The sequencing machine
+used to generate our data uses the standard Sanger quality PHRED score encoding, used
+by Illumina version 1.8 onwards. Each character is assigned a quality score between 0
+and 40 as shown in the chart below.
 
 ~~~
 Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHI
                   |         |         |         |         |
-Quality score:    0........10........20........30........40                                
+Quality score:    0........10........20........30........40
 ~~~
 {: .output}
 
 Each quality score represents the probability that the corresponding nucleotide call is
 incorrect. This quality score is logarithmic, so a quality score of 10 reflects a
-base call accuracy of 90%, while a quality score of 20 reflects a base call accuracy of 99%.
-These probability values are the results from the base calling algorithm and dependent on how
-much signal was captured for the base incorporation.
+base call accuracy of 90%, while a quality score of 20 reflects a base call accuracy
+of 99%. These probability values are the results from the base calling algorithm and
+dependent on how much signal was captured for the base incorporation.
 
 Looking back at our read:
 
@@ -117,7 +122,8 @@ NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
 {: .output}
 
 we can now see that the quality of each of the Ns is 0 and the quality of the only
-nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very bad read.
+nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a
+very bad read.
 
 > ## Exercise
 >
@@ -139,65 +145,74 @@ nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is in
 >> {: .output}
 >>
 >> The second half of this read is poor quality. Many of the positions are unknown
->> (Ns) and the bases that we do have guesses for are of very poor
->> quality (`#`). However, the beginning of the read is fairly high
->> quality. We will look at variations in position-based quality
->> in just a moment.
+>> (Ns) and the bases that we do have guesses for are of very poor quality (`#`).
+>> However, the beginning of the read is fairly high quality. We will look at
+>> variations in position-based quality in just a moment.
 >>
 > {: .solution}
 {: .challenge}
 
 > ## Quality Encodings Vary
 >
-> Although we've used a particular quality encoding system to demonstrate interpretation of
-> read quality, different sequencing machines use different encoding systems. This means that,
-> depending on which sequencer you use to generate your data, a `#` may not be an indicator of
-> a poor quality base call.
+> Although we've used a particular quality encoding system to demonstrate
+> interpretation of read quality, different sequencing machines use different encoding
+> systems. This means that, depending on which sequencer you use to generate your
+> data, a `#` may not be an indicator of a poor quality base call.
 >
-> This mainly relates to older Solexa/Illumina data,
-> but it's essential that you know which sequencing platform was
-> used to generate your data, so that you can tell your quality control program which encoding
-> to use. If you choose the wrong encoding, you run the risk of throwing away good reads or
-> (even worse) not throwing away bad reads!
+> This mainly relates to older Solexa/Illumina data, but it's essential that you know
+> which sequencing platform was used to generate your data, so that you can tell your
+> quality control program which encoding to use. If you choose the wrong encoding, you
+> run the risk of throwing away good reads or (even worse) not throwing away bad reads!
 >
 {: .callout}
 
 ### Assessing Quality using FastQC
 
-In real life, you won't be assessing the quality of your reads by visually inspecting your
-FASTQ files. Rather, you'll be using a software program to assess read quality and
-filter out poor quality reads. We'll first use a program called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to visualize the quality of our reads.
-Later in our workflow, we'll use another program to filter out poor quality reads.
+In real life, you won't be assessing the quality of your reads by visually inspecting
+your FASTQ files. Rather, you'll be using a software program to assess read quality
+and filter out poor quality reads. We'll first use a program called
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+to visualize the quality of our reads. Later in our workflow, we'll use another
+program to filter out poor quality reads.
 
-FastQC has a number of features which can give you a  quick impression of any problems your
-data may have, so you can take these issues into consideration before moving forward with your
-analyses. Rather than looking at quality scores for each individual read, FastQC looks at
-quality collectively across all reads within a sample. The image below shows a FastQC-generated plot that indicates
-a very high quality sample:
+FastQC has a number of features which can give you a  quick impression of any problems
+your data may have, so you can take these issues into consideration before moving
+forward with your analyses. Rather than looking at quality scores for each individual
+read, FastQC looks at quality collectively across all reads within a sample. The image
+below shows a FastQC-generated plot that indicates a very high quality sample:
 
 ![good_quality](../img/good_quality1.8.png)
 
-The x-axis displays the base position in the read, and the y-axis shows quality scores. In this
-example, the sample contains reads that are 40 bp long. For each position, there is a
-box-and-whisker plot showing the distribution of quality scores for all reads at that position.
-The horizontal red line indicates the median quality score and the yellow box shows the 2nd to
-3rd quartile range. This means that 50% of reads have a quality score that falls within the
-range of the yellow box at that position. The whiskers show the range to the 1st and 4th
-quartile.
+The x-axis displays the base position in the read, and the y-axis shows quality
+scores. In this example, the sample contains reads that are 40 bp long. For each
+position, there is a box-and-whisker plot showing the distribution of quality scores
+for all reads at that position. The horizontal red line indicates the median quality
+score and the yellow box shows the 2nd to 3rd quartile range. This means that 50% of
+reads have a quality score that falls within the range of the yellow box at that
+position. The whiskers show the range to the 1st and 4th quartile.
 
-For each position in this sample, the quality values do not drop much lower than 32. This
-is a high quality score. The plot background is also color-coded to identify good (green),
-acceptable (yellow), and bad (red) quality scores.
+For each position in this sample, the quality values do not drop much lower than 32.
+This is a high quality score. The plot background is also color-coded to identify good
+(green), acceptable (yellow), and bad (red) quality scores.
 
 Now let's take a look at a quality plot on the other end of the spectrum.
 
 ![bad_quality](../img/bad_quality1.8.png)
 
-Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the "bad" range, particularly on the tail end of the reads. The FastQC tool produces several other diagnostic plots to assess sample quality, in addition to the one plotted above.
+Here, we see positions within the read in which the boxes span a much wider range.
+Also, quality scores drop quite low into the "bad" range, particularly on the tail end
+of the reads. The FastQC tool produces several other diagnostic plots to assess sample
+quality, in addition to the one plotted above.
 
 ### Running analyses on Crane
 
-We are going to start doing analyses on our data. So far we've been doing all our work on the Crane "login" nodes. It's fine to use the nodes for simple tasks like examining files with `less`, editing files with `nano`, moving files, but for analyses we need to have the work done on the "compute" nodes. For this workshop we will be using the interactive queue. With one command: `srun --pty $SHELL` you will start an interactive job and be logged into one of the compute nodes. The rest of oour work will continue on the compute note.
+We are going to start doing analyses on our data. So far we've been doing all our work
+on the Crane "login" nodes. It's fine to use the nodes for simple tasks like examining
+files with `less`, editing files with `nano`, moving files, but for analyses we need
+to have the work done on the "compute" nodes. For this workshop we will be using the
+interactive queue. With one command: `srun --pty $SHELL` you will start an interactive
+job and be logged into one of the compute nodes. The rest of oour work will continue
+on the compute note.
 
 ~~~
 $ srun --pty $SHELL
@@ -209,7 +224,8 @@ $ srun --pty $SHELL
 ~~~
 {: .output}
 
-You will notice that the command prompt will change to say that you are now on a compute node.
+You will notice that the command prompt will change to say that you are now on a
+compute node.
 
 When you start a new interactive session, you are returned to your home directory
 
@@ -225,12 +241,14 @@ $ pwd
 
 We'll make sure to `cd` back to our `data/` directory below.
 
-Another important thing to remember is to load any modules we need. We'll do that before we run each analysis.
+Another important thing to remember is to load any modules we need. We'll do that
+before we run each analysis.
 
 ### Running FastQC  
 
-We will be working with a set of sample data that is located in directory (`/common/demo/dc/dc_sampledata_lite`). First, we
-will move some of these files to the `data` directory your created at the end of our
+We will be working with a set of sample data that is located in directory
+(`/common/demo/dc/dc_sampledata_lite`). First, we will move some of these files to the
+`data` directory your created at the end of our
 [last lesson]({% link _episodes/09-organization.md %}).  
 
 ~~~
@@ -273,16 +291,18 @@ $ cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 > {: .solution}
 {: .challenge}
 
-To run the FastQC program, we need to load the fastqc module (`fastqc/0.10`).  FastQC can accept multiple file names as input, so we can use the *.fastq wildcard to run FastQC on all of the FASTQ files in this directory.
+To run the FastQC program, we need to load the fastqc module (`fastqc/0.10`). FastQC
+can accept multiple file names as input, so we can use the *.fastq wildcard to run
+FastQC on all of the FASTQ files in this directory.
 
 ~~~
-$ module load bioinformatics/fastqc
+$ module load fastqc
 $ fastqc *.fastq
 ~~~
 {: .bash}
 
-You will see an automatically updating output message telling you the
-progress of the analysis. It will start like this:
+You will see an automatically updating output message telling you the progress of the
+analysis. It will start like this:
 
 ~~~
 Started analysis of SRR097977.fastq
@@ -338,8 +358,7 @@ The `.html` file is a stable webpage displaying the summary
 report for each of our samples.
 
 We want to keep our data files and our results files separate, so we
-will move these
-output files into a new directory within our `results/` directory.
+will move these output files into a new directory within our `results/` directory.
 
 ~~~
 $ mkdir /work/group/username/dc_workshop/results/fastqc_untrimmed_reads
@@ -373,10 +392,9 @@ Couldn't get a file descriptor referring to the console
 ~~~
 {: .output}
 
-This is because Crane doesn't have any web
-browsers installed on it, so the remote computer doesn't know how to
-open the file. We want to look at the webpage summary reports, so
-let's transfer them to our local computers (i.e. your laptop).
+This is because Crane doesn't have any web browsers installed on it, so the remote
+computer doesn't know how to open the file. We want to look at the webpage summary
+reports, so let's transfer them to our local computers (i.e. your laptop).
 
 To transfer a file from a remote server to our own machines, we will
 use a variant of the `cp` command called `scp`. The "s" stands for
@@ -414,8 +432,9 @@ $ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_
 
 #### On Windows
 
-Open a Windows command prompt window by typing <kbd>Windows+r</kbd> (the Windows key and the 'r' key at the same time). You should see a "Run" window open.
-In the box enter: `cmd`, a new cmd.exe window should open.
+Open a Windows command prompt window by typing <kbd>Windows+r</kbd> (the Windows key
+and the 'r' key at the same time). You should see a "Run" window open. In the box
+enter: `cmd`, a new cmd.exe window should open.
 
 Create a new folder on your desktop:
 
@@ -436,9 +455,8 @@ Now we can transfer our HTML files to our local computer using `pscp`.
 #### Back to everyone
 
 This looks really complicated, so let's break it down. The first part
-of the command `username@crane.unl.edu` is
-the address for your remote computer. Make sure you replace `username`
-with your actual username.
+of the command `username@crane.unl.edu` is the address for your remote computer.
+Make sure you replace `username` with your actual username.
 
 The second part starts with a `:` and then gives the absolute path
 of the files you want to transfer from your remote computer. Don't
@@ -547,9 +565,9 @@ Archive:  SRR097977_fastqc.zip
 ~~~
 {: .output}
 
-This didn't work. What happened here is `unzip -l` expects one `.zip` argument and we gave it six. We could go through and
-unzip each file one at a time, but this is very time consuming and
-error-prone. Someday you may have 500 files to unzip!
+This didn't work. What happened here is `unzip -l` expects one `.zip` argument and we
+gave it six. We could go through and unzip each file one at a time, but this is very
+time consuming and error-prone. Someday you may have 500 files to unzip!
 
 A more efficient way is to use a `for` loop to iterate through all of
 our `.zip` files. Let's see what that looks like and then we'll
@@ -563,25 +581,20 @@ $ for filename in *.zip
 ~~~
 {: .bash}
 
-When the shell sees the keyword `for`,
-it knows to repeat a command (or group of commands) once for each item in a list.
-Each time the loop runs (called an iteration), an item in the list is assigned in sequence to
-the **variable**, and the commands inside the loop are executed, before moving on to
-the next item in the list.
+When the shell sees the keyword `for`, it knows to repeat a command (or group of
+commands) once for each item in a list. Each time the loop runs (called an iteration),
+an item in the list is assigned in sequence to the **variable**, and the commands
+inside the loop are executed, before moving on to the next item in the list.
 
-Inside the loop,
-we call for the variable's value by putting `$` in front of it.
-The `$` tells the shell interpreter to treat
-the **variable** as a variable name and substitute its value in its place,
-rather than treat it as text or an external command.
+Inside the loop, we call for the variable's value by putting `$` in front of it.
+The `$` tells the shell interpreter to treat the **variable** as a variable name and
+substitute its value in its place, rather than treat it as text or an external command.
 
 In this example, the list is six filenames (one filename for each of our `.zip` files).
-Each time the loop iterates, it will assign a file name to the variable `filename`
-and run the `unzip` command.
-The first time through the loop,
-`$filename` is `SRR097977_fastqc.zip`.
-The interpreter runs the command `unzip` on `SRR097977_fastqc.zip`.
-For the second iteration, `$filename` becomes
+Each time the loop iterates, it will assign a file name to the variable `filename` and
+run the `unzip` command. The first time through the loop, `$filename` is
+`SRR097977_fastqc.zip`. The interpreter runs the command `unzip` on
+`SRR097977_fastqc.zip`. For the second iteration, `$filename` becomes
 `SRR098026_fastqc.zip`. This time, the shell runs `unzip` on `SRR098026_fastqc.zip`.
 It then repeats this process for the four other `.zip` files in our directory.
 
@@ -595,21 +608,19 @@ It then repeats this process for the four other `.zip` files in our directory.
 
 > ## Same Symbols, Different Meanings
 >
-> Here we see `>` being used a shell prompt, whereas `>` is also
-> used to redirect output.
-> Similarly, `$` is used as a shell prompt, but, as we saw earlier,
-> it is also used to ask the shell to get the value of a variable.
+> Here we see `>` being used a shell prompt, whereas `>` is also used to redirect
+> output. Similarly, `$` is used as a shell prompt, but, as we saw earlier, it is also
+> used to ask the shell to get the value of a variable.
 >
 > If the *shell* prints `>` or `$` then it expects you to type something,
 > and the symbol is a prompt.
 >
-> If *you* type `>` or `$` yourself, it is an instruction from you that
-> the shell to redirect output or get the value of a variable.
+> If *you* type `>` or `$` yourself, it is an instruction from you that the shell to
+> redirect output or get the value of a variable.
 {: .callout}
 
-We have called the variable in this loop `filename`
-in order to make its purpose clearer to human readers.
-The shell itself doesn't care what the variable is called;
+We have called the variable in this loop `filename` in order to make its purpose
+clearer to human readers. The shell itself doesn't care what the variable is called;
 if we wrote this loop as:
 
 ~~~
@@ -630,14 +641,14 @@ $ for temperature in *.zip
 ~~~
 {: .bash}
 
-it would work exactly the same way.
-*Don't do this.*
+it would work exactly the same way. **Don't do this.**
 Programs are only useful if people can understand them,
 so meaningless names (like `x`) or misleading names (like `temperature`)
 increase the odds that the program won't do what its readers think it does.
 
 > ## Multipart commands
-> The `for` loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
+> The `for` loop is interpreted as a multipart command.  If you press the up arrow on
+> your keyboard to recall the command, it will be shown like so:
 >
 > ~~~   
 > $ for filename in *.zip; do unzip -l $filename; done
@@ -668,11 +679,11 @@ Archive:  SRR097977_fastqc.zip
 ~~~
 {: .output}
 
-The `unzip` program is listing the content of the `.zip` files and if we ran `unzip` without the `-l` flag would decompress these file, creating a new
-directory (with subdirectories) for each of our samples, to
-store all of the different output that is produced by FastQC. There
-are a lot of files here. The one we're going to focus on is the
-`summary.txt` file.
+The `unzip` program is listing the content of the `.zip` files and if we ran `unzip`
+without the `-l` flag would decompress these file, creating a new directory (with
+subdirectories) for each of our samples, to store all of the different output that is
+produced by FastQC. There are a lot of files here. The one we're going to focus on is
+the `summary.txt` file.
 
 ### Understanding FastQC Output
 
@@ -750,20 +761,20 @@ $ cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
 >> {: .bash}
 >>
 >> ~~~
->> FAIL	Per tile sequence quality	SRR097977.fastq
->> FAIL	Per tile sequence quality	SRR098026.fastq
->> FAIL	Overrepresented sequences	SRR098026.fastq
->> FAIL	Kmer Content	SRR098026.fastq
->> FAIL	Per base sequence quality	SRR098027.fastq
->> FAIL	Per tile sequence quality	SRR098027.fastq
->> FAIL	Kmer Content	SRR098027.fastq
->> FAIL	Per tile sequence quality	SRR098028.fastq
->> FAIL	Overrepresented sequences	SRR098028.fastq
->> FAIL	Kmer Content	SRR098028.fastq
->> FAIL	Overrepresented sequences	SRR098281.fastq
->> FAIL	Kmer Content	SRR098281.fastq
->> FAIL	Overrepresented sequences	SRR098283.fastq
->> FAIL	Kmer Content	SRR098283.fastq
+>> FAIL  Per tile sequence quality  SRR097977.fastq
+>> FAIL  Per tile sequence quality  SRR098026.fastq
+>> FAIL  Overrepresented sequences  SRR098026.fastq
+>> FAIL  Kmer Content               SRR098026.fastq
+>> FAIL  Per base sequence quality  SRR098027.fastq
+>> FAIL  Per tile sequence quality  SRR098027.fastq
+>> FAIL  Kmer Content               SRR098027.fastq
+>> FAIL  Per tile sequence quality  SRR098028.fastq
+>> FAIL  Overrepresented sequences  SRR098028.fastq
+>> FAIL  Kmer Content               SRR098028.fastq
+>> FAIL  Overrepresented sequences  SRR098281.fastq
+>> FAIL  Kmer Content               SRR098281.fastq
+>> FAIL  Overrepresented sequences  SRR098283.fastq
+>> FAIL  Kmer Content               SRR098283.fastq
 >> ~~~
 >> {: .output}
 >>
@@ -785,11 +796,10 @@ $ cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
 >> ~~~
 >> {: .output}
 >>
->> All of our samples failed at least one test. If we want to see a table showing which tests failed, we can
->> use the same command we used above, but this time extract the
->> second field with `cut` (instead of the third) and add the `-c`
->> option to `uniq` to count the number of times each unique value
->> appears.
+>> All of our samples failed at least one test. If we want to see a table showing
+>> which tests failed, we can use the same command we used above, but this time
+>> extract the second field with `cut` (instead of the third) and add the `-c`
+>> option to `uniq` to count the number of times each unique value appears.
 >>
 >> ~~~
 >> $ grep FAIL fastqc_summaries.txt | cut -f 2 | sort | uniq -c
