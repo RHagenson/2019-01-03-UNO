@@ -6,55 +6,59 @@ questions:
 - "How can I get rid of sequence data that doesn't meet my quality standards?"
 objectives:
 - "Clean FASTQ reads using Trimmommatic."
-- "Select and set multiple options for command-line bioinformatics tools."
+- "Select and set multiple options for command line bioinformatics tools."
 - "Write `for` loops with two variables."
 keypoints:
-- "The options you set for the command-line tools you use are important!"
+- "The options you set for the command line tools you use are important!"
 - "Data cleaning is an essential step in a genomics workflow."
 ---
 
-# Cleaning Reads
+## Cleaning Reads
 
-In the previous episode, we took a high-level look at the quality
-of each of our samples using FastQC. We vizualized per-base quality
-graphs showing the distribution of read quality at each base across
-all reads in a sample and extracted information about which samples
+In the
+[previous lesson]({% link _episodes/10-quality-control.md %}),
+we took a high-level look at the quality of each of our samples using FastQC. We
+visualized per-base quality graphs showing the distribution of read quality at each
+base across all reads in a sample and extracted information about which samples
 fail which quality checks. We know that all of our samples failed at
 least one of the quality metrics used by FastQC. This doesn't mean,
 though, that our samples should be thrown out! It's very common to
-have some reads within a sample,
-or some positions (near the begining or end of reads) across all
+have some reads within a sample, or some positions
+(especially near the beginning or end of reads) across all
 reads that are low
 quality and should be discarded. We will use a program called
-[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) to
-filter poor quality reads and trim poor quality bases from our samples.
+[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+to filter poor quality reads and trim poor quality bases from our samples.
 
-## Trimmomatic Options
+### Trimmomatic Options
 
-To use Trimmomatic on Hydra, load the trimmomatic module with:
+To use Trimmomatic on Crane, load the `trimmomatic` module with:
 
 ~~~
-$ module load bioinformatics/trimmomatic
+$ module load trimmomatic
 ~~~
 {: .bash}
 
+On Crane, we start Trimmomatic by calling `java` along with the path to the program
+(which is made active by loading the module).with a shortcut that is available when
+you load the `trimmomatic` module: `runtrimmomatic`. To run Trimmomatic use,
+`java -jar $TM_HOME/trimmomatic.jar` and to alleviate typing that each time
+let's create an
+[alias](https://en.wikipedia.org/wiki/Alias_(command))
+for it by running:
+`alias runtrimmomatic="java -jar $TM_HOME/trimmomatic.jar"`
 
-On Hydra, we start trimmomatic with a shortcut that is available when
-you load the bioinformatics/trimmomatic module: `runtrimmomatic`.
-This shortcut (technically an [alias](https://en.wikipedia.org/wiki/Alias_(command))) has `java -jar` followed by 
-the full path to the jar file incorporated as well as some other java options that help 
-trimmomatic run well on Hydra. You can type `alias runtrimmomatic` to see
-what the alias does and you can type `module help bioinformatics/trimmomatic` for more details.
-
+You can type `alias runtrimmomatic` to see what the alias does and you can type
+`module help trimmomatic` for more details on the tool.
 
 ~~~
 $ runtrimmomatic
 ~~~
 {: .bash}
 
-
-Note: `runtrimmomatic` is a command you'll only see on Hydra. On other systems,
-Trimmomatic is called with `java -jar trimmomatic-0.32.jar`.
+Note: `runtrimmomatic` is a command you'll only see if you create the alias
+(aliases are convenient, but be sure to add the alias to your project docs).
+On other systems, Trimmomatic is called with `java -jar trimmomatic-0.33.jar`.
 Trimmomatic is a program written in the Java programming language.
 You don't need to learn Java to use Trimmomatic (FastQC is also
 written in Java), but the fact that it's a Java program helps
@@ -68,15 +72,13 @@ That's just the basic command, however. Trimmomatic has a variety of
 options and parameters. We will need to specify what options we want
 to use for our analysis. Here are some of the options:
 
-
 | option    | meaning |
 | ------- | ---------- |
 | `-threads` | Specify the number of processors you want Trimmomatic to use. |
-|  `SE` or `PE`   | Specify whether your reads are single or paired end. |
+|  `SE` or `PE`   | Specify whether your reads are single or paired-end. |
 |  `-phred33` or `-phred64` | Specify the encoding system for your quality scores. |
 
-In addition to these options, there are various trimming steps
-available:
+In addition to these options, there are various trimming steps available:
 
 | step   | meaning |
 | ------- | ---------- |
@@ -89,10 +91,33 @@ available:
 |  `TOPHRED33` | Convert quality scores to Phred-33.  |
 |  `TOPHRED64` |  Convert quality scores to Phred-64. |
 
-We will use only a few of these options and trimming steps in our
-analysis. It is important to understand the steps you are using to
-clean your data. For more information about the Trimmomatic arguments
-and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
+We will use only a few of these options and trimming steps in our analysis. It is
+important to understand the steps you are using to clean your data. For more
+information about the Trimmomatic arguments and options, see
+[the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
+
+> ## Software Versions
+>
+> One of the biggest causes for irreproducibility in Bioinformatics
+> is forgetting/neglecting to document the version of a program used.
+> In this case, we are using Trimmomatic v0.33. Be sure to note what version
+> of a tool you are using and do not use multiple versions of a tool in one project.
+>
+> Keen observers will see that the Trimmomatic manual linked above is for
+> Trimmomatic v0.32; this is the latest manual and should apply to all
+> version of Trimmomatic v0.32 and above.
+>
+> Versions are usually written in some form of `major.minor.development` designation.
+> In this case, we are working with
+> "major version 0, minor version 33, and no development version number".
+>
+> By convention, major version updates are not compatible, but minor and
+> development versions are safe to update.
+> For example, moving from v0.32 to v0.33 is safe, but
+> if tomorrow Trimmomatic v1.0 was released, moving from v0.33 to v1.0
+> would likely break our workflows.
+>
+{: .callout}
 
 We said above that a basic command for Trimmomatic looks like this:
 
@@ -104,31 +129,38 @@ $ runtrimmomatic SE
 However, a complete command for Trimmomatic will look something like this:
 
 ~~~
-$ runtrimmomatic SE -threads 1 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+$ runtrimmomatic SE \
+    -threads 4 \
+    -phred64 \
+    SRR_1056.fastq \
+    SRR_1056_trimmed.fastq \
+    ILLUMINACLIP:SRR_adapters.fa \
+    SLIDINGWINDOW:4:20
 ~~~
 {: .bash}
 
-*On Hydra it's essential to specify `-threads` or Trimmomatic will use more than threads
-on the compute node than you requested.*
+*On Crane it's essential to specify `-threads` or Trimmomatic will use more
+than threads on the compute node than you requested.*
 
 In this example, we've told Trimmomatic:
 
 | code   | meaning |
 | ------- | ---------- |
 | `SE` | that it will be taking a single end file as input |
-| `-threads 4` | to use four computing threads to run (this will spead up our run) |
+| `-threads 4` | to use four computing threads to run (this will speed up our run) |
 | `-phred64` | that the input file uses phred-64 encoding for quality scores |
 | `SRR_1056.fastq` | the input file name |
 |  `SRR_1056_trimmed.fastq` | the output file to create |
 | `ILLUMINACLIP:SRR_adapters.fa`| to clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
 |`SLIDINGWINDOW:4:20` | to use a sliding window of size 4 that will remove bases if their phred score is below 20 |
 
-## Running Trimmomatic
+### Running Trimmomatic
 
-Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq` data directory:
+Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq`
+data directory:
 
 ~~~
-$ cd /pool/genomics/username/dc_workshop/data/untrimmed_fastq
+$ cd /work/group/username/dc_workshop/data/untrimmed_fastq
 ~~~
 {: .bash}
 
@@ -139,13 +171,17 @@ discard any reads that do not have at least 20 bases remaining after
 this trimming step.
 
 ~~~
-$ runtrimmomatic SE -threads 1 SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+$ runtrimmomatic SE \
+    -threads 4 \
+    SRR098283.fastq \
+    SRR098283.fastq_trim.fastq \
+    SLIDINGWINDOW:4:20 \
+    MINLEN:20
 ~~~
 {: .bash}
 
-
 ~~~
-TrimmomaticSE: Started with arguments: -threads 1 SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+TrimmomaticSE: Started with arguments: -threads 4 SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
 Quality encoding detected as phred33
 Input Reads: 21564058 Surviving: 17030985 (78.98%) Dropped: 4533073 (21.02%)
 TrimmomaticSE: Completed successfully
@@ -157,18 +193,18 @@ TrimmomaticSE: Completed successfully
 > Use the output from your Trimmomatic command to answer the
 > following questions.
 >
-> 1) What percent of reads did we discard from our sample?
-> 2) What percent of reads did we keep?
+> 1. What percent of reads did we discard from our sample?
+> 2. What percent of reads did we keep?
 >
 >> ## Solution
->> 1) 21.02%
->> 2) 78.98%
+>> 1. 21.02%
+>> 2. 78.98%
 > {: .solution}
 {: .challenge}
 
-You may have noticed that Trimmomatic automatically detected the
-quality encoding of our sample. It is always a good idea to
-double-check this or to enter the quality encoding manually.
+You may have noticed that Trimmomatic automatically detected the quality encoding of
+our sample. It is always a good idea to double-check this or to enter the quality
+encoding manually (`-phred33`/`-phred64`).
 
 We can confirm that we have our output file:
 
@@ -182,8 +218,8 @@ SRR098283.fastq  SRR098283.fastq_trim.fastq
 ~~~
 {: .output}
 
-The output file is also a FASTQ file. It should be smaller than our
-input file because we've removed reads. We can confirm this:
+The output file is also a FASTQ file. It should be smaller than our input file because
+we've removed reads. We can confirm this:
 
 ~~~
 $ ls SRR098283* -l -h
@@ -191,11 +227,10 @@ $ ls SRR098283* -l -h
 {: .bash}
 
 ~~~
--rw-r--r-- 1 username username 3.9G Jul 30  2015 SRR098283.fastq
--rw-rw-r-- 1 username username 3.0G Nov  7 23:10 SRR098283.fastq_trim.fastq
+-r-------- 1 username group 3.9G Dec 13 14:30 SRR098283.fastq
+-rw-r--r-- 1 username group 3.0G Dec 14 14:37 SRR098283.fastq_trim.fastq
 ~~~
 {: .output}
-
 
 We've just successfully run Trimmomatic on one of our FASTQ files!
 However, there is some bad news. Trimmomatic can only operate on
@@ -207,7 +242,7 @@ quickly!
 $ for infile in *.fastq
 > do
 > outfile="${infile}"_trim.fastq
-> runtrimmomatic SE -threads 1 "${infile}" "${outfile}" SLIDINGWINDOW:4:20 MINLEN:20
+> runtrimmomatic SE -threads 4 "${infile}" "${outfile}" SLIDINGWINDOW:4:20 MINLEN:20
 > done
 ~~~
 {: .bash}
@@ -219,17 +254,18 @@ The new part in our `for` loop is the line:
 ~~~
 {: .bash}
 
-`infile` is the first variable in our loop and takes the value
-of each of the FASTQ files in our directory. `outfile` is the
-second variable in our loop and is defined by adding `_trim.fastq` to
-the end of our input file name. Use `{}` to wrap the variable so that `_trim.fastq` will
-not be interpreted as part of the variable name. In addition, quoting the shell variables is
-a good practice AND necessary if your variables have spaces in them. For more, check [Bash Pitfalls](http://mywiki.wooledge.org/BashPitfalls).
+`infile` is the first variable in our loop and takes the value of each of the FASTQ
+files in our directory. `outfile` is the second variable in our loop and is defined by
+adding `_trim.fastq` to the end of our input file name. Use `{}` to wrap the variable
+so that `_trim.fastq` will not be interpreted as part of the variable name. In
+addition, quoting the shell variables is a good practice AND necessary if your
+variables have spaces in them. For more, check
+[Bash Pitfalls](http://mywiki.wooledge.org/BashPitfalls).
 There are no spaces before or after the `=`.
 
-Go ahead and run the for loop. It should take a few minutes for
-Trimmomatic to run for each of our six input files. Once it's done
-running, take a look at your directory contents.
+Go ahead and run the for loop. It should take a few minutes for Trimmomatic to run for
+each of our six input files. Once it's done running, take a look at your directory
+contents.
 
 ~~~
 $ ls
@@ -237,20 +273,24 @@ $ ls
 {: .bash}
 
 ~~~
-SRR097977.fastq		    SRR098027.fastq_trim.fastq	SRR098283.fastq
-SRR097977.fastq_trim.fastq  SRR098028.fastq		SRR098283.fastq_trim.fastq
-SRR098026.fastq		    SRR098028.fastq_trim.fastq	SRR098283.fastq_trim.fastq_trim.fastq
-SRR098026.fastq_trim.fastq  SRR098281.fastq
-SRR098027.fastq		    SRR098281.fastq_trim.fastq
+SRR097977.fastq             SRR098027.fastq_trim.fastq  
+SRR098283.fastq             SRR097977.fastq_trim.fastq  
+SRR098028.fastq             SRR098283.fastq_trim.fastq  
+SRR098026.fastq             SRR098028.fastq_trim.fastq  
+SRR098283.fastq_trim.fastq_trim.fastq  SRR098026.fastq_trim.fastq  
+SRR098281.fastq             SRR098027.fastq
+SRR098281.fastq_trim.fastq
 ~~~
 {: .output}
 
-If you look very closely, you'll see that you have three files for the
-`SRR098283` sample. This is because we already had the `SRR098283.fastq_trim.fastq` file in our directory when we started
-our `for` loop (because we had run Trimmomatic on just that one file already).
-Our `for` loop included this file in our list of `.fastq` files and
-created a new output file named `SRR098283.fastq_trim.fastq_trim.fastq`, which is the result of
-running Trimmomatic on our already trimmed file. `SRR098283.fastq_trim.fastq` and `SRR098283.fastq_trim.fastq_trim.fastq` should be identical. If you look at your Trimmomatic output in the terminal window, you will see:
+If you look very closely, you'll see that you have three files for the `SRR098283`
+sample. This is because we already had the `SRR098283.fastq_trim.fastq` file in our
+directory when we started our `for` loop (because we had run Trimmomatic on just that
+one file already). Our `for` loop included this file in our list of `.fastq` files and
+created a new output file named `SRR098283.fastq_trim.fastq_trim.fastq`, which is the
+result of running Trimmomatic on our already trimmed file.
+`SRR098283.fastq_trim.fastq` and `SRR098283.fastq_trim.fastq_trim.fastq` should be
+identical. If you look at your Trimmomatic output in the terminal window, you will see:
 
 ~~~
 TrimmomaticSE: Started with arguments: -threads 1 SRR098283.fastq_trim.fastq SRR098283.fastq_trim.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
@@ -284,6 +324,7 @@ dropped. This is a good thing!
 > this sample? What does its quality look like?
 >
 >> ## Solution
+>>
 >> ~~~
 >> $ head -n4 SRR098026.fastq_trim.fastq
 >> ~~~
@@ -335,7 +376,7 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 
 > ## Bonus Exercise (Advanced)
 >
-> Now that we've quality controled our samples, they should perform
+> Now that we've quality controlled our samples, they should perform
 > better on the quality tests run by FastQC. Go ahead and re-run
 > FastQC on your trimmed FASTQ files and visualize the HTML files
 > to see whether your per base sequence quality is higher after
@@ -343,10 +384,10 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >
 >> ## Solution
 >>
->> On Hydra window do:
+>> On Crane window do:
 >>
 >> ~~~
->> $ fastqc /pool/genomics/username/dc_workshop/data/trimmed_fastq
+>> $ fastqc /work/group/username/dc_workshop/data/trimmed_fastq/*.fastq
 >> ~~~
 >> {: .bash}
 >>
@@ -354,11 +395,10 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >>
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp username@hydra-login01:/pool/genomics/username/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
->> $ open ~/Desktop/fastqc_html/trimmed/*.html
+>> $ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/data/trimmed_fastq/*/ ~/Desktop/fastqc_html/trimmed/
+>> $ open ~/Desktop/fastqc_html/trimmed/*/*.html
 >> ~~~
 >> {: .bash}
->>
 >>
 >> Before trimming, one of the sequences gave a warning and another
 >> failed the per base sequence quality test. After filtering, all
