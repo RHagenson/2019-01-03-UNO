@@ -14,23 +14,29 @@ keypoints:
 - "There are many different file formats for storing genomics data. It's important to understand these file formats and know how to convert between them."
 ---
 
-## Alignment to a reference genome
+## Alignment to a Reference Genome
 
-We have already trimmed our reads so now the next step is alignment of our quality reads to the reference genome.
+We have already trimmed our reads so now the next step is alignment of our quality
+reads to the reference genome.
 
 ![workflow_align](../img/variant_calling_workflow_align.png)
 
-We perform read alignment or mapping to determine where in the genome our reads originated from. There are a number of tools to
-choose from and, while there is no gold standard, there are some tools that are better suited for particular NGS analyses. We will be
-using the [Burrows-Wheeler Aligner (BWA)](http://bio-bwa.sourceforge.net/), which is a software package for mapping low-divergent
-sequences against a large reference genome. The alignment process consists of two steps:
+We perform read alignment or mapping to determine where in the genome our reads
+originated from. There are a number of tools to choose from and, while there is no
+gold standard, there are some tools that are better suited for particular NGS analyses. We will be using the
+[Burrows-Wheeler Aligner (BWA)](http://bio-bwa.sourceforge.net/),
+which is a software package for mapping low-divergent sequences against a large
+reference genome. The alignment process consists of two steps:
 
 1. Indexing the reference genome
 2. Aligning the reads to the reference genome
 
 ### Setting up
 
-First we will copy the reference genome data into our `data/` directory, as well as a set of trimmed FASTQ files to work with in this lesson, and a set of untrimmed files for the next one.  
+First we will copy the reference genome data into our `data/` directory, as well as a
+set of trimmed FASTQ files to work with in this lesson, and a set of untrimmed files
+for the next one.  
+
 ~~~
 $ cd /work/group/username/dc_workshop
 $ cp -r /common/demo/dc/.dc_sampledata_lite/ref_genome data/
@@ -38,9 +44,9 @@ $ cp -r /common/demo/dc/.dc_sampledata_lite/trimmed_fastq_small data/
 ~~~
 {: .bash}
 
-You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single
-line of code because `mkdir` can accept multiple new directory
-names as input.
+You will also need to create directories for the results that will be generated as
+part of this workflow. We can do this in a single line of code because `mkdir` can
+accept multiple new directory names as input.
 
 ~~~
 $ mkdir results/sai results/sam results/bam results/bcf results/vcf
@@ -59,8 +65,8 @@ $ mkdir results/sai results/sam results/bam results/bcf results/vcf
 
 ### Index the reference genome
 
-Our first step is to index the reference genome for use by BWA. This
-helps speed up our alignment.
+Our first step is to index the reference genome for use by BWA. This helps speed up
+our alignment.
 
 > ## To Index or Not To Index
 > Indexing the reference only has to be run once. The only reason you would
@@ -113,8 +119,8 @@ This will create a `.sai` file which is an intermediate file containing the suff
 array indexes.
 
 Have a look at the [BWA options page](http://bio-bwa.sourceforge.net/bwa.shtml). While
-we are running BWA with the default 
-parameters here, your use case might require a change of parameters.
+we are running BWA with the default parameters here, your use case might require a
+change of parameters.
 
 > ## Read the Manual
 >
@@ -123,9 +129,10 @@ parameters here, your use case might require a change of parameters.
 >
 {: .callout}
 
-We're going to start by aligning the reads from just one of the
-samples in our dataset (`SRR097977.fastq`). Later, we'll be
-iterating this whole process on all of our sample files. **Note: below that `\` is being used to extend the command onto multiple lines for easier reading.**
+We're going to start by aligning the reads from just one of the samples in our dataset
+(`SRR097977.fastq`). Later, we'll be iterating this whole process on all of our sample
+files.
+**Note: below that `\` is being used to extend the command onto multiple lines for easier reading.**
 
 ~~~
 $ bwa aln \
@@ -169,7 +176,8 @@ Post-alignment processing of the alignment file includes:
 
 ### Convert the format of the alignment to SAM/BAM
 
-The SAI file is not a standard alignment output file and will need to be converted into a SAM file before we can do any downstream processing.
+The SAI file is not a standard alignment output file and will need to be converted
+into a SAM file before we can do any downstream processing.
 
 #### SAM/BAM format
 
@@ -181,7 +189,9 @@ of the SAM format, the paper by
 [Heng Li et al.](http://bioinformatics.oxfordjournals.org/content/25/16/2078.full)
 provides a lot more detail on the specification.
 
-**The compressed binary version of SAM is called a BAM file.** We use this version to reduce size and to allow for *indexing*, which enables efficient random access of the data contained within the file.
+**The compressed binary version of SAM is called a BAM file.**
+We use this version to reduce size and to allow for *indexing*, which enables
+efficient random access of the data contained within the file.
 
 The file begins with an optional **header**. The header is used to describe source of
 data, reference sequence, method of alignment, etc., this will change depending on the
@@ -196,13 +206,13 @@ file is displayed below with the different fields highlighted.
 ![sam_bam2](../img/sam_bam3.png)
 
 > ## Better viewing of tab-delimited files
-> 
+>
 > Tab separated files can sometimes be hard to view in the terminal.
-> You may find that the headers don't line up with columns and that long lines wrap to the next line.
-> Try using `less -S -x10 filename` to view the file.
-> `-S` causes less to not wrap long lines, use the left and right arrow keys to see more of the line.
-> `-x10` expands how many spaces each tab displays as to 10 character which will help the columns to line up.
-> You can try larger values for x to make the columns wider.
+> You may find that the headers don't line up with columns and that long lines wrap to
+> the next line. Try using `less -S -x10 filename` to view the file. `-S` causes less
+> to not wrap long lines, use the left and right arrow keys to see more of the line.
+> `-x10` expands how many spaces each tab displays as to 10 character which will help
+> the columns to line up. You can try larger values for x to make the columns wider.
 >
 {: .callout}
 
@@ -241,7 +251,9 @@ Your output will start out something like this:
 ~~~
 {: .output}
 
-Next we convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`):
+Next we convert the SAM file to BAM format for use by downstream tools. We use the
+`samtools` program with the `view` command and tell this command that the input is in
+SAM format (`-S`) and to output BAM format (`-b`):
 
 ~~~
 $ module load samtools
@@ -384,7 +396,8 @@ NC_012967.1     553093  .       C       T       15.4599 .       DP=2;VDB=0.88;SG
 ~~~
 {: .output}
 
-This is a lot of information, so let's take some time to make sure we understand our output.
+This is a lot of information, so let's take some time to make sure we understand our
+output.
 
 The first few columns represent the information we have about a predicted variation.
 
@@ -422,18 +435,18 @@ For our file, the metrics presented are `DP:VDB:SGB:MQSB:MQOF:AC:AN:DP4:MQ:GT:PL
 The Broad Institute's [VCF guide](https://software.broadinstitute.org/gatk/documentation/article?id=11005) is an excellent place to learn more about VCF file format.
 
 > ## Exercise
-> 
-> Use the `grep`, `cut`, and `less` commands you've learned to extract the `POS` and `QUAL` columns from your 
-> output file (without the header lines). What is the position of the first variant to be called with a `QUAL` 
-> value of less than 4?
+>
+> Use the `grep`, `cut`, and `less` commands you've learned to extract the `POS` and
+> `QUAL` columns from your output file (without the header lines). What is the
+> position of the first variant to be called with a `QUAL` value of less than 4?
 >
 >> ## Solution
->> 
+>>
 >> ~~~
 >> $ cut results/vcf/SRR097977_final_variants.vcf -f 6,2 | grep -v "##" | less
 >> ~~~
 >> {: .bash}
->> 
+>>
 >> ~~~ 
 >> POS     QUAL
 >> 9972    68
@@ -468,7 +481,8 @@ lesson we will describe two different tools for visualization; a light-weight
 command-line based one and the Broad Institute's Integrative Genomics Viewer (IGV)
 which requires software installation and transfer of files.
 
-In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
+In order for us to visualize the alignment files, we will need to index the BAM file
+using `samtools`:
 
 ~~~
 $ samtools index results/bam/SRR097977.aligned.sorted.bam
@@ -523,14 +537,17 @@ AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTG
 ~~~
 {: .output}
 
-The first line of output shows the genome coordinates in our reference genome. The second line shows the reference
-genome sequence. The third lines shows the consensus sequence determined from the sequence reads. A `.` indicates
-a match to the reference sequence, so we can see that the consensus from our sample matches the reference in most
-locations. That is good! If that wasn't the case, we should probably reconsider our choice of reference.
+The first line of output shows the genome coordinates in our reference genome. The
+second line shows the reference genome sequence. The third lines shows the consensus
+sequence determined from the sequence reads. A `.` indicates a match to the reference
+sequence, so we can see that the consensus from our sample matches the reference in
+most locations. That is good! If that wasn't the case, we should probably reconsider
+our choice of reference.
 
-Below the horizontal line, we can see all of the reads in our sample aligned with the reference genome. Only 
-positions where the called base differs from the reference are shown. You can use the arrow keys on your keyboard
-to scroll or type `?` for a help menu. Type `Ctrl^C` to exit `tview`. 
+Below the horizontal line, we can see all of the reads in our sample aligned with the
+reference genome. Only positions where the called base differs from the reference are
+shown. You can use the arrow keys on your keyboard to scroll or type `?` for a help
+menu. Type `Ctrl^C` to exit `tview`. 
 
 ### Viewing with IGV
 
@@ -597,8 +614,8 @@ Your IGV browser should look like the screenshot below:
 
 ![IGV](../img/igv-screenshot.png)
 
-There should be two tracks: one corresponding to our BAM file and
-the other for our VCF file.
+There should be two tracks: one corresponding to our BAM file and the other for our
+VCF file.
 
 In the **VCF track**, each bar across the top of the plot shows the allele fraction
 for a single locus. The second bar shows the genotypes for each locus in each
