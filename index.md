@@ -238,7 +238,7 @@ eventbrite:           # optional: alphanumeric key for Eventbrite registration, 
 </p>
 {% endif %}
 
-<p><a href="{{ site.baseurl }} {% link lessons_index.md %}">Workshop Lessons Index</a></p>
+<p><a href="{{ site.baseurl }}{% link lessons_index.md %}">Workshop Lessons Index</a></p>
 
 <hr/>
 
