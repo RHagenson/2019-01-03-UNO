@@ -12,7 +12,7 @@ keypoints:
 - "Use `echo` statements within your scripts to get an automated progress update."
 ---
 
-## What is a shell script?
+## What is a Shell Script?
 
 You wrote a simple shell script in
 [a previous lesson]({% link _episodes/08-writing-scripts.md %})
@@ -99,20 +99,20 @@ $ nano read_qc.sh
 ~~~
 {: .bash}
 
-Enter the following pieces of code into your shell script
-(not into your terminal prompt).
+Enter the following pieces of code into your shell script (not into your terminal
+prompt).
 
-Our first line will move us into the `untrimmed_fastq/` directory when
-we run our script.
+Our first line will move us into the `untrimmed_fastq/` directory when we run our
+script.
 
 ~~~
 cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .output}
 
-These next two lines will give us a status message to tell us that we are
-currently running FastQC, then will run FastQC on all of the files in our current
-directory with a `.fastq` extension.
+These next two lines will give us a status message to tell us that we are currently
+running FastQC, then will run FastQC on all of the files in our current directory with
+a `.fastq` extension.
 
 ~~~
 module load fastqc
@@ -224,9 +224,11 @@ Analysis complete for SRR098026.fastq
 ~~~
 {: .output}
 
-For each of your sample files, FastQC will ask if you want to replace the existing version with a new version. This is 
-because we have already run FastQC on this samples files and generated all of the outputs. We are now doing this again using
-our scripts. Go ahead and select `A` each time this message appears. It will appear once per sample file (six times total).
+For each of your sample files, FastQC will ask if you want to replace the existing
+version with a new version. This is because we have already run FastQC on this samples
+files and generated all of the outputs. We are now doing this again using our scripts.
+Go ahead and select `A` each time this message appears. It will appear once per sample
+file (six times total).
 
 ~~~
 replace SRR097977_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]ename:
@@ -267,16 +269,17 @@ read_qc.sh  run_variant_calling.sh
 ~~~
 {: .output}
 
-We now have a new empty file called `run_variant_calling.sh` in our `scripts/` directory. We will open this file in `nano` and start
-building our script, like we did before.
+We now have a new empty file called `run_variant_calling.sh` in our `scripts/`
+directory. We will open this file in `nano` and start building our script, like we did
+before.
 
 ~~~
 $ nano run_variant_calling.sh
 ~~~
 {: .bash}
 
-Enter the following pieces of code into your shell script
-(not into your terminal prompt).
+Enter the following pieces of code into your shell script (not into your terminal
+prompt).
 
 First we will change our working directory so that we can create new results
 subdirectories in the right location.
@@ -352,7 +355,7 @@ for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
 {: .callout}
 
 > ## Exercise
-> 
+>
 > This is a good time to check that our script is assigning the FASTQ filename
 > variables correctly. Save your script and run it. What output do you see?
 >
@@ -447,8 +450,8 @@ lines.
 ~~~
 {: .output}
 
-Now that we've created our variables, we can start doing the steps of our workflow. Remove the `done` line from the end of
-your script and add the following lines. 
+Now that we've created our variables, we can start doing the steps of our workflow.
+Remove the `done` line from the end of your script and add the following lines.
 
 1) align the reads to the reference genome and output a `.sai` file:
 
@@ -485,8 +488,7 @@ your script and add the following lines.
 ~~~
 {: .output}
 
-6) do the first pass on variant calling by counting
-read coverage
+6) do the first pass on variant calling by counting read coverage
 
 ~~~
     samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
@@ -508,7 +510,8 @@ read coverage
 ~~~
 {: .output}
 
-We added a `done` line after the SNP filtering step because this is the last step in our `for` loop.
+We added a `done` line after the SNP filtering step because this is the last step in
+our `for` loop.
 
 Your script should now look like this:
 
@@ -620,7 +623,9 @@ $ bash run_variant_calling.sh
 > method to the `mem` method.
 {: .callout}
 
-In the [previous lesson]({% link _episodes/12-variant-calling.md %}) we mentioned that
+In the
+[previous lesson]({% link _episodes/12-variant-calling.md %})
+we mentioned that
 we were using small subsets of our trimmed FASTQ files to run our variant calling
 workflow, in the interests of time. The output files you now have in your
 `dc_workshop/results` directory are based on the small sample FASTQ files (data from
@@ -630,11 +635,12 @@ Let's do a few comparisons.
 
 > ## Exercise (Novice)
 >
-> How much larger are the full-sized trimmed FASTQ files than the small trimmed FASTQ files we just ran our variant calling
-> script on?
+> How much larger are the full-sized trimmed FASTQ files than the small trimmed FASTQ
+> files we just ran our variant calling script on?
 >
-> Hint: You can find a copy of the full-sized trimmed 
-> FASTQ files in the `/data/genomics/workshops/data_carpentry_genomics/dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq` directory.
+> Hint: You can find a copy of the full-sized trimmed FASTQ files in the
+> `/common/demo/dc/.dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq`
+> directory.
 >
 >> ## Solution
 >>
