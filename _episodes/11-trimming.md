@@ -75,7 +75,7 @@ to use for our analysis. Here are some of the options:
 | option    | meaning |
 | ------- | ---------- |
 | `-threads` | Specify the number of processors you want Trimmomatic to use. |
-|  `SE` or `PE`   | Specify whether your reads are single or paired end. |
+|  `SE` or `PE`   | Specify whether your reads are single or paired-end. |
 |  `-phred33` or `-phred64` | Specify the encoding system for your quality scores. |
 
 In addition to these options, there are various trimming steps

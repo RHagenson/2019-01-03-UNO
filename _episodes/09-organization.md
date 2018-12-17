@@ -79,15 +79,15 @@ You should see the output:
 > + `dc_workshop/data`
 > + `dc_workshop/results`
 >
-> > ## Solution
-> >
-> > ~~~
-> > $ mkdir dc_workshop
-> > $ mkdir dc_workshop/docs
-> > $ mkdir dc_workshop/data
-> > $ mkdir dc_workshop/results
-> > ~~~
-> > {: .bash}
+>> ## Solution
+>>
+>> ~~~
+>> $ mkdir dc_workshop
+>> $ mkdir dc_workshop/docs
+>> $ mkdir dc_workshop/data
+>> $ mkdir dc_workshop/results
+>> ~~~
+>> {: .bash}
 > {: .solution}
 {: .challenge}
 

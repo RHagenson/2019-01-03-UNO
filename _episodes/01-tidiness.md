@@ -34,7 +34,7 @@ is useless.
 >> - spreadsheet or tabular data with the data from your experiment and whatever you were measuring for your study
 >> - lab notebook notes about how you conducted those experiments
 >> - spreadsheet or tabular data about the samples you sent off for sequencing. Sequencing centers often have a particular format they need with the name of the sample, DNA concentration and other information.
->> - lab notebook notes about how you prepared the DNA/RNA for sequencing and what type of sequencing you're doing, e.g. paired end Illumina HiSeq.
+>> - lab notebook notes about how you prepared the DNA/RNA for sequencing and what type of sequencing you're doing, e.g. paired-end Illumina HiSeq.
 >>
 >> There likely will be other ideas here too.
 >> Was this more information and data than you were expecting?

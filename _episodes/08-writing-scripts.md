@@ -95,11 +95,11 @@ Now you've written a file. You can take a look at it with `less` or `cat`, or op
 >
 > Open `README.txt` and add the date to the top of the file and save the file.
 >
-> > ## Solution
-> >
-> > Use `nano README.txt` to open the file.  
-> > Add today's date and then use `Ctrl-X` to exit and `y` to save.
-> >
+>> ## Solution
+>>
+>> Use `nano README.txt` to open the file.  
+>> Add today's date and then use `Ctrl-X` to exit and `y` to save.
+>>
 > {: .solution}
 >
 {: .challenge}
@@ -142,33 +142,33 @@ It will look like nothing happened, but now if you look at `scripted_bad_reads.t
 > Bonus: How many bad reads are in each of the two FASTQ files? (Hint: You will need to use the
 > `cut` command with the `-d` flag.)
 >
-> > ## Solution
-> >
-> > ~~~
-> > $ wc -l scripted_bad_reads.txt
-> > ~~~
-> > {: .bash}
-> >
-> > ~~~
-> > 537 scripted_bad_reads.txt
-> > ~~~
-> > {: .output}
-> >
-> > There are 537 / 4 bad reads in the two files combined. If you look closely, you will see that there is a `--` delimiter inserted between the non-consecutive matches to grep. This accounts for the extra line. So there are 536 / 4 = 134 total bad reads.
-> >
-> > ~~~
-> > $ cut -d . -f1 scripted_bad_reads.txt | sort | uniq -c
-> > ~~~
-> > {: .bash}
-> >
-> > ~~~
-> > 1 --
-> > 536 SRR098026
-> > ~~~
-> > {: .output}
-> >
-> >
-> > There are 536 / 4 (=134) bad reads for the `SRR098026.fastq` file and none for the other file.
+>> ## Solution
+>>
+>> ~~~
+>> $ wc -l scripted_bad_reads.txt
+>> ~~~
+>> {: .bash}
+>>
+>> ~~~
+>> 537 scripted_bad_reads.txt
+>> ~~~
+>> {: .output}
+>>
+>> There are 537 / 4 bad reads in the two files combined. If you look closely, you will see that there is a `--` delimiter inserted between the non-consecutive matches to grep. This accounts for the extra line. So there are 536 / 4 = 134 total bad reads.
+>>
+>> ~~~
+>> $ cut -d . -f1 scripted_bad_reads.txt | sort | uniq -c
+>> ~~~
+>> {: .bash}
+>>
+>> ~~~
+>> 1 --
+>> 536 SRR098026
+>> ~~~
+>> {: .output}
+>>
+>>
+>> There are 536 / 4 (=134) bad reads for the `SRR098026.fastq` file and none for the other file.
 > {: .solution}
 {: .challenge}
 

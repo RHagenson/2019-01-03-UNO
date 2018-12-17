@@ -121,17 +121,17 @@ surveys_plot + p9.geom_point()
 > create a `bar`-plot that counts the number of records for each plot. (Check
 > the documentation of the bar geometry to handle the counts)
 >
-> > ## Answers
-> >
-> > ~~~
-> > (p9.ggplot(data=surveys_complete,
-> >            mapping=p9.aes(x='plot_id'))
-> >     + p9.geom_bar()
-> > )
-> > ~~~
-> > {: .language-python}
-> >
-> > ![png](../fig/06_challenge_bar.png)
+>> ## Answers
+>>
+>> ~~~
+>> (p9.ggplot(data=surveys_complete,
+>>            mapping=p9.aes(x='plot_id'))
+>>     + p9.geom_bar()
+>> )
+>> ~~~
+>> {: .language-python}
+>>
+>> ![png](../fig/06_challenge_bar.png)
 > {: .solution}
 {: .challenge}
 
@@ -255,18 +255,18 @@ set the background to white using the function `theme_bw()`.
 > providing the colors `blue` and `orange` manually
 > (see [API reference](https://plotnine.readthedocs.io/en/stable/api.html#Color-and-fill-scales) to find the appropriate function).
 >
-> > ## Answers
-> >
-> > ~~~
-> > (p9.ggplot(data=surveys_complete,
-> >            mapping=p9.aes(x='plot_id',
-> >                           fill='sex'))
-> >     + p9.geom_bar()
-> >     + p9.scale_fill_manual(["blue", "orange"])
-> > )
-> > ~~~
-> > {: .language-python}
-> > ![png](../fig/06_challenge_color_bar.png)
+>> ## Answers
+>>
+>> ~~~
+>> (p9.ggplot(data=surveys_complete,
+>>            mapping=p9.aes(x='plot_id',
+>>                           fill='sex'))
+>>     + p9.geom_bar()
+>>     + p9.scale_fill_manual(["blue", "orange"])
+>> )
+>> ~~~
+>> {: .language-python}
+>> ![png](../fig/06_challenge_color_bar.png)
 > {: .solution}
 {: .challenge}
 
@@ -322,20 +322,20 @@ better idea of the number of measurements and of their distribution:
 > Hint: Check the class for `plot_id`. By using `factor()` within the `aes`
 > mapping of a variable, `plotnine` will handle the values as category values.
 >
-> > ## Answers
-> >
-> > ~~~
-> > (p9.ggplot(data=surveys_complete,
-> >            mapping=p9.aes(x='species_id',
-> >                           y='weight',
-> >                           color='factor(plot_id)'))
-> >     + p9.geom_jitter(alpha=0.3)
-> >     + p9.geom_violin(alpha=0, color="0.7")
-> >     + p9.scale_y_log10()
-> > )
-> > ~~~
-> > {: .language-python}
-> > ![png](../fig/06_challenge_boxplot.png)
+>> ## Answers
+>>
+>> ~~~
+>> (p9.ggplot(data=surveys_complete,
+>>            mapping=p9.aes(x='species_id',
+>>                           y='weight',
+>>                           color='factor(plot_id)'))
+>>     + p9.geom_jitter(alpha=0.3)
+>>     + p9.geom_violin(alpha=0, color="0.7")
+>>     + p9.scale_y_log10()
+>> )
+>> ~~~
+>> {: .language-python}
+>> ![png](../fig/06_challenge_boxplot.png)
 > {: .solution}
 {: .challenge}
 
@@ -465,18 +465,18 @@ survey_2000 = surveys_complete[surveys_complete["year"].isin([2000, 2001])]
 > Create a separate plot for each of the species that depicts how the average
 > weight of the species changes through the years.
 >
-> > ## Answers
-> > yearly_weight = surveys_complete.groupby(['year', 'species_id'])['weight'].mean().reset_index()
-> >
-> > ~~~
-> > (p9.ggplot(data=yearly_weight,
-> >            mapping=p9.aes(x='year',
-> >                           y='weight'))
-> >     + p9.geom_line()
-> >     + p9.facet_wrap("species_id")
-> > )
-> > ~~~
-> > {: .language-python}
+>> ## Answers
+>> yearly_weight = surveys_complete.groupby(['year', 'species_id'])['weight'].mean().reset_index()
+>>
+>> ~~~
+>> (p9.ggplot(data=yearly_weight,
+>>            mapping=p9.aes(x='year',
+>>                           y='weight'))
+>>     + p9.geom_line()
+>>     + p9.facet_wrap("species_id")
+>> )
+>> ~~~
+>> {: .language-python}
 > {: .solution}
 {: .challenge}
 
@@ -486,17 +486,17 @@ survey_2000 = surveys_complete[surveys_complete["year"].isin([2000, 2001])]
 > females has changed through time by creating a separate plot for each sex and
 > an individual color assigned to each `species_id`.
 >
-> > ## Answers
-> > yearly_weight = surveys_complete.groupby(['year', 'species_id', 'sex'])['weight'].mean().reset_index()
-> >
-> > (p9.ggplot(data=yearly_weight,
-> >            mapping=p9.aes(x='year',
-> >                           y='weight',
-> >                           color='species_id'))
-> >     + p9.geom_line()
-> >     + p9.facet_wrap("sex")
-> > )
-> > {: .language-python}
+>> ## Answers
+>> yearly_weight = surveys_complete.groupby(['year', 'species_id', 'sex'])['weight'].mean().reset_index()
+>>
+>> (p9.ggplot(data=yearly_weight,
+>>            mapping=p9.aes(x='year',
+>>                           y='weight',
+>>                           color='species_id'))
+>>     + p9.geom_line()
+>>     + p9.facet_wrap("sex")
+>> )
+>> {: .language-python}
 > {: .solution}
 {: .challenge}
 

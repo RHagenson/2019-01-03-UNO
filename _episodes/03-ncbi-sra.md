@@ -61,7 +61,7 @@ Using your choice of spreadsheet program open the **SraRunTable.txt** file. If p
 > 1. What strain of *E. coli* was used in this experiment?
 > 2. What was the sequencing platform used for this experiment?
 > 3. What samples in the experiment contain
-> [paired end](http://www.illumina.com/technology/next-generation-sequencing/paired-end-sequencing_assay.html)
+> [paired-end](http://www.illumina.com/technology/next-generation-sequencing/paired-end-sequencing_assay.html)
 > sequencing data?
 > 4. What other kind of data is available?
 > 5. Are you collecting this kind of information about your sequencing runs?

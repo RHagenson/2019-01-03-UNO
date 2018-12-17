@@ -309,7 +309,7 @@ or
 >
 >    Type:
 > ```python
-> >>> rev
+>>>> rev
 > ```
 >
 > 2. Try to reassign the second value (in the *key value pair*) so that it no longer reads "two" but instead reads "apple-sauce".
