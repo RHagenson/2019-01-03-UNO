@@ -15,11 +15,11 @@ keypoints:
 
 ## Cleaning Reads
 
-In the [previous lesson]({% link _episodes/10-quality-control.md %}),
-we took a high-level look at the quality
-of each of our samples using FastQC. We visualized per-base quality
-graphs showing the distribution of read quality at each base across
-all reads in a sample and extracted information about which samples
+In the
+[previous lesson]({% link _episodes/10-quality-control.md %}),
+we took a high-level look at the quality of each of our samples using FastQC. We
+visualized per-base quality graphs showing the distribution of read quality at each
+base across all reads in a sample and extracted information about which samples
 fail which quality checks. We know that all of our samples failed at
 least one of the quality metrics used by FastQC. This doesn't mean,
 though, that our samples should be thrown out! It's very common to
@@ -27,8 +27,8 @@ have some reads within a sample, or some positions
 (especially near the beginning or end of reads) across all
 reads that are low
 quality and should be discarded. We will use a program called
-[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) to
-filter poor quality reads and trim poor quality bases from our samples.
+[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+to filter poor quality reads and trim poor quality bases from our samples.
 
 ### Trimmomatic Options
 
@@ -39,7 +39,8 @@ $ module load trimmomatic
 ~~~
 {: .bash}
 
-On Crane, we start Trimmomatic by calling `java` along with the path to the program (which is made active by loading the module).with a shortcut that is available when
+On Crane, we start Trimmomatic by calling `java` along with the path to the program
+(which is made active by loading the module).with a shortcut that is available when
 you load the `trimmomatic` module: `runtrimmomatic`. To run Trimmomatic use,
 `java -jar $TM_HOME/trimmomatic.jar` and to alleviate typing that each time
 let's create an
@@ -47,9 +48,8 @@ let's create an
 for it by running:
 `alias runtrimmomatic="java -jar $TM_HOME/trimmomatic.jar"`
 
-You can type `alias runtrimmomatic` to see
-what the alias does and you can type `module help trimmomatic` for more details
-on the tool.
+You can type `alias runtrimmomatic` to see what the alias does and you can type
+`module help trimmomatic` for more details on the tool.
 
 ~~~
 $ runtrimmomatic
@@ -78,8 +78,7 @@ to use for our analysis. Here are some of the options:
 |  `SE` or `PE`   | Specify whether your reads are single or paired-end. |
 |  `-phred33` or `-phred64` | Specify the encoding system for your quality scores. |
 
-In addition to these options, there are various trimming steps
-available:
+In addition to these options, there are various trimming steps available:
 
 | step   | meaning |
 | ------- | ---------- |
@@ -92,10 +91,10 @@ available:
 |  `TOPHRED33` | Convert quality scores to Phred-33.  |
 |  `TOPHRED64` |  Convert quality scores to Phred-64. |
 
-We will use only a few of these options and trimming steps in our
-analysis. It is important to understand the steps you are using to
-clean your data. For more information about the Trimmomatic arguments
-and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
+We will use only a few of these options and trimming steps in our analysis. It is
+important to understand the steps you are using to clean your data. For more
+information about the Trimmomatic arguments and options, see
+[the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
 > ## Software Versions
 >
@@ -157,7 +156,8 @@ In this example, we've told Trimmomatic:
 
 ### Running Trimmomatic
 
-Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq` data directory:
+Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq`
+data directory:
 
 ~~~
 $ cd /work/group/username/dc_workshop/data/untrimmed_fastq
@@ -202,9 +202,9 @@ TrimmomaticSE: Completed successfully
 > {: .solution}
 {: .challenge}
 
-You may have noticed that Trimmomatic automatically detected the
-quality encoding of our sample. It is always a good idea to
-double-check this or to enter the quality encoding manually (`-phred33`/`-phred64`).
+You may have noticed that Trimmomatic automatically detected the quality encoding of
+our sample. It is always a good idea to double-check this or to enter the quality
+encoding manually (`-phred33`/`-phred64`).
 
 We can confirm that we have our output file:
 
@@ -218,8 +218,8 @@ SRR098283.fastq  SRR098283.fastq_trim.fastq
 ~~~
 {: .output}
 
-The output file is also a FASTQ file. It should be smaller than our
-input file because we've removed reads. We can confirm this:
+The output file is also a FASTQ file. It should be smaller than our input file because
+we've removed reads. We can confirm this:
 
 ~~~
 $ ls SRR098283* -l -h
@@ -254,19 +254,18 @@ The new part in our `for` loop is the line:
 ~~~
 {: .bash}
 
-`infile` is the first variable in our loop and takes the value
-of each of the FASTQ files in our directory. `outfile` is the
-second variable in our loop and is defined by adding `_trim.fastq` to
-the end of our input file name. Use `{}` to wrap the variable so that `_trim.fastq`
-will not be interpreted as part of the variable name. In addition, quoting the shell
-variables is a good practice AND necessary if your variables have spaces in them. For
-more, check
+`infile` is the first variable in our loop and takes the value of each of the FASTQ
+files in our directory. `outfile` is the second variable in our loop and is defined by
+adding `_trim.fastq` to the end of our input file name. Use `{}` to wrap the variable
+so that `_trim.fastq` will not be interpreted as part of the variable name. In
+addition, quoting the shell variables is a good practice AND necessary if your
+variables have spaces in them. For more, check
 [Bash Pitfalls](http://mywiki.wooledge.org/BashPitfalls).
 There are no spaces before or after the `=`.
 
-Go ahead and run the for loop. It should take a few minutes for
-Trimmomatic to run for each of our six input files. Once it's done
-running, take a look at your directory contents.
+Go ahead and run the for loop. It should take a few minutes for Trimmomatic to run for
+each of our six input files. Once it's done running, take a look at your directory
+contents.
 
 ~~~
 $ ls
@@ -284,12 +283,14 @@ SRR098281.fastq_trim.fastq
 ~~~
 {: .output}
 
-If you look very closely, you'll see that you have three files for the
-`SRR098283` sample. This is because we already had the `SRR098283.fastq_trim.fastq` file in our directory when we started
-our `for` loop (because we had run Trimmomatic on just that one file already).
-Our `for` loop included this file in our list of `.fastq` files and
-created a new output file named `SRR098283.fastq_trim.fastq_trim.fastq`, which is the result of
-running Trimmomatic on our already trimmed file. `SRR098283.fastq_trim.fastq` and `SRR098283.fastq_trim.fastq_trim.fastq` should be identical. If you look at your Trimmomatic output in the terminal window, you will see:
+If you look very closely, you'll see that you have three files for the `SRR098283`
+sample. This is because we already had the `SRR098283.fastq_trim.fastq` file in our
+directory when we started our `for` loop (because we had run Trimmomatic on just that
+one file already). Our `for` loop included this file in our list of `.fastq` files and
+created a new output file named `SRR098283.fastq_trim.fastq_trim.fastq`, which is the
+result of running Trimmomatic on our already trimmed file.
+`SRR098283.fastq_trim.fastq` and `SRR098283.fastq_trim.fastq_trim.fastq` should be
+identical. If you look at your Trimmomatic output in the terminal window, you will see:
 
 ~~~
 TrimmomaticSE: Started with arguments: -threads 1 SRR098283.fastq_trim.fastq SRR098283.fastq_trim.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
@@ -323,6 +324,7 @@ dropped. This is a good thing!
 > this sample? What does its quality look like?
 >
 >> ## Solution
+>>
 >> ~~~
 >> $ head -n4 SRR098026.fastq_trim.fastq
 >> ~~~
