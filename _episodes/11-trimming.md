@@ -94,7 +94,7 @@ In addition to these options, there are various trimming steps available:
 We will use only a few of these options and trimming steps in our analysis. It is
 important to understand the steps you are using to clean your data. For more
 information about the Trimmomatic arguments and options, see
-[the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
+the [Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
 > ## Software Versions
 >
