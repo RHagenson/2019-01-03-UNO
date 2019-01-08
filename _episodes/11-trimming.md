@@ -101,7 +101,8 @@ the [Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trim
 > One of the biggest causes for irreproducibility in Bioinformatics
 > is forgetting/neglecting to document the version of a program used.
 > In this case, we are using Trimmomatic v0.33. Be sure to note what version
-> of a tool you are using and do not use multiple versions of a tool in one project.
+> of a tool you are using and do not use multiple versions of a tool in
+> one project if possible.
 >
 > Keen observers will see that the Trimmomatic manual linked above is for
 > Trimmomatic v0.32; this is the latest manual and should apply to all
