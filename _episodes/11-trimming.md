@@ -40,16 +40,16 @@ $ module load trimmomatic
 {: .bash}
 
 On Crane, we start Trimmomatic by calling `java` along with the path to the program
-(which is made active by loading the module).with a shortcut that is available when
-you load the `trimmomatic` module: `runtrimmomatic`. To run Trimmomatic use,
-`java -jar $TM_HOME/trimmomatic.jar` and to alleviate typing that each time
+(which is made active by loading the module). To run Trimmomatic we would use,
+`java -jar $TM_HOME/trimmomatic.jar` however, to alleviate typing that each time,
 let's create an
 [alias](https://en.wikipedia.org/wiki/Alias_(command))
 for it by running:
 `alias runtrimmomatic="java -jar $TM_HOME/trimmomatic.jar"`
+(Note that there should be no spaces around the equal sign.)
 
 You can type `alias runtrimmomatic` to see what the alias does and you can type
-`module help trimmomatic` for more details on the tool.
+`module help trimmomatic` for more details on the tool itself.
 
 ~~~
 $ runtrimmomatic
@@ -58,7 +58,7 @@ $ runtrimmomatic
 
 Note: `runtrimmomatic` is a command you'll only see if you create the alias
 (aliases are convenient, but be sure to add the alias to your project docs).
-On other systems, Trimmomatic is called with `java -jar trimmomatic-0.33.jar`.
+On other systems, Trimmomatic is called with `java -jar $TM_HOME/trimmomatic.jar`.
 Trimmomatic is a program written in the Java programming language.
 You don't need to learn Java to use Trimmomatic (FastQC is also
 written in Java), but the fact that it's a Java program helps
