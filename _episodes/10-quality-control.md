@@ -290,7 +290,7 @@ $ cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 > {: .solution}
 {: .challenge}
 
-To run the FastQC program, we need to load the fastqc module (`fastqc/0.10`). FastQC
+To run the FastQC program, we need to load the fastqc module (`fastqc`). FastQC
 can accept multiple file names as input, so we can use the *.fastq wildcard to run
 FastQC on all of the FASTQ files in this directory.
 
