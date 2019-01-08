@@ -426,7 +426,7 @@ $ mkdir ~/Desktop/fastqc_html
 {: .bash}
 
 ~~~
-$ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*/ ~/Desktop/fastqc_html/
+$ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*.zip ~/Desktop/fastqc_html/
 ~~~
 {: .bash}
 
@@ -445,10 +445,10 @@ $ mkdir %HOMEPATH%\Desktop\fastqc_html
 
 (`%HOMEPATH%` is roughly the same as `~` in Unix based systems.)
 
-Now we can transfer our HTML files to our local computer using `pscp`.
+Now we can transfer our HTML files to our local computer using `pscp`. (Note that Linux systems use the forward slash, `/`, for directories while Windows uses the back slash, `\`, check that you are using the right ones in the command below.)
 
 ~~~
-> pscp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*/ %HOMEPATH%\Desktop\fastqc_html\
+> pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*.zip %HOMEPATH%\Desktop\fastqc_html\
 ~~~
 {: .bash}
 
@@ -460,8 +460,8 @@ Make sure you replace `username` with your actual username.
 
 The second part starts with a `:` and then gives the absolute path
 of the files you want to transfer from your remote computer. Don't
-forget the `:`. We used a wildcard (`/*/`) to indicate that we want all of
-the directories recursively (`-r`).
+forget the `:`. We used a wildcard (`*.zip`) to indicate that we want all of
+the zip files.
 
 The third part of the command gives the absolute path of the location
 you want to put the files. This is on your local computer and is the
@@ -470,32 +470,28 @@ directory we just created `~/Desktop/fastqc_html/`.
 You should see a status output like this:
 
 ~~~
-per_base_quality.png        100%   9949     9.7KB/s   00:00
-kmer_profiles.png           100%   20KB    20.4KB/s   00:00
-per_sequence_quality.png    100%   19KB    19.4KB/s   00:00
-per_base_gc_content.png     100%   10KB    10.4KB/s   00:00
-per_base_n_content.png      100%   8426     8.2KB/s   00:00  
-.
-.
-.
-warning.png                 100%   1450     1.4KB/s   00:00
-fastqc_icon.png             100%   1197     1.2KB/s   00:00
-error.png                   100%   1561     1.5KB/s   00:00
-fastqc_data.txt             100%   9990     9.8KB/s   00:00
+SRR097977_fastqc.zip    100%  130KB 130.1KB/s   00:00
+SRR098026_fastqc.zip    100%  183KB 182.8KB/s   00:00
+SRR098027_fastqc.zip    100%  129KB 129.0KB/s   00:00
+SRR098028_fastqc.zip    100%  192KB 191.7KB/s   00:00
+SRR098281_fastqc.zip    100%  195KB 195.0KB/s   00:00
+SRR098283_fastqc.zip    100%  192KB 192.0KB/s   00:00
 ~~~
 {: .output}
 
-Now we can go to our new directory and open the HTML files.
+Navigate to this `fastqc_html/` directory in your usual file explorer and
+unzip the files as you usually would. We will learn how to programmatically
+unzip this files in just a little bit.
 
-On Mac and Linux systems:
+Viewing on Mac and Linux systems:
 
 ~~~
 $ cd ~/Desktop/fastqc_html/
-$ open *.html
+$ open */*.html
 ~~~
 {: .bash}
 
-On Windows:
+Viewing on Windows:
 
 ~~~
 > cd %HOMEPATH%\Desktop\fastqc_html
