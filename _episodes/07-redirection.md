@@ -27,6 +27,17 @@ using something called regular expressions). We're not going to work with regula
 expressions in this lesson, and are instead going to specify the strings we are
 searching for. Let's give it a try!
 
+> ## The `grep` name
+>
+> `grep` is one of the most nonintuitive standard Linux commands due to its name.
+> If it helps you recall the name of the command, `grep` is actually an acronym that
+> stands for **g**lobal **r**egular **e**xpression and **p**rint.
+>
+> Global meaning search the whole file, regular expression meaning a pattern, and
+> print meaning show me the matches.
+>
+{: .callout}
+
 > ## Nucleotide abbreviations
 >
 > The four nucleotides that appear in DNA are abbreviated `A`, `C`, `T` and `G`.
