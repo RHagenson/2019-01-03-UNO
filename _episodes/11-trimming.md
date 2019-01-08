@@ -395,7 +395,7 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >>
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/data/trimmed_fastq/*/ ~/Desktop/fastqc_html/trimmed/
+>> $ scp username@crane.unl.edu:/work/group/username/dc_workshop/data/trimmed_fastq/*.zip ~/Desktop/fastqc_html/trimmed/
 >> $ open ~/Desktop/fastqc_html/trimmed/*/*.html
 >> ~~~
 >> {: .bash}
