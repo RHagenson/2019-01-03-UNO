@@ -140,8 +140,7 @@ $ runtrimmomatic SE \
 ~~~
 {: .bash}
 
-*On Crane it's essential to specify `-threads` or Trimmomatic will use more
-than threads on the compute node than you requested.*
+*On Crane it's essential to specify `-threads` or Trimmomatic will use more threads on the compute node than you requested.*
 
 In this example, we've told Trimmomatic:
 
