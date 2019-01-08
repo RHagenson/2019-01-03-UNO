@@ -333,7 +333,7 @@ Analysis complete for SRR098283.fastq
 {: .output}
 
 The FastQC program has created several new files within our
-`/data/untrimmed_fastq/` directory.
+`data/untrimmed_fastq/` directory.
 
 ~~~
 $ ls
