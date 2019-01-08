@@ -5,12 +5,12 @@ exercises: 25
 questions:
 - "How can I get rid of sequence data that doesn't meet my quality standards?"
 objectives:
-- "Clean FASTQ reads using Trimmommatic."
-- "Select and set multiple options for command line bioinformatics tools."
-- "Write `for` loops with two variables."
+- "Clean FASTQ reads using Trimmommatic"
+- "Select and set multiple options for command line bioinformatics tools"
+- "Write `for` loops with two variables"
 keypoints:
 - "The options you set for the command line tools you use are important!"
-- "Data cleaning is an essential step in a genomics workflow."
+- "Data cleaning is an essential step in a genomics workflow"
 ---
 
 ## Cleaning Reads

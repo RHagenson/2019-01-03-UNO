@@ -5,13 +5,13 @@ exercises: 25
 questions:
 - "How do I find sequence variants between my samples and a reference genome?"
 objectives:
-- "Describe the steps involved in variant calling."
-- "Describe the types of data formats encountered during variant calling."
-- "Use command line tools to perform variant calling."
+- "Describe the steps involved in variant calling"
+- "Describe the types of data formats encountered during variant calling"
+- "Use command line tools to perform variant calling"
 keypoints:
-- "Bioinformatics command line tools are collections of commands that can be used to carry out bioinformatics analyses."
-- "To use the most powerful bioinformatics tools, you'll need to use the command line."
-- "There are many different file formats for storing genomics data. It's important to understand these file formats and know how to convert between them."
+- "Bioinformatics command line tools are collections of commands that can be used to carry out bioinformatics analyses"
+- "To use the most powerful bioinformatics tools, you'll need to use the command line"
+- "There are many different file formats for storing genomics data. It's important to understand these file formats and know how to convert between them"
 ---
 
 ## Alignment to a Reference Genome

@@ -5,11 +5,11 @@ exercises: 15
 questions:
 - "How can I make my workflow more efficient and less error-prone?"
 objectives:
-- "Write a shell script with multiple variables."
-- "Incorporate a `for` loop into a shell script."
+- "Write a shell script with multiple variables"
+- "Incorporate a `for` loop into a shell script"
 keypoints:
-- "We can combine multiple commands into a shell script to automate a workflow."
-- "Use `echo` statements within your scripts to get an automated progress update."
+- "We can combine multiple commands into a shell script to automate a workflow"
+- "Use `echo` statements within your scripts to get an automated progress update"
 ---
 
 ## What is a Shell Script?
