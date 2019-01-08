@@ -437,7 +437,6 @@ workflow. Remember to delete the `done` line from your script before adding thes
 lines.
 
 ~~~
-    fq=/work/group/username/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
     results=/work/group/username/dc_workshop/results/
     sai=${results}/sai/${base}_aligned.sai
     sam=${results}/sam/${base}_aligned.sam
@@ -535,7 +534,6 @@ for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
     base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
 
-    fq=/work/group/username/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
     results=/work/group/username/dc_workshop/results/
     sai=${results}/sai/${base}_aligned.sai
     sam=${results}/sam/${base}_aligned.sam
