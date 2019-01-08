@@ -655,6 +655,20 @@ loci. Use
 [this website](http://software.broadinstitute.org/software/igv/AlignmentData)
 and the links therein to understand how IGV colors the alignments.
 
+> ## Exercise
+>
+> Try looking at the two closest variants found in SRR097977 at positions 2039200 and
+> 2039206?
+> These two variants are low quality, both with a score of 7.24351.
+>
+>> ## Solution
+>>
+>> Zoom into the proper range by setting the view manually via the search bar found
+>> next to the genome and query sequence selection dropdowns.
+>>
+> {: .solution}
+{: .challenge}
+
 Now that we've run through our workflow for a single sample, we want to repeat this
 workflow for our other five samples. However, we don't want to type each of these
 individual steps again five more times. That would be very time consuming and
