@@ -6,15 +6,15 @@ questions:
 - "How can I search within files?"
 - "How can I combine existing commands to do new things?"
 objectives:
-- "Employ the `grep` command to search for information within files."
-- "Print the results of a command to a file."
-- "Construct command pipelines with two or more stages."
+- "Employ the `grep` command to search for information within files"
+- "Print the results of a command to a file"
+- "Construct command pipelines with two or more stages"
 keypoints:
-- "`grep` is a powerful search tool with many options for customization."
-- "`>`, `>>`, and `|` are different ways of redirecting output."
-- "`command > file` redirects a command's output to a file."
-- "`command >> file` redirects a command's output to a file without overwriting the existing contents of the file."
-- "`command_1 | command_2` redirects the output of the first command as input to the second command."
+- "`grep` is a powerful search tool with many options for customization"
+- "`>`, `>>`, and `|` are different ways of redirecting output"
+- "`command > file` redirects a command's output to a file"
+- "`command >> file` redirects a command's output to a file without overwriting the existing contents of the file"
+- "`command_1 | command_2` redirects the output of the first command as input to the second command"
 ---
 
 ## Searching Files
