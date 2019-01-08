@@ -488,7 +488,8 @@ between us and deleting our data files.
 > ## `rm` Deletes Completely
 >
 > The `rm` file permanently removes the file. Be careful with this command.
-> It doesn't just nicely put the files in the Trash. They're really gone.
+> It doesn't just nicely put the files in the Trash/Recycle Bin. They're really gone.
+>
 {: .callout}
 
 By default, `rm`, will not delete directories. You can tell `rm` to delete a directory
