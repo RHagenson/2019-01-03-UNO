@@ -229,13 +229,13 @@ $ less SRR097977.fastq
 
 Some navigation commands in `less`
 
-| key     | action |
-| ------- | ---------- |
-| <kbd>Space</kbd> | to go forward |
-|  <kbd>b</kbd>    | to go backward |
-|  <kbd>g</kbd>    | to go to the beginning |
-|  <kbd>G</kbd>    | to go to the end |
-|  <kbd>q</kbd>    | to quit |
+| Key              | Action                 |
+| ---------------- | ---------------------- |
+| <kbd>Space</kbd> | to go forward          |
+| <kbd>b</kbd>     | to go backward         |
+| <kbd>g</kbd>     | to go to the beginning |
+| <kbd>G</kbd>     | to go to the end       |
+| <kbd>q</kbd>     | to quit                |
 
 `less` also gives you a way of searching through files. Use the <kbd>/</kbd> key to
 begin a search. Enter the word you would like to search for and press
