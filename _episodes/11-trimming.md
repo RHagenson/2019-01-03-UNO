@@ -72,24 +72,24 @@ That's just the basic command, however. Trimmomatic has a variety of
 options and parameters. We will need to specify what options we want
 to use for our analysis. Here are some of the options:
 
-| option    | meaning |
-| ------- | ---------- |
-| `-threads` | Specify the number of processors you want Trimmomatic to use. |
-|  `SE` or `PE`   | Specify whether your reads are single or paired-end. |
-|  `-phred33` or `-phred64` | Specify the encoding system for your quality scores. |
+| Option                | Meaning                                              |
+| --------------------- | ---------------------------------------------------- |
+| `-threads`            | The number of processors you want Trimmomatic to use |
+| `SE`/`PE`             | Whether your reads are single or paired-end          |
+| `-phred33`/`-phred64` | The encoding system for your quality scores          |
 
 In addition to these options, there are various trimming steps available:
 
-| step   | meaning |
-| ------- | ---------- |
-| `SLIDINGWINDOW` | Perform sliding window trimming, cutting once the average quality within the window falls below a threshold. |
-| `LEADING`  | Cut bases off the start of a read, if below a threshold quality.  |
-|  `TRAILING` |  Cut bases off the end of a read, if below a threshold quality. |
-| `CROP`  |  Cut the read to a specified length. |
-|  `HEADCROP` |  Cut the specified number of bases from the start of the read. |
-| `MINLEN`  |  Drop an entire read if it is below a specified length. |
-|  `TOPHRED33` | Convert quality scores to Phred-33.  |
-|  `TOPHRED64` |  Convert quality scores to Phred-64. |
+| Step            | Meaning    |
+| --------------- | ---------- |
+| `SLIDINGWINDOW` | Perform sliding window trimming, cutting once the average quality within the window falls below a threshold |
+| `LEADING`       | Cut bases off the start of a read, if below a threshold quality |
+| `TRAILING`      |  Cut bases off the end of a read, if below a threshold quality |
+| `CROP`          |  Cut the read to a specified length |
+| `HEADCROP`      |  Cut the specified number of bases from the start of the read |
+| `MINLEN`        |  Drop an entire read if it is below a specified length |
+| `TOPHRED33`     | Convert quality scores to Phred-33 |
+| `TOPHRED64`     |  Convert quality scores to Phred-64 |
 
 We will use only a few of these options and trimming steps in our analysis. It is
 important to understand the steps you are using to clean your data. For more
