@@ -31,9 +31,9 @@ That script was only two lines long, but shell scripts can be much more complica
 than that and can be used to perform a large number of operations on one or many
 files. This saves you the effort of having to type each of those commands over for
 each of your data files and makes your work less error-prone and more reproducible.
-For example, the variant calling workflow we just carried out had about eight steps
+For example, the variant calling workflow we just carried out had about 8 steps
 where we had to type a command into our terminal. Most of these commands were pretty
-long. If we wanted to do this for all six of our data files, that would be forty-eight
+long. If we wanted to do this for all 6 of our data files, that would be 48
 steps. If we had 50 samples (a more realistic number), it would be 400 steps! You can
 see why we want to automate this.
 
