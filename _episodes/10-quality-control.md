@@ -525,19 +525,19 @@ tabs in a single window or six separate browser windows.
 Now that we've looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
 in your terminal program that is connected to Crane and make sure you're in
-our results subdirectory.
+our `results/` subdirectory.
 
 ~~~
 $ cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
-$ ls
+$ ls -F
 ~~~
 {: .bash}
 
 ~~~
-SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
-SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
-SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
-SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
+SRR097977_fastqc/     SRR098026_fastqc.zip  SRR098028_fastqc/
+SRR098281_fastqc.zip  SRR097977_fastqc.zip  SRR098027_fastqc/
+SRR098028_fastqc.zip  SRR098283_fastqc/     SRR098026_fastqc/
+SRR098027_fastqc.zip  SRR098281_fastqc/     SRR098283_fastqc.zip
 ~~~
 {: .output}
 
