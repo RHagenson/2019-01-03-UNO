@@ -5,12 +5,12 @@ exercises: 20
 questions:
 - How can we automate a commonly used set of commands?
 objectives:
-- Use the `nano` text editor to modify text files.
-- Write a basic shell script.
-- Use the `bash` command to execute a shell script.
-- Use `chmod` to make a script an executable program.
+- Use the `nano` text editor to modify text files
+- Write a basic shell script
+- Use the `bash` command to execute a shell script
+- Use `chmod` to make a script an executable program
 keypoints:
-- Scripts are a collection of commands executed together.
+- Scripts are a collection of commands executed together
 ---
 
 ## Writing Files
