@@ -122,6 +122,26 @@ dc_workshop/results:
 ~~~
 {: .output}
 
+## Let's Start a Large File Transfer for Tomorrow
+
+Tomorrow we will be working with a set of sample data that is located in directory
+(`/common/demo/dc/.dc_sampledata_lite`). We will need to copy some of these files to the
+`data` directory you just created and for that we are going to use a new command, `nohup`
+
+~~~
+$ nohup cp -r \
+    /common/demo/dc/.dc_sampledata_lite/untrimmed_fastq \
+    /work/group/username/dc_workshop/data/ \
+    > /work/group/username/dc_workshop/transfer.txt 2>&1 &
+~~~
+{: .bash}
+
+What `nohup` does is allow you to run a command in the background and not
+have the command stop when you logoff the cluster at the end of today.
+The `> /work/group/username/dc_workshop/transfer.txt 2>&1 &` means that
+all output (even errors) of `cp` will be written to `transfer.txt`.
+
+
 ## Organizing your files
 
 Before beginning any analysis, it's important to save a copy of your
