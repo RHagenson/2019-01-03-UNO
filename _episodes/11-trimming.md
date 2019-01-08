@@ -142,17 +142,17 @@ $ runtrimmomatic SE \
 
 *On Crane it's essential to specify `-threads` or Trimmomatic will use more threads on the compute node than you requested.*
 
-In this example, we've told Trimmomatic:
+In the above example, we've told Trimmomatic:
 
-| code   | meaning |
-| ------- | ---------- |
-| `SE` | that it will be taking a single end file as input |
-| `-threads 4` | to use four computing threads to run (this will speed up our run) |
-| `-phred64` | that the input file uses phred-64 encoding for quality scores |
-| `SRR_1056.fastq` | the input file name |
-|  `SRR_1056_trimmed.fastq` | the output file to create |
-| `ILLUMINACLIP:SRR_adapters.fa`| to clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
-|`SLIDINGWINDOW:4:20` | to use a sliding window of size 4 that will remove bases if their phred score is below 20 |
+| Code             | Meaning                   |
+| ---------------- | ------------------------- |
+| `SE`             | Single end file as input  |
+| `-threads 4`     | Use four computing threads to run (this will speed up our run) |
+| `-phred64`       | Input uses phred-64 encoding for quality scores |
+| `SRR_1056.fastq` | Input file name           |
+|  `SRR_1056_trimmed.fastq` | Output file name |
+| `ILLUMINACLIP:SRR_adapters.fa` | Clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
+|`SLIDINGWINDOW:4:20` | Use a sliding window of size 4 that will remove bases if their phred score is below 20 |
 
 ### Running Trimmomatic
 
