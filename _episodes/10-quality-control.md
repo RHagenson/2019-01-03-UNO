@@ -246,12 +246,12 @@ before we run each analysis.
 ### Running FastQC  
 
 We will be working with a set of sample data that is located in directory
-(`/common/demo/dc/dc_sampledata_lite`). First, we will move some of these files to the
+(`/common/demo/dc/.dc_sampledata_lite`). First, we will move some of these files to the
 `data` directory your created at the end of our
 [last lesson]({% link _episodes/09-organization.md %}).  
 
 ~~~
-$ cp -r /common/demo/dc/dc_sampledata_lite/untrimmed_fastq /work/group/username/dc_workshop/data/
+$ cp -r /common/demo/dc/.dc_sampledata_lite/untrimmed_fastq /work/group/username/dc_workshop/data/
 ~~~
 {: .bash}
 
