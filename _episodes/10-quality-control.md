@@ -210,12 +210,13 @@ We are going to start doing analyses on our data. So far we've been doing all ou
 on the Crane "login" nodes. It's fine to use the nodes for simple tasks like examining
 files with `less`, editing files with `nano`, moving files, but for analyses we need
 to have the work done on the "compute" nodes. For this workshop we will be using the
-interactive queue. With one command: `srun --pty $SHELL` you will start an interactive
-job and be logged into one of the compute nodes. The rest of oour work will continue
-on the compute note.
+interactive queue. With one command you will start an interactive
+job, be logged into one of the compute nodes, mount the `/common/` directory
+that we will need later on, and set a timeout of our sesson at 3 hours.
+The rest of our work will continue on the compute note.
 
 ~~~
-$ srun --pty $SHELL
+$ srun --pty --time=3:00:00 --license=common $SHELL
 ~~~
 {: .bash}
 
@@ -225,9 +226,7 @@ $ srun --pty $SHELL
 {: .output}
 
 You will notice that the command prompt will change to say that you are now on a
-compute node.
-
-When you start a new interactive session, you are returned to your home directory
+compute node (`@cNNN`).
 
 ~~~
 $ pwd
