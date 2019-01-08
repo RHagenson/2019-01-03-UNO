@@ -133,7 +133,7 @@ $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
 ~~~
 {: .bash}
 
-> ## File extensions
+> ## File extensions - part 1
 >
 > You might be confused about why we're naming our output file with a `.txt`
 > extension. After all, it will be holding FASTQ formatted data that we're extracting
