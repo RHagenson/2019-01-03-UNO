@@ -157,9 +157,9 @@ to unzip all of the `.zip` files in this directory.
 ~~~
 echo "Unzipping..."
 for filename in *.zip
-    do
+do
     unzip $filename
-    done
+done
 ~~~
 {: .output}
 
@@ -199,9 +199,9 @@ cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 
 echo "Unzipping..."
 for filename in *.zip
-    do
+do
     unzip $filename
-    done
+done
 
 echo "Saving summary..."
 cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
@@ -301,7 +301,7 @@ genome=/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 > Within the Bash shell you can create variables at any time (as we did
 > above, and during the 'for' loop lesson). Assign any name and the
 > value using the assignment operator: '='. You can check the current
-> definition of your variable by typing into your script: 
+> definition of your variable by typing into your script:
 > `echo $variable_name`
 {: .callout}
 
@@ -346,9 +346,9 @@ validation.
 
 ~~~
 for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
-    do
+do
     echo "working with file $fq"
-    done
+done
 ~~~
 {: .bash}
 
