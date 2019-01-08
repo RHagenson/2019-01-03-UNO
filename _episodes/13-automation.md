@@ -55,7 +55,7 @@ $ for filename in *.zip
 And here's the one you wrote for running Trimmomatic on all of our `.fastq` sample files.
 
 ~~~
-$ module load bioinformatics/trimmomatic
+$ module load trimmomatic
 $ for infile in *.fastq
 > do
 > outfile="${infile}"_trim.fastq
