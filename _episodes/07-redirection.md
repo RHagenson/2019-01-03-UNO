@@ -514,7 +514,7 @@ submitted for sequencing.
 > {: .solution}
 {: .challenge}
 
-### How many of each class of library layout are there?  
+### How many of each class of library layout are there?
 
 We can extract even more information from our metadata table if we add in some new
 tools: `sort` and `uniq`. The `sort` command will sort the lines of a text file and
