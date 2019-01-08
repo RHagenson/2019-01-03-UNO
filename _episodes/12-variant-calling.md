@@ -132,7 +132,6 @@ change of parameters.
 We're going to start by aligning the reads from just one of the samples in our dataset
 (`SRR097977.fastq`). Later, we'll be iterating this whole process on all of our sample
 files.
-**Note: below that `\` is being used to extend the command onto multiple lines for easier reading.**
 
 ~~~
 $ bwa aln \
