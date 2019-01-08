@@ -251,8 +251,9 @@ search backwards in the same way you used <kbd>/</kbd> previously.
 For instance, let's search forward for the sequence `TTTTT` in our file. You can see
 that we go right to that sequence, what it looks like, and where it is in the file. If
 you continue to type <kbd>/</kbd> and hit return, you will move forward to the next
-instance of this sequence motif. If you instead type <kbd>?</kbd> and hit return, you
-will search backwards and move up the file to previous examples of this motif.
+instance of this sequence motif. If you instead type <kbd>?</kbd> then
+<kbd>Enter</kbd>, you will search backwards and move up the file to
+previous examples of this motif.
 
 > ## Exercise
 >
