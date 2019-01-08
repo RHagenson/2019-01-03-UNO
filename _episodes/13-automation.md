@@ -337,6 +337,13 @@ The first thing we do is assign the name of the FASTQ file we're currently worki
 with to a variable called `fq` and tell the script to `echo` the filename back to us
 so we can check which file we're on.
 
+To start, let's use a smaller trimmed fastq dataset found in
+`/work/group/username/dc_workshop/data/trimmed_fastq_small/`.
+It is important to test workflows with a smaller dataset prior to running on the
+complete data. If an error is going to occur with the complete data, it will most
+likely also appear with the test dataset, but will give you the result faster for
+validation.
+
 ~~~
 for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
