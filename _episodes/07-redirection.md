@@ -345,12 +345,13 @@ reads and then counted the lines in the file to see how many reads matched our
 criteria. There's a way to do this, however, that doesn't require us to create these
 intermediate files -- the pipe command (`|`).
 
-This is probably not a key on your keyboard you use very much, so let's all take a
-minute to find that key. What `|` does is take the output that is scrolling by on the
-terminal and uses that output as input to another command. When our output was
-scrolling by, we might have wished we could slow it down and look at it, like we can
-with `less`. Well it turns out that we can! We can redirect our output from our `grep`
-call through the `less` command.
+This is probably not a key you use very much on your keyboard, so let's all take a
+minute to find that key (hint: look above <kbd>Enter</kbd>).
+What `|` does is take the output that is scrolling by on the terminal and uses
+that output as input to another command. When our output was scrolling by, we might
+have wished we could slow it down and look at it, like we can with `less`. Well it
+turns out that we can! We can redirect our output from our `grep` call through
+the `less` command.
 
 ~~~
 $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq | less
