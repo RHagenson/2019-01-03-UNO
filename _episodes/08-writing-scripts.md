@@ -130,7 +130,7 @@ type the code in by hand each time.
 Bad reads have a lot of Ns, so we're going to look for `NNNNNNNNNN` (10 Ns in a row)
 with `grep`. We want the whole FASTQ record, so we're also going to get the one line
 above the sequence and the two lines below. We also want to look in all the files that
-end with `.fastq`, so we're going to use the `*` wild card.
+end with `.fastq`, so we're going to use the `*` wildcard.
 
 ~~~
 $ grep -B1 -A2 NNNNNNNNNN *.fastq > scripted_bad_reads.txt
