@@ -411,7 +411,7 @@ The syntax for `scp` is the same, but now `my_file` and
 `new_location` are on separate computers, so we need to give an
 absolute path, including the name of our remote computer. First we
 will make a new directory on our computer to store the HTML files
-we're transferring. Let's put it on our desktop for now.
+we're transferring. Let's put it on our Desktop for now.
 
 Now we can transfer our HTML files to our local computer using `scp`.
 
