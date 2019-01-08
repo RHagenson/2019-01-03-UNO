@@ -389,8 +389,8 @@ We can now move our backup file to this directory. We can move files around usin
 command `mv`.
 
 ~~~
-$ mv SRR098026-copy.fastq backup
-$ ls backup
+$ mv SRR098026-copy.fastq backup/
+$ ls backup/
 ~~~
 {: .bash}
 
@@ -403,7 +403,7 @@ The `mv` command is also how you rename files. Let's rename this file to make it
 that this is a backup.
 
 ~~~
-$ cd backup
+$ cd backup/
 $ mv SRR098026-copy.fastq SRR098026-backup.fastq
 $ ls
 ~~~
