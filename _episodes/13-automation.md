@@ -168,7 +168,7 @@ status message to remind ourselves that this is what we're doing.
 
 ~~~
 echo "Saving summary..."
-cat */summary.txt >> /work/group/username/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
 ~~~
 {: .output}
 
