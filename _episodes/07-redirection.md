@@ -389,9 +389,10 @@ efficiently. Let's take a few minutes to practice.
 >> {: .output}
 >>
 >> Note here that "separated by any number of **known** nucleotides" is precise
->> wording that includes matching zero known nucleotides (zero is a number).
->> If "at least one **known** nucleotide" is desired, replace `*` with `+` to indicate
->> one or more matches.
+>> wording that includes matching zero known nucleotides
+>> (zero is a number, just not one we often consider).
+>> If "_at least one_ **known** nucleotide" is desired,
+>> replace `*` with `+` to indicate one or more matches.
 >> `grep -P "NNNNN[ATGC]+NNNNN" SRR098026.fastq | wc -l`
 > {: .solution}
 {: .challenge}
