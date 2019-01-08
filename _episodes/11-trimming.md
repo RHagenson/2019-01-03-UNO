@@ -358,7 +358,7 @@ to a new subdirectory within our `data/` directory. We can also remove
 our extra, double-trimmed file for the `SRR098283` sample.
 
 ~~~
-$ cd /pool/genoimcs/username/dc_workshop/data/untrimmed_fastq
+$ cd /work/group/username/dc_workshop/data/untrimmed_fastq
 $ mkdir ../trimmed_fastq
 $ rm SRR098283.fastq_trim.fastq_trim.fastq
 $ mv *_trim* ../trimmed_fastq
