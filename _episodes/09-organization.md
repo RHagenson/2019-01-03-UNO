@@ -75,7 +75,7 @@ You should see the output:
 ~~~
 {: .output}
 
-> ## Direct Work Return  
+> ## Direct HCC Work Return  
 > If you aren't in your work directory, the easiest way to get there is to enter the
 > command `cd $WORK`, which always returns you to work.  
 {: .callout}
