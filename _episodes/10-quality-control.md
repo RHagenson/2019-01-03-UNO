@@ -315,6 +315,7 @@ Approx 35% complete for SRR097977.fastq
 Approx 40% complete for SRR097977.fastq
 Approx 45% complete for SRR097977.fastq
 Approx 50% complete for SRR097977.fastq
+...
 ~~~
 {: .output}
 
