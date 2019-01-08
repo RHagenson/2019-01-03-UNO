@@ -135,9 +135,9 @@ files.
 
 ~~~
 $ bwa aln \
-        data/ref_genome/ecoli_rel606.fasta \
-        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
-        > results/sai/SRR097977.aligned.sai
+    data/ref_genome/ecoli_rel606.fasta \
+    data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
+    > results/sai/SRR097977.aligned.sai
 ~~~
 {: .bash}
 
@@ -227,9 +227,9 @@ The code in our case will look like:
 
 ~~~
 $ bwa samse data/ref_genome/ecoli_rel606.fasta \
-        results/sai/SRR097977.aligned.sai \
-        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
-        > results/sam/SRR097977.aligned.sam
+    results/sai/SRR097977.aligned.sai \
+    data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
+    > results/sam/SRR097977.aligned.sam
 ~~~
 {: .bash}
 
@@ -295,9 +295,9 @@ Do the first pass on variant calling by counting read coverage with samtools
 
 ~~~
 $ samtools mpileup -g \
-        -f data/ref_genome/ecoli_rel606.fasta \
-        results/bam/SRR097977.aligned.sorted.bam \
-        > results/bcf/SRR097977_raw.bcf
+    -f data/ref_genome/ecoli_rel606.fasta \
+    results/bam/SRR097977.aligned.sorted.bam \
+    > results/bcf/SRR097977_raw.bcf
 ~~~
 {: .bash}
 
@@ -318,9 +318,9 @@ Identify SNPs using bcftools:
 ~~~
 $ module load bcftools
 $ bcftools call -vm \
-        -O b \
-        results/bcf/SRR097977_raw.bcf \
-        > results/bcf/SRR097977_variants.bcf
+    -O b \
+    results/bcf/SRR097977_raw.bcf \
+    > results/bcf/SRR097977_variants.bcf
 ~~~
 {: .bash}
 
@@ -330,9 +330,9 @@ Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
 $ bcftools view \
-        results/bcf/SRR097977_variants.bcf \
-        | vcfutils.pl varFilter - \
-        > results/vcf/SRR097977_final_variants.vcf
+    results/bcf/SRR097977_variants.bcf \
+    | vcfutils.pl varFilter - \
+    > results/vcf/SRR097977_final_variants.vcf
 ~~~
 {: .bash}
 
@@ -503,8 +503,8 @@ and the reference file:
 
 ~~~
 $ samtools tview \
-        results/bam/SRR097977.aligned.sorted.bam \
-        data/ref_genome/ecoli_rel606.fasta
+    results/bam/SRR097977.aligned.sorted.bam \
+    data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
@@ -546,7 +546,7 @@ our choice of reference.
 Below the horizontal line, we can see all of the reads in our sample aligned with the
 reference genome. Only positions where the called base differs from the reference are
 shown. You can use the arrow keys on your keyboard to scroll or type `?` for a help
-menu. Type `Ctrl^C` to exit `tview`. 
+menu. Type `Ctrl^C` to exit `tview`.
 
 ### Viewing with IGV
 
@@ -606,11 +606,11 @@ On Linux/Mac systems:
 
 ~~~
 $ scp username@crane.unl.edu:'\
-/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
-/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
     /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \
     /work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
-~/Desktop/files_for_igv/
+    ~/Desktop/files_for_igv/
 ~~~
 {: .bash}
 
