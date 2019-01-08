@@ -400,15 +400,15 @@ output.
 
 The first few columns represent the information we have about a predicted variation.
 
-| column | info |
-| ------- | ---------- |
-| CHROM | contig location where the variation occurs |
-| POS | position within the contig where the variation occurs |
-| ID | a `.` until we add annotation information |
-| REF | reference genotype (forward strand) |
-| ALT | sample genotype (forward strand) |
-| QUAL | Phred-scaled probablity that the observed variant exists at this site (higher is better) |
-| FILTER | a `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed |
+| Column | Info                                                  |
+| ------ | ----------------------------------------------------- |
+| CHROM  | Contig location where the variation occurs            |
+| POS    | Position within the contig where the variation occurs |
+| ID     | A `.` until we add annotation information             |
+| REF    | Reference genotype (forward strand)                   |
+| ALT    | Sample genotype (forward strand)                      |
+| QUAL   | Phred-scaled probability that the observed variant exists at this site (higher is better) |
+| FILTER | A `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed |
 
 In an ideal world, the information in the `QUAL` column would be all we needed to
 filter out bad variant calls. However, in reality we need to filter on multiple other
@@ -416,20 +416,20 @@ metrics.
 
 The last two columns contain the genotypes and can be tricky to decode.
 
-| column | info |
-| ------- | ---------- |
-| FORMAT | lists in order the metrics presented in the final column |
-| results | lists the values associated with those metrics in order |
+| Column  | Info                                                     |
+| ------- | -------------------------------------------------------- |
+| FORMAT  | Lists in order the metrics presented in the final column |
+| results | Lists the values associated with those metrics in order  |
 
 For our file, the metrics presented are `DP:VDB:SGB:MQSB:MQOF:AC:AN:DP4:MQ:GT:PL`.
 
-| metric | definition |
-| ------- | ---------- |
-| GT | Genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc |
-| PL | Phred-scaled likelihoods of the given genotypes |
-| GQ | Genotype quality Phred-scaled confidence for the genotype |
-| AD | Allele depth, i.e. the unfiltered number of reads that support each of the reported alleles |
-| DP |  (Allele) Depth, i.e. the filtered number of reads that support each of the reported alleles |
+| Metric  | Definition                                                |
+| ------- | --------------------------------------------------------- |
+| GT      | Genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc |
+| PL      | Phred-scaled likelihoods of the given genotypes           |
+| GQ      | Genotype quality Phred-scaled confidence for the genotype |
+| AD      | Allele depth, i.e. the unfiltered number of reads that support each of the reported alleles |
+| DP      |  (Allele) Depth, i.e. the filtered number of reads that support each of the reported alleles |
 
 The Broad Institute's [VCF guide](https://software.broadinstitute.org/gatk/documentation/article?id=11005) is an excellent place to learn more about VCF file format.
 
