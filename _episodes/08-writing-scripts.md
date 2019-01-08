@@ -124,7 +124,7 @@ let you save commands to run them and also lets you put multiple commands togeth
 One thing we will commonly want to do with sequencing results is pull out bad reads
 and write them to a file to see if we can figure out what's going on with them. We're
 going to look for reads with long sequences of Ns like we did before, but now we're
-going to write a script, so we can run it each time we get new sequences, rather than
+going to write a script so we can run it each time we get new sequences rather than
 type the code in by hand each time.
 
 Bad reads have a lot of Ns, so we're going to look for `NNNNNNNNNN` (10 Ns in a row)
