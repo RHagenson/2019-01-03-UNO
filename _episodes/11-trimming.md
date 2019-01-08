@@ -127,7 +127,7 @@ $ runtrimmomatic SE
 ~~~
 {: .bash}
 
-However, a complete command for Trimmomatic will look something like this:
+However, an example complete command for Trimmomatic will look something like this:
 
 ~~~
 $ runtrimmomatic SE \
