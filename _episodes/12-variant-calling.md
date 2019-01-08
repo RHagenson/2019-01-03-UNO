@@ -576,6 +576,8 @@ $ cd ~/Desktop/files_for_igv
 Now we will transfer our files to that new directory. The commands to `scp` always go
 in the terminal window that is connected to your local computer (not to Crane).
 
+On Linux/Mac systems:
+
 ~~~
 $ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
 $ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
@@ -584,18 +586,43 @@ $ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/vcf/SRR097
 ~~~
 {: .bash}
 
+On Windows:
+
+~~~
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam %HOMEPATH%\Desktop\files_for_igv
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai %HOMEPATH%\Desktop\files_for_igv
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta %HOMEPATH%\Desktop\files_for_igv
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf %HOMEPATH%\Desktop\files_for_igv
+~~~
+{: .bash}
+
 You will need to type your Crane password each time you call `scp`.
 
-Alternatively, you can copy everything using one command, and add the password only
+Alternatively, you can copy everything using one command, and type the password only
 once. Each path/file is separated by a space and all files to be copied are delimited
 by a a single quote ('):
+
+On Linux/Mac systems:
 
 ~~~
 $ scp username@crane.unl.edu:'\
 /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
 /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
-/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \ /work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
+    /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \
+    /work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
 ~/Desktop/files_for_igv/
+~~~
+{: .bash}
+
+On Windows systems:
+
+~~~
+$ pscp username@crane.unl.edu:'\
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
+    /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \
+    /work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
+    %HOMEPATH%\Desktop\files_for_igv
 ~~~
 {: .bash}
 
