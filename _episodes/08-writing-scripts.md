@@ -119,8 +119,7 @@ up again and edit it with `nano`.
 ## Writing scripts
 
 A really powerful thing about the command line is that you can write scripts. Scripts
-let you save commands to run them and also lets you put multiple commands together. In
-the plot below, this is where you win, because you are automating your work.
+let you save commands to run them and also lets you put multiple commands together.
 
 One thing we will commonly want to do with sequencing results is pull out bad reads
 and write them to a file to see if we can figure out what's going on with them. We're
