@@ -6,7 +6,7 @@ exercises: 10
 questions:
 - "How to collect and structure the data about your sequencing data"
 objectives:
-- "Think about and understand the types of metadata a sequencing experiment will generate."
+- "Think about and understand the types of metadata a sequencing experiment will generate"
 - "Understand the importance of metadata and potential metadata standards"
 - "Explore common formatting challenges in spreadsheet data"
 keypoints:

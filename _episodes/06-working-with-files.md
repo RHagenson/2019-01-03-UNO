@@ -8,16 +8,16 @@ questions:
 - "How can I control who has permission to modify a file?"
 - "How can I repeat recently used commands?"
 objectives:
-- View, search within, copy, move, and rename files.
-- Create new directories.
-- Use wild cards (`*`) to perform operations on multiple files.
-- Make a file read-only.
-- Use the `history` command to view and repeat recently used commands.
+- "View, search within, copy, move, and rename files"
+- "Create new directories"
+- "Use wildcards (`*`) to perform operations on multiple files"
+- "Make a file read-only"
+- "Use the `history` command to view and repeat recently used commands"
 keypoints:
-- "You can view file contents using `less`, `cat`, `head` or `tail`."
-- "The commands `cp`, `mv`, and `mkdir` are useful for manipulating existing files and creating new directories."
-- "You can view file permissions using `ls -l` and change permissions using `chmod`."
-- "The `history` command and the up arrow on your keyboard can be used to repeat recently used commands."
+- "You can view file contents using `less`, `cat`, `head` or `tail`"
+- "The commands `cp`, `mv`, and `mkdir` are useful for manipulating existing files and creating new directories"
+- "You can view file permissions using `ls -l` and change permissions using `chmod`"
+- "The `history` command and the up arrow on your keyboard can be used to repeat recently used commands"
 ---
 
 ## Working with Files
@@ -51,7 +51,7 @@ SRR097977.fastq  SRR098026.fastq
 {: .output}
 
 The `*` character is a wildcard character which stands for "everything".
-Thus, `*.fastq` matches every file that ends with `fastq`.
+Thus, `*.fastq` matches every file that ends with `.fastq`.
 
 This command:
 
@@ -229,13 +229,13 @@ $ less SRR097977.fastq
 
 Some navigation commands in `less`
 
-| key     | action |
-| ------- | ---------- |
-| <kbd>Space</kbd> | to go forward |
-|  <kbd>b</kbd>    | to go backward |
-|  <kbd>g</kbd>    | to go to the beginning |
-|  <kbd>G</kbd>    | to go to the end |
-|  <kbd>q</kbd>    | to quit |
+| Key              | Action                 |
+| ---------------- | ---------------------- |
+| <kbd>Space</kbd> | to go forward          |
+| <kbd>b</kbd>     | to go backward         |
+| <kbd>g</kbd>     | to go to the beginning |
+| <kbd>G</kbd>     | to go to the end       |
+| <kbd>q</kbd>     | to quit                |
 
 `less` also gives you a way of searching through files. Use the <kbd>/</kbd> key to
 begin a search. Enter the word you would like to search for and press
@@ -251,8 +251,9 @@ search backwards in the same way you used <kbd>/</kbd> previously.
 For instance, let's search forward for the sequence `TTTTT` in our file. You can see
 that we go right to that sequence, what it looks like, and where it is in the file. If
 you continue to type <kbd>/</kbd> and hit return, you will move forward to the next
-instance of this sequence motif. If you instead type <kbd>?</kbd> and hit return, you
-will search backwards and move up the file to previous examples of this motif.
+instance of this sequence motif. If you instead type <kbd>?</kbd> then
+<kbd>Enter</kbd>, you will search backwards and move up the file to
+previous examples of this motif.
 
 > ## Exercise
 >
@@ -388,8 +389,8 @@ We can now move our backup file to this directory. We can move files around usin
 command `mv`.
 
 ~~~
-$ mv SRR098026-copy.fastq backup
-$ ls backup
+$ mv SRR098026-copy.fastq backup/
+$ ls backup/
 ~~~
 {: .bash}
 
@@ -402,7 +403,7 @@ The `mv` command is also how you rename files. Let's rename this file to make it
 that this is a backup.
 
 ~~~
-$ cd backup
+$ cd backup/
 $ mv SRR098026-copy.fastq SRR098026-backup.fastq
 $ ls
 ~~~
@@ -487,7 +488,8 @@ between us and deleting our data files.
 > ## `rm` Deletes Completely
 >
 > The `rm` file permanently removes the file. Be careful with this command.
-> It doesn't just nicely put the files in the Trash. They're really gone.
+> It doesn't just nicely put the files in the Trash/Recycle Bin. They're really gone.
+>
 {: .callout}
 
 By default, `rm`, will not delete directories. You can tell `rm` to delete a directory

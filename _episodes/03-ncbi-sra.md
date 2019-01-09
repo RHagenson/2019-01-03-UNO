@@ -8,7 +8,7 @@ objectives:
 - "Be aware that public genomic data is available"
 - "Understand how to access and download this data"  
 keypoints:
-- "Public data repositories are a great source of genomic data."
+- "Public data repositories are a great source of genomic data"
 ---
 
 In our experiments we're usually generating our own genomic data, but many types of

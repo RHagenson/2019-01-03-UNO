@@ -5,12 +5,12 @@ exercises: 20
 questions:
 - How can we automate a commonly used set of commands?
 objectives:
-- Use the `nano` text editor to modify text files.
-- Write a basic shell script.
-- Use the `bash` command to execute a shell script.
-- Use `chmod` to make a script an executable program.
+- Use the `nano` text editor to modify text files
+- Write a basic shell script
+- Use the `bash` command to execute a shell script
+- Use `chmod` to make a script an executable program
 keypoints:
-- Scripts are a collection of commands executed together.
+- Scripts are a collection of commands executed together
 ---
 
 ## Writing Files
@@ -49,7 +49,7 @@ soon.
 
 > ## Which Editor?
 >
-> When we say, "`nano` is a text editor," we really do mean "text": it can
+> When we say, "`nano` is a text editor," we really do mean text: it can
 > only work with plain character data, not tables, images, or any other
 > human-friendly media. We use it in examples because it is one of the
 > least complex text editors. However, because of this trait, it may
@@ -119,19 +119,18 @@ up again and edit it with `nano`.
 ## Writing scripts
 
 A really powerful thing about the command line is that you can write scripts. Scripts
-let you save commands to run them and also lets you put multiple commands together. In
-the plot below, this is where you win, because you are automating your work.
+let you save commands to run them and also lets you put multiple commands together.
 
 One thing we will commonly want to do with sequencing results is pull out bad reads
 and write them to a file to see if we can figure out what's going on with them. We're
 going to look for reads with long sequences of Ns like we did before, but now we're
-going to write a script, so we can run it each time we get new sequences, rather than
+going to write a script so we can run it each time we get new sequences rather than
 type the code in by hand each time.
 
 Bad reads have a lot of Ns, so we're going to look for `NNNNNNNNNN` (10 Ns in a row)
 with `grep`. We want the whole FASTQ record, so we're also going to get the one line
 above the sequence and the two lines below. We also want to look in all the files that
-end with `.fastq`, so we're going to use the `*` wild card.
+end with `.fastq`, so we're going to use the `*` wildcard.
 
 ~~~
 $ grep -B1 -A2 NNNNNNNNNN *.fastq > scripted_bad_reads.txt
@@ -223,7 +222,7 @@ $ ls -l bad-reads-script.sh
 {: .bash}
 
 ~~~
--rw-rw-r-- 1 username group 0 Oct 25 21:46 bad-reads-script.sh
+-rw-r--r-- 1 username group 0 Oct 25 21:46 bad-reads-script.sh
 ~~~
 {: .output}
 
@@ -245,7 +244,7 @@ $ ls -l bad-reads-script.sh
 {: .bash}
 
 ~~~
--rwxrwxr-x 1 username group 0 Oct 25 21:46 bad-reads-script.sh
+-rwxr-xr-x 1 username group 0 Oct 25 21:46 bad-reads-script.sh
 ~~~
 {: .output}
 

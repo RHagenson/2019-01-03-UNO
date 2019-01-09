@@ -6,12 +6,12 @@ questions:
 - "How can I organize my file system for a new bioinformatics project?"
 - "How can I document my work?"
 objectives:
-- "Create a file system for a bioinformatics project."
-- "Explain what types of files should go in your `docs`, `data`, and `results` directories."
-- "Use the `history` command and a text editor like `nano` to document your work on your project."
+- "Create a file system for a bioinformatics project"
+- "Explain what types of files should go in your `docs`, `data`, and `results` directories"
+- "Use the `history` command and a text editor like `nano` to document your work on your project"
 keypoints:
 - "Spend the time to organize your file system when you start a new project. Your future self will thank you!"
-- "Always save a write-protected copy of your raw data."
+- "Always save a write-protected copy of your raw data"
 ---
 
 ## Getting your project started
@@ -75,7 +75,7 @@ You should see the output:
 ~~~
 {: .output}
 
-> ## Direct Work Return  
+> ## Direct HCC Work Return  
 > If you aren't in your work directory, the easiest way to get there is to enter the
 > command `cd $WORK`, which always returns you to work.  
 {: .callout}
@@ -121,6 +121,30 @@ dc_workshop/docs:
 dc_workshop/results:
 ~~~
 {: .output}
+
+## Let's start a large file transfer for tomorrow
+
+Tomorrow we will be working with a set of sample data that is located in directory
+(`/common/demo/dc/.dc_sampledata_lite`). We will need to copy some of these files to the
+`data` directory you just created -- which will take a while so we will run it
+in a second connection while we finish today's lesson.
+
+Do not close down your current connection, rather open up a new connection to
+Crane following the steps found in a
+[previous lesson]({% link _episodes/04-introduction.md %}).
+
+In your second connection, run the following:
+
+~~~
+$ cp -r \
+    /common/demo/dc/.dc_sampledata_lite/untrimmed_fastq \
+    /work/group/username/dc_workshop/data/
+~~~
+{: .bash}
+
+We will let this copy complete while we finish today's lesson.
+You can now return to the connection you were previously using,
+we will check on this transfer at the end of the lesson.
 
 ## Organizing your files
 
@@ -284,6 +308,13 @@ new skills to carrying out more sophisticated bioinformatics
 analysis work. Don't worry if everything doesn't feel perfectly comfortable yet. We're
 going to have many more opportunities for practice as we move forward on our
 bioinformatics journey!
+
+## Let's check on that file transfer
+
+In your second Crane connection, check the output of the transfer.
+If the transfer has run to completion, you should be back at your prompt.
+If you are not back at your prompt, please let a helper know so we can
+ensure the copy completes for tomorrow.
 
 ## References
 

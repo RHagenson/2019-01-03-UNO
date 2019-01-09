@@ -5,13 +5,13 @@ exercises: 25
 questions:
 - "How do I find sequence variants between my samples and a reference genome?"
 objectives:
-- "Describe the steps involved in variant calling."
-- "Describe the types of data formats encountered during variant calling."
-- "Use command line tools to perform variant calling."
+- "Describe the steps involved in variant calling"
+- "Describe the types of data formats encountered during variant calling"
+- "Use command line tools to perform variant calling"
 keypoints:
-- "Bioinformatics command line tools are collections of commands that can be used to carry out bioinformatics analyses."
-- "To use the most powerful bioinformatics tools, you'll need to use the command line."
-- "There are many different file formats for storing genomics data. It's important to understand these file formats and know how to convert between them."
+- "Bioinformatics command line tools are collections of commands that can be used to carry out bioinformatics analyses"
+- "To use the most powerful bioinformatics tools, you'll need to use the command line"
+- "There are many different file formats for storing genomics data. It's important to understand these file formats and know how to convert between them"
 ---
 
 ## Alignment to a Reference Genome
@@ -132,13 +132,12 @@ change of parameters.
 We're going to start by aligning the reads from just one of the samples in our dataset
 (`SRR097977.fastq`). Later, we'll be iterating this whole process on all of our sample
 files.
-**Note: below that `\` is being used to extend the command onto multiple lines for easier reading.**
 
 ~~~
 $ bwa aln \
-        data/ref_genome/ecoli_rel606.fasta \
-        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
-        > results/sai/SRR097977.aligned.sai
+    data/ref_genome/ecoli_rel606.fasta \
+    data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
+    > results/sai/SRR097977.aligned.sai
 ~~~
 {: .bash}
 
@@ -228,9 +227,9 @@ The code in our case will look like:
 
 ~~~
 $ bwa samse data/ref_genome/ecoli_rel606.fasta \
-        results/sai/SRR097977.aligned.sai \
-        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
-        > results/sam/SRR097977.aligned.sam
+    results/sai/SRR097977.aligned.sai \
+    data/trimmed_fastq_small/SRR097977.fastq_trim.fastq \
+    > results/sam/SRR097977.aligned.sam
 ~~~
 {: .bash}
 
@@ -296,9 +295,9 @@ Do the first pass on variant calling by counting read coverage with samtools
 
 ~~~
 $ samtools mpileup -g \
-        -f data/ref_genome/ecoli_rel606.fasta \
-        results/bam/SRR097977.aligned.sorted.bam \
-        > results/bcf/SRR097977_raw.bcf
+    -f data/ref_genome/ecoli_rel606.fasta \
+    results/bam/SRR097977.aligned.sorted.bam \
+    > results/bcf/SRR097977_raw.bcf
 ~~~
 {: .bash}
 
@@ -319,9 +318,9 @@ Identify SNPs using bcftools:
 ~~~
 $ module load bcftools
 $ bcftools call -vm \
-        -O b \
-        results/bcf/SRR097977_raw.bcf \
-        > results/bcf/SRR097977_variants.bcf
+    -O b \
+    results/bcf/SRR097977_raw.bcf \
+    > results/bcf/SRR097977_variants.bcf
 ~~~
 {: .bash}
 
@@ -331,9 +330,9 @@ Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
 $ bcftools view \
-        results/bcf/SRR097977_variants.bcf \
-        | vcfutils.pl varFilter - \
-        > results/vcf/SRR097977_final_variants.vcf
+    results/bcf/SRR097977_variants.bcf \
+    | vcfutils.pl varFilter - \
+    > results/vcf/SRR097977_final_variants.vcf
 ~~~
 {: .bash}
 
@@ -401,15 +400,15 @@ output.
 
 The first few columns represent the information we have about a predicted variation.
 
-| column | info |
-| ------- | ---------- |
-| CHROM | contig location where the variation occurs |
-| POS | position within the contig where the variation occurs |
-| ID | a `.` until we add annotation information |
-| REF | reference genotype (forward strand) |
-| ALT | sample genotype (forward strand) |
-| QUAL | Phred-scaled probablity that the observed variant exists at this site (higher is better) |
-| FILTER | a `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed |
+| Column | Info                                                  |
+| ------ | ----------------------------------------------------- |
+| CHROM  | Contig location where the variation occurs            |
+| POS    | Position within the contig where the variation occurs |
+| ID     | A `.` until we add annotation information             |
+| REF    | Reference genotype (forward strand)                   |
+| ALT    | Sample genotype (forward strand)                      |
+| QUAL   | Phred-scaled probability that the observed variant exists at this site (higher is better) |
+| FILTER | A `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed |
 
 In an ideal world, the information in the `QUAL` column would be all we needed to
 filter out bad variant calls. However, in reality we need to filter on multiple other
@@ -417,20 +416,20 @@ metrics.
 
 The last two columns contain the genotypes and can be tricky to decode.
 
-| column | info |
-| ------- | ---------- |
-| FORMAT | lists in order the metrics presented in the final column |
-| results | lists the values associated with those metrics in order |
+| Column  | Info                                                     |
+| ------- | -------------------------------------------------------- |
+| FORMAT  | Lists in order the metrics presented in the final column |
+| results | Lists the values associated with those metrics in order  |
 
 For our file, the metrics presented are `DP:VDB:SGB:MQSB:MQOF:AC:AN:DP4:MQ:GT:PL`.
 
-| metric | definition |
-| ------- | ---------- |
-| GT | Genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc |
-| PL | Phred-scaled likelihoods of the given genotypes |
-| GQ | Genotype quality Phred-scaled confidence for the genotype |
-| AD | Allele depth, i.e. the unfiltered number of reads that support each of the reported alleles |
-| DP |  (Allele) Depth, i.e. the filtered number of reads that support each of the reported alleles |
+| Metric  | Definition                                                |
+| ------- | --------------------------------------------------------- |
+| GT      | Genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc |
+| PL      | Phred-scaled likelihoods of the given genotypes           |
+| GQ      | Genotype quality Phred-scaled confidence for the genotype |
+| AD      | Allele depth, i.e. the unfiltered number of reads that support each of the reported alleles |
+| DP      |  (Allele) Depth, i.e. the filtered number of reads that support each of the reported alleles |
 
 The Broad Institute's [VCF guide](https://software.broadinstitute.org/gatk/documentation/article?id=11005) is an excellent place to learn more about VCF file format.
 
@@ -504,8 +503,8 @@ and the reference file:
 
 ~~~
 $ samtools tview \
-        results/bam/SRR097977.aligned.sorted.bam \
-        data/ref_genome/ecoli_rel606.fasta
+    results/bam/SRR097977.aligned.sorted.bam \
+    data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
@@ -547,7 +546,7 @@ our choice of reference.
 Below the horizontal line, we can see all of the reads in our sample aligned with the
 reference genome. Only positions where the called base differs from the reference are
 shown. You can use the arrow keys on your keyboard to scroll or type `?` for a help
-menu. Type `Ctrl^C` to exit `tview`. 
+menu. Type `Ctrl^C` to exit `tview`.
 
 ### Viewing with IGV
 
@@ -577,6 +576,8 @@ $ cd ~/Desktop/files_for_igv
 Now we will transfer our files to that new directory. The commands to `scp` always go
 in the terminal window that is connected to your local computer (not to Crane).
 
+On Linux/Mac systems:
+
 ~~~
 $ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
 $ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
@@ -585,18 +586,43 @@ $ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/vcf/SRR097
 ~~~
 {: .bash}
 
+On Windows:
+
+~~~
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam %HOMEPATH%\Desktop\files_for_igv
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai %HOMEPATH%\Desktop\files_for_igv
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta %HOMEPATH%\Desktop\files_for_igv
+$ pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf %HOMEPATH%\Desktop\files_for_igv
+~~~
+{: .bash}
+
 You will need to type your Crane password each time you call `scp`.
 
-Alternatively, you can copy everything using one command, and add the password only
+Alternatively, you can copy everything using one command, and type the password only
 once. Each path/file is separated by a space and all files to be copied are delimited
 by a a single quote ('):
 
+On Linux/Mac systems:
+
 ~~~
 $ scp username@crane.unl.edu:'\
-/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
-/work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
-/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \ /work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
-~/Desktop/files_for_igv/
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
+    /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \
+    /work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
+    ~/Desktop/files_for_igv/
+~~~
+{: .bash}
+
+On Windows systems:
+
+~~~
+$ pscp username@crane.unl.edu:'\
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam \
+    /work/group/username/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai \
+    /work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta \
+    /work/group/username/dc_workshop/results/vcf/SRR097977_final_variants.vcf' \
+    %HOMEPATH%\Desktop\files_for_igv
 ~~~
 {: .bash}
 
@@ -628,6 +654,20 @@ with IGV. See how quality information corresponds to alignment information at th
 loci. Use
 [this website](http://software.broadinstitute.org/software/igv/AlignmentData)
 and the links therein to understand how IGV colors the alignments.
+
+> ## Exercise
+>
+> Try looking at the two closest variants found in SRR097977 at positions 2039200 and
+> 2039206?
+> These two variants are low quality, both with a score of 7.24351.
+>
+>> ## Solution
+>>
+>> Zoom into the proper range by setting the view manually via the search bar found
+>> next to the genome and query sequence selection dropdowns.
+>>
+> {: .solution}
+{: .challenge}
 
 Now that we've run through our workflow for a single sample, we want to repeat this
 workflow for our other five samples. However, we don't want to type each of these

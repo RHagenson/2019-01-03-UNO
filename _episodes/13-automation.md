@@ -5,11 +5,11 @@ exercises: 15
 questions:
 - "How can I make my workflow more efficient and less error-prone?"
 objectives:
-- "Write a shell script with multiple variables."
-- "Incorporate a `for` loop into a shell script."
+- "Write a shell script with multiple variables"
+- "Incorporate a `for` loop into a shell script"
 keypoints:
-- "We can combine multiple commands into a shell script to automate a workflow."
-- "Use `echo` statements within your scripts to get an automated progress update."
+- "We can combine multiple commands into a shell script to automate a workflow"
+- "Use `echo` statements within your scripts to get an automated progress update"
 ---
 
 ## What is a Shell Script?
@@ -31,9 +31,9 @@ That script was only two lines long, but shell scripts can be much more complica
 than that and can be used to perform a large number of operations on one or many
 files. This saves you the effort of having to type each of those commands over for
 each of your data files and makes your work less error-prone and more reproducible.
-For example, the variant calling workflow we just carried out had about eight steps
+For example, the variant calling workflow we just carried out had about 8 steps
 where we had to type a command into our terminal. Most of these commands were pretty
-long. If we wanted to do this for all six of our data files, that would be forty-eight
+long. If we wanted to do this for all 6 of our data files, that would be 48
 steps. If we had 50 samples (a more realistic number), it would be 400 steps! You can
 see why we want to automate this.
 
@@ -55,7 +55,7 @@ $ for filename in *.zip
 And here's the one you wrote for running Trimmomatic on all of our `.fastq` sample files.
 
 ~~~
-$ module load bioinformatics/trimmomatic
+$ module load trimmomatic
 $ for infile in *.fastq
 > do
 > outfile="${infile}"_trim.fastq
@@ -157,9 +157,9 @@ to unzip all of the `.zip` files in this directory.
 ~~~
 echo "Unzipping..."
 for filename in *.zip
-    do
+do
     unzip $filename
-    done
+done
 ~~~
 {: .output}
 
@@ -168,7 +168,7 @@ status message to remind ourselves that this is what we're doing.
 
 ~~~
 echo "Saving summary..."
-cat */summary.txt >> /work/group/username/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
 ~~~
 {: .output}
 
@@ -199,9 +199,9 @@ cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 
 echo "Unzipping..."
 for filename in *.zip
-    do
+do
     unzip $filename
-    done
+done
 
 echo "Saving summary..."
 cat */summary.txt > /work/group/username/dc_workshop/docs/fastqc_summaries.txt
@@ -301,7 +301,7 @@ genome=/work/group/username/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 > Within the Bash shell you can create variables at any time (as we did
 > above, and during the 'for' loop lesson). Assign any name and the
 > value using the assignment operator: '='. You can check the current
-> definition of your variable by typing into your script: 
+> definition of your variable by typing into your script:
 > `echo $variable_name`
 {: .callout}
 
@@ -337,11 +337,18 @@ The first thing we do is assign the name of the FASTQ file we're currently worki
 with to a variable called `fq` and tell the script to `echo` the filename back to us
 so we can check which file we're on.
 
+To start, let's use a smaller trimmed fastq dataset found in
+`/work/group/username/dc_workshop/data/trimmed_fastq_small/`.
+It is important to test workflows with a smaller dataset prior to running on the
+complete data. If an error is going to occur with the complete data, it will most
+likely also appear with the test dataset, but will give you the result faster for
+validation.
+
 ~~~
 for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
-    do
+do
     echo "working with file $fq"
-    done
+done
 ~~~
 {: .bash}
 
@@ -437,7 +444,6 @@ workflow. Remember to delete the `done` line from your script before adding thes
 lines.
 
 ~~~
-    fq=/work/group/username/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
     results=/work/group/username/dc_workshop/results/
     sai=${results}/sai/${base}_aligned.sai
     sam=${results}/sam/${base}_aligned.sam
@@ -535,7 +541,6 @@ for fq in /work/group/username/dc_workshop/data/trimmed_fastq_small/*.fastq
     base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
 
-    fq=/work/group/username/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
     results=/work/group/username/dc_workshop/results/
     sai=${results}/sai/${base}_aligned.sai
     sam=${results}/sam/${base}_aligned.sam

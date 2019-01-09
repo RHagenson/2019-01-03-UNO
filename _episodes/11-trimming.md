@@ -5,12 +5,12 @@ exercises: 25
 questions:
 - "How can I get rid of sequence data that doesn't meet my quality standards?"
 objectives:
-- "Clean FASTQ reads using Trimmommatic."
-- "Select and set multiple options for command line bioinformatics tools."
-- "Write `for` loops with two variables."
+- "Clean FASTQ reads using Trimmommatic"
+- "Select and set multiple options for command line bioinformatics tools"
+- "Write `for` loops with two variables"
 keypoints:
 - "The options you set for the command line tools you use are important!"
-- "Data cleaning is an essential step in a genomics workflow."
+- "Data cleaning is an essential step in a genomics workflow"
 ---
 
 ## Cleaning Reads
@@ -40,16 +40,16 @@ $ module load trimmomatic
 {: .bash}
 
 On Crane, we start Trimmomatic by calling `java` along with the path to the program
-(which is made active by loading the module).with a shortcut that is available when
-you load the `trimmomatic` module: `runtrimmomatic`. To run Trimmomatic use,
-`java -jar $TM_HOME/trimmomatic.jar` and to alleviate typing that each time
+(which is made active by loading the module). To run Trimmomatic we would use,
+`java -jar $TM_HOME/trimmomatic.jar` however, to alleviate typing that each time,
 let's create an
 [alias](https://en.wikipedia.org/wiki/Alias_(command))
 for it by running:
 `alias runtrimmomatic="java -jar $TM_HOME/trimmomatic.jar"`
+(Note that there should be no spaces around the equal sign.)
 
 You can type `alias runtrimmomatic` to see what the alias does and you can type
-`module help trimmomatic` for more details on the tool.
+`module help trimmomatic` for more details on the tool itself.
 
 ~~~
 $ runtrimmomatic
@@ -58,7 +58,7 @@ $ runtrimmomatic
 
 Note: `runtrimmomatic` is a command you'll only see if you create the alias
 (aliases are convenient, but be sure to add the alias to your project docs).
-On other systems, Trimmomatic is called with `java -jar trimmomatic-0.33.jar`.
+On other systems, Trimmomatic is called with `java -jar $TM_HOME/trimmomatic.jar`.
 Trimmomatic is a program written in the Java programming language.
 You don't need to learn Java to use Trimmomatic (FastQC is also
 written in Java), but the fact that it's a Java program helps
@@ -72,36 +72,37 @@ That's just the basic command, however. Trimmomatic has a variety of
 options and parameters. We will need to specify what options we want
 to use for our analysis. Here are some of the options:
 
-| option    | meaning |
-| ------- | ---------- |
-| `-threads` | Specify the number of processors you want Trimmomatic to use. |
-|  `SE` or `PE`   | Specify whether your reads are single or paired-end. |
-|  `-phred33` or `-phred64` | Specify the encoding system for your quality scores. |
+| Option                | Meaning                                              |
+| --------------------- | ---------------------------------------------------- |
+| `-threads`            | The number of processors you want Trimmomatic to use |
+| `SE`/`PE`             | Whether your reads are single or paired-end          |
+| `-phred33`/`-phred64` | The encoding system for your quality scores          |
 
 In addition to these options, there are various trimming steps available:
 
-| step   | meaning |
-| ------- | ---------- |
-| `SLIDINGWINDOW` | Perform sliding window trimming, cutting once the average quality within the window falls below a threshold. |
-| `LEADING`  | Cut bases off the start of a read, if below a threshold quality.  |
-|  `TRAILING` |  Cut bases off the end of a read, if below a threshold quality. |
-| `CROP`  |  Cut the read to a specified length. |
-|  `HEADCROP` |  Cut the specified number of bases from the start of the read. |
-| `MINLEN`  |  Drop an entire read if it is below a specified length. |
-|  `TOPHRED33` | Convert quality scores to Phred-33.  |
-|  `TOPHRED64` |  Convert quality scores to Phred-64. |
+| Step            | Meaning    |
+| --------------- | ---------- |
+| `SLIDINGWINDOW` | Perform sliding window trimming, cutting once the average quality within the window falls below a threshold |
+| `LEADING`       | Cut bases off the start of a read, if below a threshold quality |
+| `TRAILING`      |  Cut bases off the end of a read, if below a threshold quality |
+| `CROP`          |  Cut the read to a specified length |
+| `HEADCROP`      |  Cut the specified number of bases from the start of the read |
+| `MINLEN`        |  Drop an entire read if it is below a specified length |
+| `TOPHRED33`     | Convert quality scores to Phred-33 |
+| `TOPHRED64`     |  Convert quality scores to Phred-64 |
 
 We will use only a few of these options and trimming steps in our analysis. It is
 important to understand the steps you are using to clean your data. For more
 information about the Trimmomatic arguments and options, see
-[the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
+the [Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
 > ## Software Versions
 >
 > One of the biggest causes for irreproducibility in Bioinformatics
 > is forgetting/neglecting to document the version of a program used.
 > In this case, we are using Trimmomatic v0.33. Be sure to note what version
-> of a tool you are using and do not use multiple versions of a tool in one project.
+> of a tool you are using and do not use multiple versions of a tool in
+> one project if possible.
 >
 > Keen observers will see that the Trimmomatic manual linked above is for
 > Trimmomatic v0.32; this is the latest manual and should apply to all
@@ -126,7 +127,7 @@ $ runtrimmomatic SE
 ~~~
 {: .bash}
 
-However, a complete command for Trimmomatic will look something like this:
+However, an example complete command for Trimmomatic will look something like this:
 
 ~~~
 $ runtrimmomatic SE \
@@ -139,20 +140,19 @@ $ runtrimmomatic SE \
 ~~~
 {: .bash}
 
-*On Crane it's essential to specify `-threads` or Trimmomatic will use more
-than threads on the compute node than you requested.*
+*On Crane it's essential to specify `-threads` or Trimmomatic will use more threads on the compute node than you requested.*
 
-In this example, we've told Trimmomatic:
+In the above example, we've told Trimmomatic:
 
-| code   | meaning |
-| ------- | ---------- |
-| `SE` | that it will be taking a single end file as input |
-| `-threads 4` | to use four computing threads to run (this will speed up our run) |
-| `-phred64` | that the input file uses phred-64 encoding for quality scores |
-| `SRR_1056.fastq` | the input file name |
-|  `SRR_1056_trimmed.fastq` | the output file to create |
-| `ILLUMINACLIP:SRR_adapters.fa`| to clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
-|`SLIDINGWINDOW:4:20` | to use a sliding window of size 4 that will remove bases if their phred score is below 20 |
+| Code             | Meaning                   |
+| ---------------- | ------------------------- |
+| `SE`             | Single end file as input  |
+| `-threads 4`     | Use four computing threads to run (this will speed up our run) |
+| `-phred64`       | Input uses phred-64 encoding for quality scores |
+| `SRR_1056.fastq` | Input file name           |
+|  `SRR_1056_trimmed.fastq` | Output file name |
+| `ILLUMINACLIP:SRR_adapters.fa` | Clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
+|`SLIDINGWINDOW:4:20` | Use a sliding window of size 4 that will remove bases if their phred score is below 20 |
 
 ### Running Trimmomatic
 
@@ -358,7 +358,7 @@ to a new subdirectory within our `data/` directory. We can also remove
 our extra, double-trimmed file for the `SRR098283` sample.
 
 ~~~
-$ cd /pool/genoimcs/username/dc_workshop/data/untrimmed_fastq
+$ cd /work/group/username/dc_workshop/data/untrimmed_fastq
 $ mkdir ../trimmed_fastq
 $ rm SRR098283.fastq_trim.fastq_trim.fastq
 $ mv *_trim* ../trimmed_fastq
@@ -395,7 +395,7 @@ SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
 >>
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/data/trimmed_fastq/*/ ~/Desktop/fastqc_html/trimmed/
+>> $ scp username@crane.unl.edu:/work/group/username/dc_workshop/data/trimmed_fastq/*.zip ~/Desktop/fastqc_html/trimmed/
 >> $ open ~/Desktop/fastqc_html/trimmed/*/*.html
 >> ~~~
 >> {: .bash}

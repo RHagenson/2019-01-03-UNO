@@ -6,15 +6,15 @@ questions:
 - "How can I search within files?"
 - "How can I combine existing commands to do new things?"
 objectives:
-- "Employ the `grep` command to search for information within files."
-- "Print the results of a command to a file."
-- "Construct command pipelines with two or more stages."
+- "Employ the `grep` command to search for information within files"
+- "Print the results of a command to a file"
+- "Construct command pipelines with two or more stages"
 keypoints:
-- "`grep` is a powerful search tool with many options for customization."
-- "`>`, `>>`, and `|` are different ways of redirecting output."
-- "`command > file` redirects a command's output to a file."
-- "`command >> file` redirects a command's output to a file without overwriting the existing contents of the file."
-- "`command_1 | command_2` redirects the output of the first command as input to the second command."
+- "`grep` is a powerful search tool with many options for customization"
+- "`>`, `>>`, and `|` are different ways of redirecting output"
+- "`command > file` redirects a command's output to a file"
+- "`command >> file` redirects a command's output to a file without overwriting the existing contents of the file"
+- "`command_1 | command_2` redirects the output of the first command as input to the second command"
 ---
 
 ## Searching Files
@@ -26,6 +26,17 @@ characters (sometimes called a string) or a particular pattern (which can be spe
 using something called regular expressions). We're not going to work with regular
 expressions in this lesson, and are instead going to specify the strings we are
 searching for. Let's give it a try!
+
+> ## The `grep` name
+>
+> `grep` is one of the most nonintuitive standard Linux commands due to its name.
+> If it helps you recall the name of the command, `grep` is actually an acronym that
+> stands for **g**lobal **r**egular **e**xpression and **p**rint.
+>
+> Global meaning search the whole file, regular expression meaning a pattern, and
+> print meaning show me the matches.
+>
+{: .callout}
 
 > ## Nucleotide abbreviations
 >
@@ -122,7 +133,7 @@ $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
 ~~~
 {: .bash}
 
-> ## File extensions
+> ## File extensions - part 1
 >
 > You might be confused about why we're naming our output file with a `.txt`
 > extension. After all, it will be holding FASTQ formatted data that we're extracting
@@ -334,12 +345,13 @@ reads and then counted the lines in the file to see how many reads matched our
 criteria. There's a way to do this, however, that doesn't require us to create these
 intermediate files -- the pipe command (`|`).
 
-This is probably not a key on your keyboard you use very much, so let's all take a
-minute to find that key. What `|` does is take the output that is scrolling by on the
-terminal and uses that output as input to another command. When our output was
-scrolling by, we might have wished we could slow it down and look at it, like we can
-with `less`. Well it turns out that we can! We can redirect our output from our `grep`
-call through the `less` command.
+This is probably not a key you use very much on your keyboard, so let's all take a
+minute to find that key (hint: look above <kbd>Enter</kbd>).
+What `|` does is take the output that is scrolling by on the terminal and uses
+that output as input to another command. When our output was scrolling by, we might
+have wished we could slow it down and look at it, like we can with `less`. Well it
+turns out that we can! We can redirect our output from our `grep` call through
+the `less` command.
 
 ~~~
 $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq | less
@@ -377,9 +389,10 @@ efficiently. Let's take a few minutes to practice.
 >> {: .output}
 >>
 >> Note here that "separated by any number of **known** nucleotides" is precise
->> wording that includes matching zero known nucleotides (zero is a number).
->> If "at least one **known** nucleotide" is desired, replace `*` with `+` to indicate
->> one or more matches.
+>> wording that includes matching zero known nucleotides
+>> (zero is a number, just not one we often consider).
+>> If "_at least one_ **known** nucleotide" is desired,
+>> replace `*` with `+` to indicate one or more matches.
 >> `grep -P "NNNNN[ATGC]+NNNNN" SRR098026.fastq | wc -l`
 > {: .solution}
 {: .challenge}
@@ -501,7 +514,7 @@ submitted for sequencing.
 > {: .solution}
 {: .challenge}
 
-### How many of each class of library layout are there?  
+### How many of each class of library layout are there?
 
 We can extract even more information from our metadata table if we add in some new
 tools: `sort` and `uniq`. The `sort` command will sort the lines of a text file and

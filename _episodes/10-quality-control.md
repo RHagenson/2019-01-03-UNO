@@ -6,12 +6,12 @@ exercises: 20
 questions:
 - "How can I describe the quality of my data?"
 objectives:
-- "Explain how a FASTQ file encodes per-base quality scores."
-- "Interpret a FastQC plot summarizing per-base quality across all reads."
-- "Use `for` loops to automate operations on multiple files."
+- "Explain how a FASTQ file encodes per-base quality scores"
+- "Interpret a FastQC plot summarizing per-base quality across all reads"
+- "Use `for` loops to automate operations on multiple files"
 keypoints:
-- "Quality encodings vary across sequencing platforms."
-- "`for` loops let you perform the same set of operations on multiple files with a single command."
+- "Quality encodings vary across sequencing platforms"
+- "`for` loops let you perform the same set of operations on multiple files with a single command"
 ---
 
 ## Bioinformatics Workflows
@@ -210,12 +210,13 @@ We are going to start doing analyses on our data. So far we've been doing all ou
 on the Crane "login" nodes. It's fine to use the nodes for simple tasks like examining
 files with `less`, editing files with `nano`, moving files, but for analyses we need
 to have the work done on the "compute" nodes. For this workshop we will be using the
-interactive queue. With one command: `srun --pty $SHELL` you will start an interactive
-job and be logged into one of the compute nodes. The rest of oour work will continue
-on the compute note.
+interactive queue. With one command you will start an interactive
+job, be logged into one of the compute nodes, mount the `/common/` directory
+that we will need later on, and set a timeout of our sesson at 3 hours.
+The rest of our work will continue on the compute note.
 
 ~~~
-$ srun --pty $SHELL
+$ srun --pty --time=3:00:00 --license=common $SHELL
 ~~~
 {: .bash}
 
@@ -225,9 +226,7 @@ $ srun --pty $SHELL
 {: .output}
 
 You will notice that the command prompt will change to say that you are now on a
-compute node.
-
-When you start a new interactive session, you are returned to your home directory
+compute node (`@cNNN`).
 
 ~~~
 $ pwd
@@ -246,22 +245,25 @@ before we run each analysis.
 
 ### Running FastQC  
 
-We will be working with a set of sample data that is located in directory
-(`/common/demo/dc/dc_sampledata_lite`). First, we will move some of these files to the
-`data` directory your created at the end of our
-[last lesson]({% link _episodes/09-organization.md %}).  
-
-~~~
-$ cp -r /common/demo/dc/dc_sampledata_lite/untrimmed_fastq /work/group/username/dc_workshop/data/
-~~~
-{: .bash}
-
-Navigate to your FASTQ dataset:
+We will be using the FASTQ dataset you transferred yesterday.
+Please navigate to the files.
 
 ~~~
 $ cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .bash}
+
+Your directory should look like:
+
+~~~
+$ ls -F
+~~~
+{: .bash}
+~~~
+SRR097977.fastq*  SRR098027.fastq*  SRR098281.fastq*
+SRR098026.fastq*  SRR098028.fastq*  SRR098283.fastq*
+~~~
+{: .output}
 
 > ## Exercise
 >
@@ -291,7 +293,7 @@ $ cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 > {: .solution}
 {: .challenge}
 
-To run the FastQC program, we need to load the fastqc module (`fastqc/0.10`). FastQC
+To run the FastQC program, we need to load the fastqc module (`fastqc`). FastQC
 can accept multiple file names as input, so we can use the *.fastq wildcard to run
 FastQC on all of the FASTQ files in this directory.
 
@@ -316,6 +318,7 @@ Approx 35% complete for SRR097977.fastq
 Approx 40% complete for SRR097977.fastq
 Approx 45% complete for SRR097977.fastq
 Approx 50% complete for SRR097977.fastq
+...
 ~~~
 {: .output}
 
@@ -333,7 +336,7 @@ Analysis complete for SRR098283.fastq
 {: .output}
 
 The FastQC program has created several new files within our
-`/data/untrimmed_fastq/` directory.
+`data/untrimmed_fastq/` directory.
 
 ~~~
 $ ls
@@ -363,7 +366,7 @@ will move these output files into a new directory within our `results/` director
 ~~~
 $ mkdir /work/group/username/dc_workshop/results/fastqc_untrimmed_reads
 $ mv *.zip /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
-$ mv *fastqc/ ../../results/fastqc_untrimmed_reads/
+$ mv *fastqc/ /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -411,7 +414,7 @@ The syntax for `scp` is the same, but now `my_file` and
 `new_location` are on separate computers, so we need to give an
 absolute path, including the name of our remote computer. First we
 will make a new directory on our computer to store the HTML files
-we're transferring. Let's put it on our desktop for now.
+we're transferring. Let's put it on our Desktop for now.
 
 Now we can transfer our HTML files to our local computer using `scp`.
 
@@ -426,7 +429,7 @@ $ mkdir ~/Desktop/fastqc_html
 {: .bash}
 
 ~~~
-$ scp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*/ ~/Desktop/fastqc_html/
+$ scp username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*.zip ~/Desktop/fastqc_html/
 ~~~
 {: .bash}
 
@@ -445,10 +448,10 @@ $ mkdir %HOMEPATH%\Desktop\fastqc_html
 
 (`%HOMEPATH%` is roughly the same as `~` in Unix based systems.)
 
-Now we can transfer our HTML files to our local computer using `pscp`.
+Now we can transfer our HTML files to our local computer using `pscp`. (Note that Linux systems use the forward slash, `/`, for directories while Windows uses the back slash, `\`, check that you are using the right ones in the command below.)
 
 ~~~
-> pscp -r username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*/ %HOMEPATH%\Desktop\fastqc_html\
+> pscp username@crane.unl.edu:/work/group/username/dc_workshop/results/fastqc_untrimmed_reads/*.zip %HOMEPATH%\Desktop\fastqc_html\
 ~~~
 {: .bash}
 
@@ -460,8 +463,8 @@ Make sure you replace `username` with your actual username.
 
 The second part starts with a `:` and then gives the absolute path
 of the files you want to transfer from your remote computer. Don't
-forget the `:`. We used a wildcard (`/*/`) to indicate that we want all of
-the directories recursively (`-r`).
+forget the `:`. We used a wildcard (`*.zip`) to indicate that we want all of
+the zip files.
 
 The third part of the command gives the absolute path of the location
 you want to put the files. This is on your local computer and is the
@@ -470,32 +473,28 @@ directory we just created `~/Desktop/fastqc_html/`.
 You should see a status output like this:
 
 ~~~
-per_base_quality.png        100%   9949     9.7KB/s   00:00
-kmer_profiles.png           100%   20KB    20.4KB/s   00:00
-per_sequence_quality.png    100%   19KB    19.4KB/s   00:00
-per_base_gc_content.png     100%   10KB    10.4KB/s   00:00
-per_base_n_content.png      100%   8426     8.2KB/s   00:00  
-.
-.
-.
-warning.png                 100%   1450     1.4KB/s   00:00
-fastqc_icon.png             100%   1197     1.2KB/s   00:00
-error.png                   100%   1561     1.5KB/s   00:00
-fastqc_data.txt             100%   9990     9.8KB/s   00:00
+SRR097977_fastqc.zip    100%  130KB 130.1KB/s   00:00
+SRR098026_fastqc.zip    100%  183KB 182.8KB/s   00:00
+SRR098027_fastqc.zip    100%  129KB 129.0KB/s   00:00
+SRR098028_fastqc.zip    100%  192KB 191.7KB/s   00:00
+SRR098281_fastqc.zip    100%  195KB 195.0KB/s   00:00
+SRR098283_fastqc.zip    100%  192KB 192.0KB/s   00:00
 ~~~
 {: .output}
 
-Now we can go to our new directory and open the HTML files.
+Navigate to this `fastqc_html/` directory in your usual file explorer and
+unzip the files as you usually would. We will learn how to programmatically
+unzip this files in just a little bit.
 
-On Mac and Linux systems:
+Viewing on Mac and Linux systems:
 
 ~~~
 $ cd ~/Desktop/fastqc_html/
-$ open *.html
+$ open */*.html
 ~~~
 {: .bash}
 
-On Windows:
+Viewing on Windows:
 
 ~~~
 > cd %HOMEPATH%\Desktop\fastqc_html
@@ -529,19 +528,19 @@ tabs in a single window or six separate browser windows.
 Now that we've looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
 in your terminal program that is connected to Crane and make sure you're in
-our results subdirectory.
+our `results/` subdirectory.
 
 ~~~
 $ cd /work/group/username/dc_workshop/results/fastqc_untrimmed_reads/
-$ ls
+$ ls -F
 ~~~
 {: .bash}
 
 ~~~
-SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
-SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
-SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
-SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
+SRR097977_fastqc/     SRR098026_fastqc.zip  SRR098028_fastqc/
+SRR098281_fastqc.zip  SRR097977_fastqc.zip  SRR098027_fastqc/
+SRR098028_fastqc.zip  SRR098283_fastqc/     SRR098026_fastqc/
+SRR098027_fastqc.zip  SRR098281_fastqc/     SRR098283_fastqc.zip
 ~~~
 {: .output}
 

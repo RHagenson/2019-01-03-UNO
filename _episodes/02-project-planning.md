@@ -8,8 +8,8 @@ objectives:
 - Understand the data we send to and get back from a sequencing center
 - Make decisions about how (if) data will be stored, archived, shared, etc.   
 keypoints:
-- "Data being sent to a sequencing center also needs to be structured so you can use it."
-- "Raw sequencing data should be kept raw somewhere, so you can always go back to the original files."
+- "Data being sent to a sequencing center also needs to be structured so you can use it"
+- "Raw sequencing data should be kept raw somewhere, so you can always go back to the original files"
 ---
 
 There are a variety of ways to work with a large sequencing dataset. You may be a
