@@ -122,25 +122,29 @@ dc_workshop/results:
 ~~~
 {: .output}
 
-## Let's Start a Large File Transfer for Tomorrow
+## Let's start a large file transfer for tomorrow
 
 Tomorrow we will be working with a set of sample data that is located in directory
 (`/common/demo/dc/.dc_sampledata_lite`). We will need to copy some of these files to the
-`data` directory you just created and for that we are going to use a new command, `nohup`
+`data` directory you just created -- which will take a while so we will run it
+in a second connection while we finish today's lesson.
+
+Do not close down your current connection, rather open up a new connection to
+Crane following the steps found in a
+[previous lesson]({% link _episodes/04-introduction.md %}).
+
+In your second connection, run the following:
 
 ~~~
-$ nohup cp -r \
+$ cp -r \
     /common/demo/dc/.dc_sampledata_lite/untrimmed_fastq \
-    /work/group/username/dc_workshop/data/ \
-    > /work/group/username/dc_workshop/transfer.txt 2>&1 &
+    /work/group/username/dc_workshop/data/
 ~~~
 {: .bash}
 
-What `nohup` does is allow you to run a command in the background and not
-have the command stop when you logoff the cluster at the end of today.
-The `> /work/group/username/dc_workshop/transfer.txt 2>&1 &` means that
-all output (even errors) of `cp` will be written to `transfer.txt`.
-
+We will let this copy complete while we finish today's lesson.
+You can now return to the connection you were previously using,
+we will check on this transfer at the end of the lesson.
 
 ## Organizing your files
 
@@ -304,6 +308,13 @@ new skills to carrying out more sophisticated bioinformatics
 analysis work. Don't worry if everything doesn't feel perfectly comfortable yet. We're
 going to have many more opportunities for practice as we move forward on our
 bioinformatics journey!
+
+## Let's check on that file transfer
+
+In your second Crane connection, check the output of the transfer.
+If the transfer has run to completion, you should be back at your prompt.
+If you are not back at your prompt, please let a helper know so we can
+ensure the copy completes for tomorrow.
 
 ## References
 

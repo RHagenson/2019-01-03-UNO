@@ -245,30 +245,25 @@ before we run each analysis.
 
 ### Running FastQC  
 
-We will be using the FASTQ dataset you transferred yesterday, but first
-let's check the output of the transfer by using `less`.
-
-~~~
-$ less transfer.txt
-~~~
-{: .bash}
-
-If there were errors try starting the transfer again without `nohup`.
-
-~~~
-$ cp -r \
-    /common/demo/dc/.dc_sampledata_lite/untrimmed_fastq \
-    /work/group/username/dc_workshop/data/
-~~~
-{: .bash}
-
-If the transfer was successful, change to the transferred files:
+We will be using the FASTQ dataset you transferred yesterday.
+Please navigate to the files.
 
 ~~~
 $ cd /work/group/username/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .bash}
 
+Your directory should look like:
+
+~~~
+$ ls -F
+~~~
+{: .bash}
+~~~
+SRR097977.fastq*  SRR098027.fastq*  SRR098281.fastq*
+SRR098026.fastq*  SRR098028.fastq*  SRR098283.fastq*
+~~~
+{: .output}
 
 > ## Exercise
 >
